@@ -1,8 +1,5 @@
 libopenblas-base
 libgsl-dev
 default-jre
-# libgtk-3-0
-# libdbus-glib-1-2
-# xvfb
 firefox
 docker.io
