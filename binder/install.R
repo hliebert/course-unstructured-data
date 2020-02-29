@@ -4,7 +4,7 @@ install.packages(
     "xml2",
     "httr",
     "rvest",
-    "RSelenium"
+    "RSelenium",
     "wdman",
     "tidyverse",
     "data.table",
