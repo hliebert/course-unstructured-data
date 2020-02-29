@@ -1,21 +1,13 @@
 install.packages(
   c(
-    "glmnet",
-    "grf",
-    "ranger",
-    "caret",
-    "topicmodels",
     "jsonlite",
     "xml2",
     "httr",
     "rvest",
     "RSelenium",
     "wdman",
-    "rio",
     "tidyverse",
     "data.table",
-    "knitr",
-    "rmarkdown",
     "devtools"
   ),
   dependencies = TRUE
