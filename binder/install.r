@@ -1,16 +1,11 @@
-install.packages(
-  c(
-    "jsonlite",
-    "httr",
-    "rvest",
-    "RSelenium",
-    "wdman",
-    "stringr",
-    "glmnet",
-    "tidyverse",
-    "data.table",
-    "topicmodels",
-    "IRKernel"
-  ),
-  dependencies = TRUE
-)
+install.packages("jsonlite", dependencies = TRUE)
+install.packages("httr", dependencies = TRUE)
+install.packages("rvest", dependencies = TRUE)
+install.packages("RSelenium", dependencies = TRUE)
+install.packages("wdman", dependencies = TRUE)
+install.packages("stringr", dependencies = TRUE)
+install.packages("glmnet", dependencies = TRUE)
+install.packages("tidyverse", dependencies = TRUE)
+install.packages("data.table", dependencies = TRUE)
+install.packages("topicmodels", dependencies = TRUE)
+install.packages("devtools", dependencies = TRUE)
