@@ -1,5 +1,2 @@
 libopenblas-base
 libgsl-dev
-default-jre
-firefox
-docker.io
