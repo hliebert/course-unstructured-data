@@ -1,4 +1,0 @@
-#!/usr/bin/env Rscript
-
-rD <- RSelenium::rsDriver()
-rD[["server"]]$stop()
