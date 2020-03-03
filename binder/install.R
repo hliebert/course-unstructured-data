@@ -7,6 +7,7 @@ install.packages(
     "rvest",
     "RSelenium",
     "wdman",
+    "webdriver",
     "tidyverse",
     "data.table",
     "devtools"
