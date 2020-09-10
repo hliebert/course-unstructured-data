@@ -6,5 +6,4 @@ The lab material is set up to run on Binder.
 
 Jupyter [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master)
 
-Rstudio [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh /hliebert/course-unstructured-data/master?urlpath=rstudio)
-
+Rstudio [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=rstudio)
