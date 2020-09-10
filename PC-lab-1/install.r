@@ -1,0 +1,44 @@
+install.packages(
+  c(
+    "twfy",
+    "jsonlite",
+    "xml2",
+    "httr",
+    "rvest",
+    "RSelenium",
+    "wdman",
+    "webdriver",
+    "tm",
+    "quanteda",
+    "spacyr",
+    "readtext",
+    "tidyverse",
+    "tidytext",
+    "wordcloud",
+    "SentimentAnalysis",
+    "naivebayes",
+    "slam",
+    "lsa",
+    "word2vec",
+    "glmnet",
+    "lexicon",
+    "qdap",
+    "textclean",
+    "uwot",
+    "udpipe",
+    "ggrepel",
+    "factoextra",
+    "fpc",
+    "caret",
+    "RCurl",
+    "data.table",
+    "IRkernel",
+    "corpustools",
+    "plotly",
+    "devtools"
+  ),
+  dependencies = TRUE
+)
+
+devtools::install_github("quanteda/quanteda.corpora")
+IRkernel::installspec()

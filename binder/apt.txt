@@ -1,9 +1,6 @@
 default-jre
 default-jdk
 firefox
-firefox-geckodriver
-chromium-browser
-chromium-chromedriver
 libopenblas-base
 libgsl-dev
 curl
