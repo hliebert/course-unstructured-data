@@ -2,5 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-*/Archive
-*/Solutions
+**/Archive
+**/Solutions
+**/.auctex-auto/
+**/.ipynb_checkpoints/
