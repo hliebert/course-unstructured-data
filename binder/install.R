@@ -17,6 +17,8 @@ install.packages(
     "wordcloud",
     "SentimentAnalysis",
     "naivebayes",
+    "h2o",
+    "fastNaiveBayes",
     "slam",
     "lsa",
     "word2vec",
@@ -35,6 +37,7 @@ install.packages(
     "IRkernel",
     "corpustools",
     "plotly",
+    "plot3D",
     "devtools"
   ),
   dependencies = TRUE

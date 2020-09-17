@@ -3,7 +3,7 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Fr Dez  7 15:01:01 2018
-## Last-Updated: Fr. Aug 28 15:42:23 2020
+## Last-Updated: Do. Sep 17 20:07:03 2020
 ######################################################################
 
 ## Libraries
@@ -16,9 +16,11 @@ library(topicmodels)
 library(wordcloud)
 library(SentimentAnalysis)
 library(naivebayes)
+library(fastNaiveBayes)
 library(slam)
 library(glmnet)
 library(lexicon)
+library(caret)
 
 ## Simple helper function to view first copora elements, only for lecture
 chead <- function(c) lapply(c[1:2], as.character)
@@ -278,58 +280,117 @@ topterms %>%
 
 
 
+#======================== Supervised methods: Prep data, binary ========================
 
-
-## Supervised methods: Prep data
 ## Convert the sparse term-document matrix to a standard data frame
 bag <- as.data.frame(as.matrix(dtms))
 
 ## Convert token counts to simple binary indicators (not much difference)
-bag <- as.data.frame(sapply(bag, function(x) as.numeric(x > 0)))
+bag.bin <- as.data.frame(sapply(bag, function(x) as.numeric(x > 0)))
+
+## Add rownmames
 bag$doc_id <- rownames(as.matrix(dtms))
+bag.bin$doc_id <- rownames(as.matrix(dtms))
 
 ## Add outcomes from the original data: Predict agricultural sector
 loans$agsector <- as.numeric(loans$sectorname == "Agriculture")
 bag <- merge(bag, loans[, .(agsector, loanamount, doc_id)], by = "doc_id")
+bag.bin <- merge(bag.bin, loans[, .(agsector, loanamount, doc_id)], by = "doc_id")
 table(bag$agsector)
-
 
 ## Partition data in test and training sample
 set.seed(100)
 testids <- sample(floor(nrow(bag)/3))
 xtrain <- as.matrix(bag[-testids, !(names(bag) %in% c("agsector", "loanamount", "doc_id"))])
-ytrain <- as.factor(bag[-testids,  "agsector"])
 xtest  <- as.matrix(bag[ testids, !(names(bag) %in% c("agsector", "loanamount", "doc_id"))])
+xtrain.bin <- as.matrix(bag.bin[-testids, !(names(bag) %in% c("agsector", "loanamount", "doc_id"))])
+xtest.bin  <- as.matrix(bag.bin[ testids, !(names(bag) %in% c("agsector", "loanamount", "doc_id"))])
+ytrain <- as.factor(bag[-testids,  "agsector"])
 ytest  <- as.factor(bag[ testids,  "agsector"])
 
 
+#======================== Naive bayes, token indicators ========================
 
+## naive_bayes package only supports binomial, requires transforming everything to factors
+## and requires using binary indicators, not counts.
+xtrain.factor <- as.data.frame(lapply(as.data.frame(xtrain.bin), as.factor))
+xtest.factor <- as.data.frame(lapply(as.data.frame(xtest.bin), as.factor))
 
 ## Supervised generative model: Naive Bayes
-nbclassifier <- naive_bayes(xtrain, ytrain)
+nbclassifier <- naive_bayes(xtrain.factor, ytrain)
 ## nbclassifier <- naive_bayes(xtrain, ytrain, laplace = 1)
-nbpred <- predict(nbclassifier, xtest)
+nbpred <- predict(nbclassifier, xtest.factor, type = "class")
+## nbprob <- predict(nbclassifier, xtest, type = "prob")
 
 ## Performance statistics: Classification rate
 1-mean(as.numeric(nbpred != ytest))
 ## Performance statistics: Confusion matrix
-## table(nbpred, ytest)a
-caret::confusionMatrix(nbpred, ytest)
+## table(nbpred, ytest)
+confusionMatrix(nbpred, ytest)
 ## gmodels::CrossTable(nbpred, ytest,
 ##                     prop.chisq = FALSE, chisq = FALSE, prop.t = FALSE,
 ##                     dnn = c("Predicted", "Actual"))
 
+## parameter grid
+nb.grid <- expand.grid(
+  laplace = seq(0, 1, 0.1),
+  adjust = 1,
+  usekernel = TRUE
+)
+
+## use k-fold cv to tune the laplace smoothing parameter
+## not much scope for tuning with naive bayes
+nbclassifier <- train(
+  xtrain.factor, ytrain,
+  method = "naive_bayes",
+  trControl = trainControl(method = "cv", number = 10),
+  tuneGrid = nb.grid
+)
+nbclassifier
+summary(nbclassifier)
+nbpred <- predict(nbclassifier, xtest.factor)
+1-mean(as.numeric(nbpred != ytest))
+confusionMatrix(nbpred, ytest)
 
 
+#========================== Naive bayes, token counts ==========================
 
-## Supervised text regression: L1 penalized logistic regression
+## fastNaiveBays better package (supports multinomial distribution, for non-binary feature counts)
+fnb.detect_distribution(xtrain)
+
+nbclassifier <- fastNaiveBayes(xtrain, ytrain)
+## nbclassifier <- multinomial_naive_bayes(xtrain, ytrain)
+nbpred <- predict(nbclassifier, xtest)
+1-mean(as.numeric(nbpred != ytest))
+confusionMatrix(nbpred, ytest)
+
+## not part of caret, need to add it, manual grid search here, pointless, no tuning required
+## cv.nbclassifier <- lapply(seq(0, 1, 0.1), function(x) fastNaiveBayes(xtrain, ytrain, laplace = x))
+## cv.nbclassifier <- lapply(cv.nbclassifier, function(x) predict(x, xtest))
+## cv.nbclassifier <- lapply(cv.nbclassifier, function(x) 1-mean(as.numeric(x != ytest)))
+## cv.nbclassifier
+
+
+#========= Supervised text regression: L1 penalized logistic regression, binary ========
+
+l1classifier <- cv.glmnet(xtrain.bin, ytrain, alpha = 1, family = "binomial")
+l1pred <- as.factor(predict(l1classifier, xtest.bin, s = "lambda.min", type = "class"))
+
+## Performance statistics: Classification rate
+1-mean(as.numeric(l1pred != ytest))
+## Performance statistics: Confusion matrix
+confusionMatrix(l1pred, ytest)
+
+
+#===== Supervised text regression: L1 penalized logistic regression, counts ====
+
 l1classifier <- cv.glmnet(xtrain, ytrain, alpha = 1, family = "binomial")
 l1pred <- as.factor(predict(l1classifier, xtest, s = "lambda.min", type = "class"))
 
 ## Performance statistics: Classification rate
 1-mean(as.numeric(l1pred != ytest))
 ## Performance statistics: Confusion matrix
-caret::confusionMatrix(l1pred, ytest)
+confusionMatrix(l1pred, ytest)
 
 ## L1 logistic classifier using rare feature upweighting
 sdweights <- apply(xtrain, 2, sd)
@@ -341,13 +402,11 @@ l1pred <- as.factor(predict(l1classifier, xtest, s = "lambda.min", type = "class
 ## Performance statistics: Classification rate
 1-mean(as.numeric(l1pred != ytest))
 ## Performance statistics: Confusion matrix
-caret::confusionMatrix(l1pred, ytest)
+confusionMatrix(l1pred, ytest)
 
 
-
-
-## Further example: Predict Loan Amount
-## Supervised text regression: L1 penalized linear regression
+#===================== Further example: Predict Loan Amount ====================
+#======================== L1 penalized linear regression =======================
 
 ## Rebuild outcome vectors
 ytrain <- as.matrix(bag[-testids,  "loanamount"])
@@ -359,6 +418,4 @@ l1pred <- predict(l1predictor, xtest, s = "lambda.min", type = "response")
 
 ## RMSE
 sqrt(mean((l1pred - ytest)^2))
-caret::postResample(l1pred, ytest)
-
-
+postResample(l1pred, ytest)

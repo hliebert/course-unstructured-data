@@ -3,7 +3,7 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: Di Aug 11 16:12:24 2020
-## Last-Updated: Mi. Sep  2 17:25:43 2020
+## Last-Updated: Do. Sep 17 17:46:06 2020
 ################################################################################
 
 #================================= Model inputs ================================
@@ -28,22 +28,35 @@ X <- as.matrix(cbind(intercept, x1))
 #================================== QR decomp ==================================
 
 # Fit a linear model, QR-decomposition/Gram-Schmidt orthogonalization
-qrd <- lm(y ~ X - 1)
-## qrd <- lm(y ~ x1)
-## qrd <- lm(y ~ x1 + x2 + x3)
-qrd
+b.qrd <- lm(y ~ X - 1)
+## b.rd <- lm(y ~ x1)
+## b.qrd <- lm(y ~ x1 + x2 + x3)
+b.qrd
+
+# Doing qrd manually and solving
+## After rotation of `X` and `y`, solve upper triangular system `Rb = Q'y`
+qrdecomp <- qr(X)
+b.qrd <- backsolve(qrdecomp$qr, qr.qty(qrdecomp, y))
+b.qrd
+
+
+#===================================== SVD =====================================
+
+svdecomp <- svd(X)
+b.svd <- as.numeric(svdecomp$v %*% (crossprod(svdecomp$u, y) / svdecomp$d))
+b.svd
 
 
 #=============================== Normal equations ==============================
 
 ## Matrix multiplication
-ols <- solve(t(X) %*% X) %*% t(X) %*% y
-ols
+b.ols <- solve(t(X) %*% X) %*% t(X) %*% y
+b.ols
 ## More idiomatic
-ols <- solve(crossprod(X)) %*% crossprod(X,y)
-ols
-ols <- solve(crossprod(X), crossprod(X,y))
-ols
+b.ols <- solve(crossprod(X)) %*% crossprod(X,y)
+b.ols
+b.ols <- solve(crossprod(X), crossprod(X,y))
+b.ols
 
 
 #=============================== Gradient descent ==============================
@@ -53,18 +66,22 @@ cost <- function(X, y, theta) {
   sum((X %*% theta - y)^2) / (2 * length(y))
 }
 
+## euclidean norm
+eucnorm <- function(x) sqrt(sum(x^2))
+
 ## learning rate and iteration limit
 alpha <- 0.01
 niter <- 2000
 
-## keep history
-cost_history <- double(niter)
-theta_history <- list(niter)
 
+## Batch gradient descent
 ## initialize coefficients
 theta <- matrix(c(0, 0), nrow = 2) ## univariate
 ## theta <- matrix(c(0, 0), nrow = 4) ## multivariate
-# gradient descent
+## keep history
+cost_history <- double(niter)
+theta_history <- list(niter)
+## compute gradient and update
 set.seed(42)
 for (i in 1:niter) {
   error <- (X %*% theta) - y
@@ -72,8 +89,37 @@ for (i in 1:niter) {
   theta <- theta - alpha * delta
   cost_history[i] <- cost(X, y, theta)
   theta_history[[i]] <- theta
+  ## if ((i %% 100) == 0) print(theta)
 }
 print(theta)
+print(niter)
+
+
+## Batch gradient descent
+## with a non-fixed number of iterations and stopping rule
+## initialize coefficients
+theta <- matrix(c(0, 0), nrow = 2) ## univariate
+## theta <- matrix(c(0, 0), nrow = 4) ## multivariate
+## keep history
+cost_history <- c()
+theta_history <- list()
+## threshold and first iteration values
+set.seed(42)
+epsilon <- 10e-10
+delta <- Inf
+i = 0
+## compute gradient and update
+while (eucnorm(delta) > epsilon) {
+  error <- (X %*% theta) - y
+  delta <- t(X) %*% error / length(y)
+  theta <- theta - alpha * delta
+  cost_history <- c(cost_history, cost(X, y, theta))
+  theta_history <- append(theta_history, list(theta))
+  ## if ((i %% 100) == 0) print(theta)
+  i <- i + 1
+}
+print(theta)
+print(i)
 
 
 #===================================== Plot ====================================
@@ -81,8 +127,8 @@ print(theta)
 ## compare estimates
 plot(x1, y, col = rgb(0.2, 0.4, 0.6, 0.4),
      main = "Linear regression (by QR-decomp, normal equations or gradient descent)")
-abline(qrd[1:2], col = "blue")
-abline(ols[1:2], col = "green")
+abline(b.qrd[1:2], col = "blue")
+abline(b.ols[1:2], col = "green")
 abline(theta[1:2], col = "red")
 
 ## plot data and converging fit
@@ -94,7 +140,7 @@ for (i in c(1, 3, 6, 10, 14, seq(20, niter, by = 10))) {
 abline(coef = theta, col = "blue")
 
 ## cost convergence
-plot(cost_history, type = "line", col = "blue", lwd = 2,
+plot(cost_history, type = "l", col = "blue", lwd = 2,
      main = "Cost function", ylab = "cost", xlab = "Iterations")
 
 
@@ -109,6 +155,8 @@ plot(cost_history, type = "line", col = "blue", lwd = 2,
 
 theta <- matrix(c(0, 0), nrow = 2) ## univariate
 ## theta <- matrix(c(0, 0), nrow = 4) ## multivariate
+cost_history <- c()
+theta_history <- list()
 set.seed(42)
 for (i in 1:niter) {
   ## j <- sample(NROW(X), NCOL(X))
@@ -124,14 +172,14 @@ print(theta)
 
 ## plot data and converging fit
 plot(x1, y, col = rgb(0.2, 0.4, 0.6, 0.4),
-     main = "Linear regression by stochastic gradient descent")
+     main = "Linear regression by stochastic gradient descent, single obs")
 for (i in c(1, 3, 6, 10, 14, seq(20, niter, by = 10))) {
   abline(coef = theta_history[[i]], col = rgb(0.8, 0, 0, 0.3))
 }
 abline(coef = theta, col = "blue")
 
 ## cost convergence
-plot(cost_history, type = "line", col = "blue", lwd = 2,
+plot(cost_history, type = "l", col = "blue", lwd = 2,
      main = "Cost function", ylab = "cost", xlab = "Iterations")
 
 
@@ -139,6 +187,8 @@ plot(cost_history, type = "line", col = "blue", lwd = 2,
 
 theta <- matrix(c(0, 0), nrow = 2) ## univariate
 ## theta <- matrix(c(0, 0), nrow = 4) ## multivariate
+cost_history <- c()
+theta_history <- list()
 set.seed(42)
 for (i in 1:niter) {
   select <- sample(NROW(X), 32)
@@ -152,24 +202,21 @@ print(theta)
 
 ## plot data and converging fit
 plot(x1, y, col = rgb(0.2, 0.4, 0.6, 0.4),
-     main = "Linear regression by stochastic gradient descent")
+     main = "Linear regression by stochastic gradient descent, mini batch")
 for (i in c(1, 3, 6, 10, 14, seq(20, niter, by = 10))) {
   abline(coef = theta_history[[i]], col = rgb(0.8, 0, 0, 0.3))
 }
 abline(coef = theta, col = "blue")
 
 ## cost convergence
-plot(cost_history, type = "line", col = "blue", lwd = 2,
+plot(cost_history, type = "l", col = "blue", lwd = 2,
      main = "Cost function", ylab = "cost", xlab = "Iterations")
 
 
 #============================== More illustrations =============================
 
-conv <- as.data.frame(cbind(t(sapply(theta_history, function(x) x[, 1])),
-                            cost = cost_history))
+conv <- as.data.frame(cbind(t(sapply(theta_history, function(x) x[, 1])), cost = cost_history))
 head(conv)
-
-install.packages("plot3D", dependencies = TRUE)
 
 library(plot3D)
 scatter3D(

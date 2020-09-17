@@ -3,7 +3,7 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: So Mär  1 15:41:38 2020
-## Last-Updated: Mi. Sep  2 16:10:30 2020
+## Last-Updated: Di. Sep 15 07:54:54 2020
 ################################################################################
 
 #================================== Libraries ==================================
@@ -552,6 +552,10 @@ predict(model, newdata = c("loan", "money"), type = "nearest", top_n = 5)
 
 wv <- predict(model, newdata = c("king", "man", "woman"), type = "embedding")
 wv <- wv["king", ] - wv["man", ] + wv["woman", ]
+predict(model, newdata = wv, type = "nearest", top_n = 5)
+
+wv <- predict(model, newdata = c("france", "paris", "london"), type = "embedding")
+wv <- wv["france", ] - wv["paris", ] + wv["london", ]
 predict(model, newdata = wv, type = "nearest", top_n = 5)
 
 wv <- predict(model, newdata = c("physician", "man", "woman"), type = "embedding")
