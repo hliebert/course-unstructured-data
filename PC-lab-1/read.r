@@ -3,7 +3,7 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: Mi. Aug 26 14:44:17 2020
-## Last-Updated: Mi. Sep  2 12:31:20 2020
+## Last-Updated: Mi. Sep 16 19:05:35 2020
 ################################################################################
 
 
@@ -61,8 +61,8 @@ example <- read.table("example.csv", sep =";")
 
 options(scipen = 9999)
 head(example)
-stopifnot(is.na(example$V3))
-example$V3 <- NULL
+dim(example)
+stopifnot(ncol(example)==2)
 
 names(example) <- c("id", "ad")
 example$ad <- trimws(example$ad)
