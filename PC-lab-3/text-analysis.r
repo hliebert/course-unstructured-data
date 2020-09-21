@@ -3,7 +3,7 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Fr Dez  7 15:01:01 2018
-## Last-Updated: Do. Sep 17 20:07:03 2020
+## Last-Updated: Mo. Sep 21 15:27:20 2020
 ######################################################################
 
 ## Libraries
@@ -355,7 +355,14 @@ confusionMatrix(nbpred, ytest)
 
 #========================== Naive bayes, token counts ==========================
 
-## fastNaiveBays better package (supports multinomial distribution, for non-binary feature counts)
+## non-parametric naive bayes
+nbclassifier <- nonparametric_naive_bayes(xtrain, ytrain)
+nbpred <- predict(nbclassifier, xtest)
+1-mean(as.numeric(nbpred != ytest))
+confusionMatrix(nbpred, ytest)
+
+## fastNaiveBays better package
+## (supports multinomial distribution, parametric nb for non-binary feature counts)
 fnb.detect_distribution(xtrain)
 
 nbclassifier <- fastNaiveBayes(xtrain, ytrain)
