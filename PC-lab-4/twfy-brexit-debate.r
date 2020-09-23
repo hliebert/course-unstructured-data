@@ -3,7 +3,7 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: So Mär  1 15:41:38 2020
-## Last-Updated: Di. Sep 15 07:54:54 2020
+## Last-Updated: Mi. Sep 23 10:47:53 2020
 ################################################################################
 
 #================================== Libraries ==================================
@@ -418,6 +418,9 @@ fviz_cluster(km, data = pcs)
 
 #=============================== Word embeddings ===============================
 
+## this data is not ideal to train embeddings, it is too small.
+## but it is fast and sufficient for illustration.
+
 ## use untransformed or only minimally transformed text as input
 text <- brexit.debates$body.orig
 text <- replace_html(text)
@@ -562,11 +565,80 @@ wv <- predict(model, newdata = c("physician", "man", "woman"), type = "embedding
 wv <- wv["physician", ] - wv["man", ] + wv["woman", ]
 predict(model, newdata = wv, type = "nearest", top_n = 20)
 
-wv <- predict(model, newdata = c("black", "white", "racism", "person"), type = "embedding")
-wv <- wv["white", ] - wv["person", ] + wv["racism", ]
+wv <- predict(model, newdata = c("ideology", "person", "racist", "xenophobia"), type = "embedding")
+wv <- wv["ideology", ] - wv["person", ] + wv["racist", ]
 predict(model, newdata = wv, type = "nearest", top_n = 10)
 
-wv <- predict(model, newdata = c("black", "white", "racism", "person"), type = "embedding")
-wv <- wv["white", ] - wv["person", ] + wv["racism", ]
-predict(model, newdata = wv, type = "nearest", top_n = 10)
 
+#==================================== GloVe ====================================
+
+library(text2vec)
+
+## Create iterator over tokens
+tokens <- space_tokenizer(text)
+str(tokens)
+
+## Create vocabulary. Terms will be unigrams (simple words).
+it <- itoken(tokens)
+vocab <- create_vocabulary(it)
+vocab
+
+## remove infrequent tokens
+vocab <- prune_vocabulary(vocab, term_count_min = 5L)
+
+## Use our filtered vocabulary
+vectorizer <- vocab_vectorizer(vocab)
+## use window of 5 for context words to construct term-co-occurence matrix
+tcm <- create_tcm(it, vectorizer, skip_grams_window = 5L)
+str(tcm)
+
+## inspect: standard is decay weighting with offset position
+## (weight = 1 / distance_from_current_word)
+head(tcm)
+
+## fit glove
+glove <- GlobalVectors$new(rank = 50, x_max = 10)
+wvmain <- glove$fit_transform(tcm, n_iter = 10, convergence_tol = 0.01, n_threads = 8)
+dim(wvmain)
+tail(wvmain)
+
+## can also retrieve context vectors
+wvcontext <- glove$components
+tail(wvcontext)
+dim(wvcontext)
+
+## could use either of these (typically main),
+## or aggregate them by averaging or summing them (suggested in glove paper)
+## summing:
+wordvectors <- wvmain + t(wvcontext)
+
+## analogy tasks work the same
+## (although not well here as the corpus is too small and specific, requires more data)
+berlin <- wordvectors["paris", , drop = FALSE] - wordvectors["france", , drop = FALSE] + wordvectors["germany", , drop = FALSE]
+cosinesim <- sim2(x = wordvectors, y = berlin, method = "cosine", norm = "l2")
+head(sort(cosinesim[,1], decreasing = TRUE), 5)
+
+## simple way to get a document representation: just averaging word vectors within a document
+## assuming dtm is a document-term-matrix
+
+## isolating common terms
+commonterms <- intersect(colnames(dtm), rownames(wordvectors))
+
+## filtering dtm (and normalizing)
+## could also re-weight dtm with tf-idf instead of l1 norm
+## dtmaveraged <-  as.matrix(dtm)[, common_terms]
+dtmaveraged <-  normalize(as.matrix(dtm)[, commonterms], "l1")
+
+## get averaged document vectors ('sentence' vectors)
+docvectors <- dtmaveraged %*% wordvectors[commonterms, ]
+head(docvectors)
+
+## vector dimensions for multiplication
+dim(dtmaveraged)
+dim(wordvectors[commonterms, ])
+dim(docvectors)
+
+## analogy tasks work just as before, could use this to find e.g. speakers similar to a person
+## check which is most similar to first document
+cosinesim <- sim2(x = docvectors, y = docvectors[1, , drop = FALSE], method = "cosine", norm = "l2")
+head(sort(cosinesim[,1], decreasing = TRUE), 5)
