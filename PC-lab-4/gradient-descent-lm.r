@@ -3,7 +3,7 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: Di Aug 11 16:12:24 2020
-## Last-Updated: Do. Sep 17 17:46:06 2020
+## Last-Updated: Do. Sep 24 16:12:46 2020
 ################################################################################
 
 #================================= Model inputs ================================
@@ -42,10 +42,22 @@ b.qrd
 
 #===================================== SVD =====================================
 
+## Moore-penrose Pseudoinverse
 svdecomp <- svd(X)
-b.svd <- as.numeric(svdecomp$v %*% (crossprod(svdecomp$u, y) / svdecomp$d))
+str(svdecomp)
+b.svd <- as.numeric(svdecomp$v %*% solve(diag(svdecomp$d)) %*% t(svdecomp$u) %*% y)
+b.svd
+b.svd <- as.numeric(svdecomp$v %*% (crossprod(svdecomp$u, y) / svdecomp$d)) ## the same
+b.svd
+b.svd <- MASS::ginv(X) %*% y ## function for Moore-Penrose Pseudo-Inverse
 b.svd
 
+## Moore-penrose Pseudoinverse, computed using eigenvalue decomposition of x'x
+egd <- eigen(t(X) %*% X)
+xtx.inv <- egd$vectors %*% solve(diag(egd$values)) %*% t(egd$vectors)
+x.pseudo.inv <- xtx.inv %*% t(X)
+b.svd <- x.pseudo.inv %*% y
+b.svd
 
 #=============================== Normal equations ==============================
 
