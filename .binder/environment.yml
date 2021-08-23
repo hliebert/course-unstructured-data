@@ -1,7 +1,7 @@
 channels:
   - conda-forge
 dependencies:
-  - r-base=4.1.0
+  - r-base=3.6
   - r-caret
   - r-data.table
   - r-devtools
