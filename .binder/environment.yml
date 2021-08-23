@@ -1,9 +1,8 @@
 channels:
   - conda-forge
 dependencies:
-  - r-base=3.6
+  - r-base=4.1.0
   - r-caret
-  - r-corpustools
   - r-data.table
   - r-devtools
   - r-factoextra
@@ -26,7 +25,8 @@ dependencies:
   - r-readtext
   - r-RSelenium
   - r-rvest
-  - r-SentimentAnalysis
+# - r-sentimentanalysis
+  - r-sentimentr
   - r-slam
   - r-spacyr
   - r-textclean
@@ -38,6 +38,6 @@ dependencies:
   - r-uwot
   - r-wdman
   - r-webdriver
-  - r-word2vec
+# - r-word2vec
   - r-wordcloud
   - r-xml2
