@@ -10,7 +10,7 @@ mkdir txts
 # convert all pdfs to text
 # for file in pdf/*.pdf; do pdftotext "$file"; done
 
-# more readible if you write a shell script to execute
+# more readible form, needs to put in a separate file and executed (bash fileaname.sh)
 # for file in pdf/*.pdf
 #     do pdftotext "$file"
 # done

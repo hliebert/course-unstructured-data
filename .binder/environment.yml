@@ -47,7 +47,7 @@ dependencies:
 # - r-twfy
 # - r-udpipe
   - r-uwot
-  - r-wdman
+# - r-wdman
   - r-webdriver
 # - r-word2vec
   - r-wordcloud
