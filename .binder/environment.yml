@@ -22,7 +22,6 @@ dependencies:
   - r-glmnet
   - r-h2o
   - r-httr
-  - r-irkernel
   - r-jsonlite
   - r-lexicon
   - r-lsa
