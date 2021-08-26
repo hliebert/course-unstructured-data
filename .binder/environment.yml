@@ -9,7 +9,7 @@ dependencies:
   - geckodriver
   - selenium
   - transformers
-  - torch
+  - pytorch
   # R
   - r-base=4.1
   - r-caret
