@@ -16,7 +16,7 @@ dependencies:
   - r-data.table
   - r-devtools
   - r-factoextra
-  - r-fastNaiveBayes
+# - r-fastnaivebayes
   - r-fpc
   - r-ggrepel
   - r-glmnet

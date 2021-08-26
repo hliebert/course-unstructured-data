@@ -48,6 +48,7 @@
 ##   dependencies = TRUE
 ## )
 
+install.packages("fastNaiveBayes")
 install.packages("SentimentAnalysis")
 install.packages("twfy")
 devtools::install_github("bnosac/word2vec", dependencies = TRUE)
