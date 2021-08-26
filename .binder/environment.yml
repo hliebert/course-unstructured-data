@@ -31,10 +31,10 @@ dependencies:
   - r-plotly
   - r-qdap
   - r-quanteda
-  - r-RCurl
+  - r-rcurl
   - r-readtext
   - r-reticulate
-  - r-RSelenium
+  - r-rselenium
   - r-rvest
 # - r-sentimentanalysis
   - r-sentimentr
