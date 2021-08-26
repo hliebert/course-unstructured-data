@@ -22,7 +22,7 @@ dependencies:
   - r-glmnet
   - r-h2o
   - r-httr
-  - r-IRkernel
+  - r-irkernel
   - r-jsonlite
   - r-lexicon
   - r-lsa
