@@ -11,7 +11,7 @@ dependencies:
   - transformers
   - pytorch
   # R
-  - r-base=4.1
+  - r-base=3.6
   - r-caret
   - r-data.table
   - r-devtools
@@ -22,6 +22,7 @@ dependencies:
   - r-glmnet
   - r-h2o
   - r-httr
+  - r-irkernel
   - r-jsonlite
   - r-lexicon
   - r-lsa
