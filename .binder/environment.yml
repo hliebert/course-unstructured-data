@@ -1,6 +1,16 @@
 channels:
+  - default
   - conda-forge
 dependencies:
+  # Python
+  - numpy
+  - matplotlib
+  - pandas
+  - webdriverdownloader
+  - selenium
+  - transformers
+  - torch
+  # R
   - r-base=4.1
   - r-caret
   - r-data.table
@@ -23,6 +33,7 @@ dependencies:
   - r-quanteda
   - r-RCurl
   - r-readtext
+  - r-reticulate
   - r-RSelenium
   - r-rvest
 # - r-sentimentanalysis
@@ -34,7 +45,7 @@ dependencies:
   - r-tidyverse
   - r-tm
   - r-twfy
-  - r-udpipe
+# - r-udpipe
   - r-uwot
   - r-wdman
   - r-webdriver
