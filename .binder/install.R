@@ -49,6 +49,7 @@
 ## )
 
 install.packages("SentimentAnalysis")
+install.packages("twfy")
 devtools::install_github("bnosac/word2vec", dependencies = TRUE)
 devtools::install_github("bnosac/doc2vec", dependencies = TRUE)
 devtools::install_github("bnosac/golgotha", INSTALL_opts = "--no-multiarch")

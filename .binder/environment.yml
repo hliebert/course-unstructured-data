@@ -44,7 +44,7 @@ dependencies:
   - r-tidytext
   - r-tidyverse
   - r-tm
-  - r-twfy
+# - r-twfy
 # - r-udpipe
   - r-uwot
   - r-wdman
