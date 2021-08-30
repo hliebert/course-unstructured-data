@@ -1,7 +1,0 @@
-numpy
-matplotlib
-pandas
-webdriverdownloader
-selenium
-transformers
-torch
