@@ -37,7 +37,7 @@ dependencies:
   - r-reticulate
   - r-rselenium
   - r-rvest
-  - r-sentimentanalysis
+# - r-sentimentanalysis
   - r-sentimentr
   - r-slam
   - r-spacyr
