@@ -32,6 +32,7 @@ dependencies:
   - r-plotly
   - r-qdap
   - r-quanteda
+  - r-ranger
   - r-rcurl
   - r-readtext
   - r-reticulate
