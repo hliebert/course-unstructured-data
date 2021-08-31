@@ -15,7 +15,7 @@ dependencies:
   - r-caret
   - r-data.table
   - r-devtools
-# - r-doc2vec
+  - r-doc2vec
   - r-factoextra
   - r-fastnaivebayes
   - r-fpc
@@ -38,7 +38,7 @@ dependencies:
   - r-reticulate
   - r-rselenium
   - r-rvest
-# - r-sentimentanalysis
+  - r-sentimentanalysis
   - r-sentimentr
   - r-slam
   - r-spacyr
@@ -47,10 +47,10 @@ dependencies:
   - r-tidyverse
   - r-tm
   - r-twfy
-# - r-udpipe
+  - r-udpipe
   - r-uwot
   - r-wdman
   - r-webdriver
-# - r-word2vec
+  - r-word2vec
   - r-wordcloud
   - r-xml2
