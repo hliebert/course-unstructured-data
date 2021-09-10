@@ -20,6 +20,7 @@ dependencies:
   - r-fastnaivebayes
   - r-fpc
   - r-ggrepel
+  - r-ghql
   - r-glmnet
   - r-h2o
   - r-httr
