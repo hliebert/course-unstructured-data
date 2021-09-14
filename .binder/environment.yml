@@ -11,7 +11,7 @@ dependencies:
   - pytorch
   - selenium
   - transformers
-# Python via pip
+  # Python via pip
   - pip:
       - bert
   # R
