@@ -3,15 +3,21 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Do Jan  4 19:13:53 2018
-## Last-Updated: Mi. Aug 26 17:45:55 2020
+## Last-Updated: Fr Sep 10 14:24:53 2021
 ######################################################################
+
+## Note: This queries Kiva's legacy REST API (v1). The current Kiva API uses
+## GraphQL. Documentation of the legacy API can be found here:
+## https://web.archive.org/web/20181110112914/http://build.kiva.org/
+
 
 ## Libraries
 library(jsonlite)
 library(httr)
 library(rvest)
+library(ghql)
 
-## Kiva Examples
+#================================ Kiva Examples ================================
 
 ## Get the 20 most recent loans
 newloans <- fromJSON("https://api.kivaws.org/v1/loans/newest.json")
@@ -34,11 +40,11 @@ toJSON(loans, pretty = TRUE)
 methods <- fromJSON("https://api.kivaws.org/v1/methods.json", flatten = TRUE)
 str(methods)
 methods <- as.data.frame(methods$methods)
+methods[, c("uri", "documentation.en.summary")]
 methods[grep("search", methods$id), ]
 
 
-
-## Request specific info from KIVA API
+#===================== Request specific info from KIVA API =====================
 
 ## Examples
 ## https://build.kiva.org/api
@@ -101,7 +107,7 @@ dim(data)
 
 
 
-## Get all data, multiple requests, iterate over pages
+#============= Get all data, multiple requests, iterate over pages =============
 
 ## Note: very simple proof of concept
 ## (should check http response for error and have better tests)
@@ -181,8 +187,123 @@ for (p in seq(1, maxpages, by = 1)[1:3]) {
 ## dim(data)
 
 
+#===============================================================================
+#============================= Kiva GraphQL example ============================
+#===============================================================================
 
-## TheyWorkForYou.com Example
+# new Kiva api
+
+#================================ simple request ===============================
+
+baseurl <- "https://api.kivaws.org/graphql?query="
+query <- "{lend {loan (id: 1568001){id name}}}"
+q <- URLencode(paste0(baseurl, query))
+
+## response <- POST(q)
+response <- GET(q)
+response <- fromJSON(content(response, as = "text"))
+response
+
+## more elaborate query, nicer formatting.
+query <- "{
+  lend {
+    loans(sortBy: newest) {
+      values {
+        id
+        name
+        loanAmount
+      }
+    }
+  }
+}"
+q <- URLencode(paste0(baseurl, query))
+response <- GET(q)
+response <- fromJSON(content(response, as = "text"))
+response
+
+
+
+#============================ using the ghql library ===========================
+
+## Link to the GraphQL schema api
+link = "https://api.kivaws.org/graphql?query="
+
+## Connection
+conn <- GraphqlClient$new(url = link)
+
+## Define a Graphql Query
+query <- '{
+  lend {
+    loans(sortBy: newest) {
+      values {
+        id
+        name
+        loanAmount
+      }
+    }
+  }
+}'
+
+
+## The ghql query class and define query in a character string
+new <- Query$new()$query("link", query)
+
+## Inspecting the schema
+str(new)
+new$link
+
+# Execute query
+result <- conn$exec(new$link)
+result
+
+# Transform result to JSON
+result.injson <- fromJSON(result, flatten = F)
+result.injson
+
+
+## more elaborate query
+query <- '{
+  lend {
+    loans (filters: {gender: female, country: ["KE", "US"]}, limit: 5) {
+      totalCount
+      values {
+        name
+        loanAmount
+        image {
+          url(presetSize: small)
+        }
+        activity {
+          name
+        }
+        geocode {
+          country {
+            isoCode
+            name
+          }
+        }
+        lenders (limit: 0) {
+          totalCount
+        }
+        ... on LoanPartner {
+          partnerName
+        }
+        ... on LoanDirect {
+          trusteeName
+        }
+      }
+    }
+  }
+}'
+
+
+# set up new query and get JSON result
+new <- Query$new()$query("link", query)
+result.injson <- fromJSON(conn$exec(new$link), flatten = F)
+result.injson
+
+
+#========================== TheyWorkForYou.com Example =========================
+
 apikey <- "G3WVqtBtKAbdGVqrd8BKajm8"
 base <- "https://www.theyworkforyou.com/api/"
 format <- "js"

@@ -3,7 +3,7 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Di Jan  8 18:23:16 2019
-## Last-Updated: Do. Aug 27 12:52:05 2020
+## Last-Updated: Di Sep 14 17:29:43 2021
 ################################################################################
 
 
@@ -66,7 +66,6 @@ page <- read_html(session)
 table <- html_node(page, css = "table.wikitable:nth-child(130)")
 regions <- html_table(table)
 regions
-
 
 
 #=============================== REGEX FILTERING ===============================

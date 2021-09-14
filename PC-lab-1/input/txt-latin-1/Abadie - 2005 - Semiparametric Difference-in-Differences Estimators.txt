@@ -1,0 +1,1398 @@
+The Review of Economic Studies, Ltd.
+Semiparametric Difference-in-Differences Estimators Author(s): Alberto Abadie Reviewed work(s): Source: The Review of Economic Studies, Vol. 72, No. 1 (Jan., 2005), pp. 1-19 Published by: Oxford University Press Stable URL: http://www.jstor.org/stable/3700681 . Accessed: 11/10/2012 09:09 Your use of the JSTOR archive indicates your acceptance of the Terms & Conditions of Use, available at . http://www.jstor.org/page/info/about/policies/terms.jsp . JSTOR is a not-for-profit service that helps scholars, researchers, and students discover, use, and build upon a wide range of content in a trusted digital archive. We use information technology and tools to increase productivity and facilitate new forms of scholarship. For more information about JSTOR, please contact support@jstor.org. .
+Oxford University Press and The Review of Economic Studies, Ltd. are collaborating with JSTOR to digitize, preserve and extend access to The Review of Economic Studies.
+http://www.jstor.org
+
+ReviewofEconomicStudies(2005) 72, 1-19 Q 2005TheReviewofEconomicStudiesLimited
+
+0034-6527/05/00010000001$02.00
+
+Semiparametric Difference-in-Differences
+Estimators
+ALBERTO ABADIE
+HarvardUniversitayndNBER
+FirstversionreceivedJune2001;finalversionacceptedOctober2003 (Eds.)
+Thedifference-in-differe(DnIcDe)s estimatoirs oneofthemostpopulartoolsforappliedresearch in economicsto evaluatetheeffectosf publicinterventionansd othertreatmentosf interesotn some relevanotutcomevariablesH. oweveri,tiswellknownthattheDID estimatoirsbasedonstrongidentifying assumptionIsn. particularth, econventionDalID estimatorrequiresthati,ntheabsenceofthetreatment, theaverageoutcomefs orthetreatedandcontroglroupswouldhavefollowedparallelpathsovertime.This assumptiomn aybe implausibliefpre-treatmecnhtaracteristitchsatarethoughttobe associatedwiththe dynamicosftheoutcomevariableareunbalancedbetweenthetreatedandtheuntreatedT.hatwouldbe the case,forexamplei,fselectionfortreatmenistinfluencebdyindividual-transitsohroycksonpastoutcomes (Ashenfelterd'sip).Thisarticleconsidertshecase inwhichdifferenciens observedcharacteristiccrseate non-paralleolutcomedynamicbs etweentreatedandcontrolsI.t is shownthati,n sucha case,a simple two-stepstrategcyanbe usedtoestimatteheaverageeffecotfthetreatmenftorthetreatedI.n addition, theestimatiofnrameworpkroposedinthisarticleallowstheuse ofcovariatetsodescribehowtheaverage effecotfthetreatmenvtarieswithchangesinobservedcharacteristics.
+A goodwaytodoeconometriisctsolookforgoodnaturaelxperimenantsdusestatistical methodtshatcantidyuptheconfoundifnagctortshatnaturheasnotcontrollefdorus. (DanielMcFaddenE,conometrTiocols)
+1. INTRODUCTION
+Theuseofnaturaelxperimenttos evaluatetreatmeneftfectisntheabsenceoftrulyexperimental datahas gainedwideacceptancein empiricarlesearchin economicsandothersocialsciences. Simplecomparisonosfpre-treatmeanntdpost-treatmeonuttcomesforthoseindividualesxposed toa treatmenartelikelytobe contaminatebdytemporatlrendisntheoutcomevariableorbythe effectofeventso, therthanthetreatmentth, atoccurredbetweenbothperiodsH. oweverw, hen onlya fractionof thepopulationis exposedto thetreatmenatn, untreatecdomparisongroup canbe usedtoidentiftyemporavlariationintheoutcomethatis notduetotreatmenetxposure. The difference-in-differe(DnIcDe)s estimatoirs basedon thissimpleidea. CardandKrueger (1994) assesstheemploymenetffectosf a raisein theminimumwagein New Jerseyusinga neighbourinsgtateP, ennsylvanitao, identiftyhevariationinemploymentthatNewJerseywould haveexperiencedin theabsenceof a raisein theminimumwage.OtherapplicationosfDID includestudiesof theeffectosf immigratioonn nativewagesand employmen(tCard,1990), theeffectosftemporardyisabilitybenefitosn timeoutofworkafteran injury(Meyer,Viscusi andDurbin,1995),andtheeffecotfanti-takeovlearwson firmsl'everage(GarveyandHanka, 1999).
+It is well knownthattheconventionaDlID estimatoris based on strongassumptions. In particulart,heconventionaDlID estimatorequiresthatin absenceof thetreatmenth, e
+1
+
+2
+
+REVIEW OF ECONOMIC STUDIES
+
+averageoutcomesfortreatedand controlswouldhave followedparallelpathsovertime.This assumptionmaybe implausibliefpre-treatmecnhtaracteristitchsatarethoughttobe associated withthedynamicosftheoutcomevariableareunbalancedbetweenthetreatedandtheuntreated
+group. Thisstudyconsidersthecase in whichdifferenceins observedcharacteristiccrseatenon-
+paralleloutcomedynamicfsorthetreatedanduntreategdroupsI.tis shownthati,nsucha case,a simpletwo-stepstrategcyanbe usedtoestimatteheaverageeffecotfthetreatmenftorthetreated. In additiont,heestimationframeworpkroposedin thisarticleallowstheuse of covariatesto describehowtheaverageeffecotfthetreatmenvtarieswithchangesinobservedcharacteristics.
+Despitetheprolifilciteraturoen semiparametraincdnon-parametrmicethodsf,ewarticles havebeendevotedtostudyinagndrelaxingtheDID identificatiornestrictionSso.meexceptions are Besley and Case (1994), Meyer(1995), Heckman,Ichimuraand Todd (1997), Imbens, LiebmanandEissa (1997), HeckmanI,chimuraS,mithandTodd(1998), AngrisatndKrueger (1999),BlundellandMaCurdy(1999),BlundellC, ostaDias,MeghirandvanReenen(2001)and AtheyandImbens(2002).
+The identificatiopnrocedureused in thisarticleoriginatedwithHeckmanet al. (1997, 1998).Howevert,heestimatiopnrocedurdeifferfsromtheearlierliteraturine threeways.First, it does notrequirerepeatedobservationfsorthesameindividualsT. he proposedestimatorasre feasibleunderthedatarequirementfsortraditionaDlID estimatorws henappliedto repeated cross-sectionsS.econd,it allows theestimationof parsimonioupsarametriacpproximations to the averageeffectof thetreatmenotn thetreatedconditionaol n selectedcovariatesof interesFt.inallyt,heframeworckanaccommodatme ultilevetlreatmenvtariables(thatis,different treatmenint tensities).
+The restofthearticleis organizedas follows.Section2 describestheconventionaDlID modelanddiscussessomeofitslimitationsS.ection3 presenttshemainidentificatiornesults of thearticle,followedby some extensionsT. he estimationstrategyalong withasymptotic distributiotnheoryis providedin Section4. Section5 concludes.Proofsarepresentedin the
+Appendix.
+
+2. THE DID ESTIMATOR
+
+ThebasicDID frameworckanbe describedas followsL. et Y(i, t) be theoutcomeofinteresftor individuail attimet.Thepopulationis observedina pre-treatmepnetriodt = 0, andina posttreatmenpteriodt = 1.Betweenthesetwoperiodss,omefractioonfthepopulationis exposedto thetreatmenWt.edenoteD(i, t) = 1 ifindividuail hasbeenexposedtothetreatmenptrevious toperiodt,D(i, t) = 0 otherwiseW. ecallthoseindividualws ithD(i, 1) = 1 treateda,ndthose withD(i, 1) = 0 controls(oruntreatedS).inceindividualasreonlyexposedtotreatmenatfter thefirspteriod,D(i, 0) = 0 forall i.
+TheconventionDalID estimatoirs oftenderivedusinga linearparametrmic odel.Itis useful toconsiderthisformulatioonftheDID modelfirstt,ofixideas,beforestudyinngon-parametric identificatioinnSection3. ThefollowingformulatioonftheDID modelis basedonthatgivenin
+AshenfeltearndCard(1985). Supposethattheoutcomevariableis generatedbya components ofvarianceprocess
+
+Y(i, t) = 8(t) + a. D(i, t) + r(i) + v(i, t),
+
+(1)
+
+where63(t)is a time-specifcicomponenta, representtsheimpactofthetreatmenrt,(i) is an individual-specifcoicmponenta,ndv(i, t) is anindividual-transitsohroyckthathasmeanzeroat
+eachperiod,t = 0, 1,andis possiblycorrelateidntime.OnlyY(i, t) andD(i, t) areobserved. Theeffecotfthetreatmenat,,is notidentifiewdithoufturtherrestrictionAs.sufficiencotndition
+
+ABADIE SEMIPARAMETRICDIFFERENCE-IN-DIFFERENCES
+
+3
+
+foridentificatioisnthatselectionfortreatmendtoes notdependon theindividual-transitory shockst, hatis
+
+P(D(i, 1) = 1 I v(i, t)) = P(D(i, 1) = 1)
+
+(2)
+
+fort = 0, 1.AddingandsubtractinEg[rq(i) I D(i, 1)] inequation(1), we obtain
+
+Y(i, t) = 8(t) + a -D(i, t) + E[r(i) I D(i, 1)] + e(i, t),
+
+(3)
+
+wheree(i, t) = r(i) - E[j(i) I D(i, 1)] + v(i, t). Noticethat8(t) = 8(0) + (6(1) - 8(0))t,
+
+and E[r(i) ID(i, 1)] = E[q(i) D(i, 1) = 0] + (E[r(i) 0])D(i, 1). Let /t = E[r(i) I D(i, 1) = 0] + 8(0), r =
+
+D(i, 1)D(i, E[rq(i) I D(i, 1) =
+
+I 1] -
+
+1) = E[r(i)
+
+D(i, 1) = 0] and6 = 8(1) - 6(0). Weobtain
+
+Y(i, t) = pt+r *D(i, 1) + 8 -t + a -D(i, t) +. (i, t).
+
+(4)
+
+The restrictioinn equation(2) fort = 0, 1 impliesE[(1, D(i, 1), t,D(i, t)) . e(i, t)] = 0, so all theparameterisn equation(4), includingthetreatmenimt pacta, areestimablebyleast squares.Noticethatthemodelallowsanykindof dependencbe etweenselectionfortreatment, D(i, 1) = 1, andtheindividual-specifciocmponentir, (i). Thismodelis called"difference-indifferencebs"ecauseundertheidentifyincgonditioninequation(2) wehave
+
+a = {E[Y(i, 1) I D(i, 1) = 1] - E[Y(i, 1) I D(i, 1) = 0]}
+
+- {E[Y(i, 0) I D(i, 1) = 1] - E[Y(i, 0) I D(i, 1) = 0]},
+
+(5)
+
+andtheleastsquaresestimatoorfa is thesamplecounterparoftequation(5). Thisformulatioonftheproblemis usefulwhenrepeatedcrosssectionsof(Y(i, t),D(i, 1))
+for t = 0, 1 are available.If a sample withrepeatedpre-treatmenantd post-treatment observationosftheoutcomevariable,Y(i, 1) and Y(i, 0), is available,thena is estimableby leastsquaresregressioonfY(i, 1) - Y(i, 0) on D(i, 1):
+
+a = E[Y(i, 1) - Y(i, 0) I D(i, 1) = 1] - E[Y(i, 1) - Y(i, 0) I D(i, 1) = 0].
+
+Notethatequation(2) fort = 0, 1 impliesthatv(i, 1) - v(i, 0) is meanindependenotf D(i, 1),andtherefortehati,nabsenceofthetreatmentth,eaverageoutcomeforthetreatedwould haveexperiencetdhesamevariationas theaverageoutcomefortheuntreatedT.hisrestriction, impliedbythemodel,maybe toostringenifttreatedandcontrolasreunbalancedin covariates thatarethoughttobe associatedwiththedynamicosftheoutcomevariable.
+Forexamplei,thasbeendocumentetdhatparticipantins traininpgrogrammesxperiencae declineinearningpsriortothetraininpgeriod(Ashenfelterd'sip,Ashenfelte(1r978)). Thisfact suggesttshatselectionfortraininmg aybeaffectebdyindividual-transitsohroycksinpre-training earningsT. o accommodattehisconjectureA, shenfeltearndCard(1985) proposethefollowing modelfortheselectionprocess:
+
+1 ifY(i, 1 - K) + u(i) < Y D(i, 1)=0 otherwise,
+
+(6)
+
+whereK is a positiveintegerY, is a constanta,ndu(i) is a randomvariableindependenotfany
+variancecomponentU. nderthisformulatiofnortheselectionprocess,thoseindividualws ith lowearningK periodsbeforetraininagremorelikelytoparticipatienthetraininpgrogramme. The identificatiocnonditionin equation(2) does nothold in generalforthisexample.The
+reasonis thattheindividual-specifciocmponentsv,(i, t), areallowedto be correlatedintime. However,iftheselectionprocesscan be representebdy equation(6), thenP(D(i, 1) = 1 I
+Y(i, 1 - K), v(i,t)) = P(D(i, 1) = 1 I Y(i, 1 - K)). The DID modelholdsconditionaoln
+
+4
+
+REVIEW OF ECONOMIC STUDIES
+
+Y(i, 1 - K), so theimpactofthetreatmenistgivenby
+
+{E[Y(i, 1) IX(i), D(i, 1) = 1] - E[Y(i, 1) 1X(i), D(i, 1) = 011]}
+
+-{E[Y(i, 0) I X(i), D(i, 1) = 1] - E[Y(i, 0) I X(i), D(i, 1) = 0]}
+
+(7)
+
+whereX(i) = Y(i, 1 - K).1 More generallyi,n thisarticleX(i) is a vectorof observed characteristicsu, ch as demographicattributesp,redetermineadt t = 0. A conditional identificatiornestrictioins appealingin theDID frameworwkhenthevariablesin X(i) are believedto be relatedto theoutcomedynamicsandtheirdistributiondsiffebretweentreated andcontrols.
+The traditionawl ayto accommodatecovariatesin theDID modelis to introductehem linearlyinequation(4):
+
+Y(i, t) = it + X(i)'wr(t)+ t -D(i, 1) + 6 -t + a -D(i, t) + e(i, t),
+
+(8)
+
+whereX(i) is assumeduncorrelatewdithe(i, t). Becausethecoefficienotns X(i) changewitht, thisformulatioonf theDID modelallowstheuse of covariatesto represenhteterogeneitiny outcomedynamicsD. ifferencintghelastequationwithrespecttot,we obtain
+
+Y(i, 1) - Y(i, 0) = 6 + X(i)'7r + a - D(i, 1) + (e(i, 1) - e(i, 0)),
+
+where7r = 7r(1)- r(0). Thisalternativfeormulatioins usefulwhena samplewithrepeated observationis available.Howevera,s noticedbyMeyer(1995),introducincgovariatesin this linearfashionmaynotbe appropriatiefthetreatmenhtas differeneftfectfsordifferengtroups inthepopulationH. eterogeneitiyntreatmenetffectcsanbe studiedbyspecifyinag inequation (8) as a functionof X(i) (i.e. byincludinginteractionbsetweenX(i) and D(i, t) in equation (8)). Ideally,covariatesshouldbe treatednon-parametricalalsy,in equation(7), so thatany potentiailnconsistenccyreatedbyfunctionaflormmisspecificatioisnavoided.Howeverw, hen thenumberofcovariaters equiredto attainidentificatioisnlarge,somekindofintegratioonver X(i) is requiredinordertoobtaininterpretabrleesults.
+Thenextsectionproposesa flexiblne ewprocedurteocontroflortheeffecotfcovariateisn theDID modelwhichis basedon conditionaildentificatiornestrictionAs.s intheconventional
+DID model,theroleofthecovariateisnthisnewapproachis twofoldF.irstb, yusingcovariates we extendidentificatitoonthoseinstanceisnwhichobservedcompositionadlifferencbesetween treatedandcontrolcsausenon-paralledlynamicisntheoutcomevariableI.n additiont,heeffect ofthetreatmenist allowedto differamongindividualss,o covariatecsan be usedto describe theeffectofthetreatmenftordifferengtroupsofthepopulationA. distinctivfeeatureof the methodsproposedin thisarticleis that,whilecovariatesare treatednon-parametricaflloyr identificatiotnh,eestimatorpsrovideparsimonioupsarametriacpproximationtso theaverage effecotfthetreatmenotn thetreatedconditionaoln selectedcovariateosfinterest.2
+A relatedway to accommodatecovariatesin a DID estimatorhas been exploredby Heckmanetal. (1997, 1998) whoproposea DID estimatoorftheaveragetreatmenetffecton thetreatedbasedalsoonconditionaildentificatironestrictionTsh. eirestimatoirs constructebdy matchingdifferenceins pre-treatmeanntdpost-treatmeonuttcomesforthetreatedtoweighted averagesof differenceins pre-treatmeanntd post-treatmeonuttcomesfortheuntreatedT.he differenceasrematchedon theprobabilitoyftreatmenetxposureconditionaoln thecovariates
+
+1. In fact,forAshenfelterd'sip modelin equation(6), thesecondtermin equation(7) is zeroand estimation couldbe basedsolelyonconditionaalveragesofpost-treatmeonuttcomes.
+2. In otherwords,whileidentificatiodnoesnothingeonparametrircestrictionist,allowstheuse ofparametric functiontsodescribehowtheeffectofthetreatmenvtarieswithcovariatesT. hisapproachfollowsthespiritofWhite (1981) and Roehrig(1988) amongotherswhoproposetreatingparametrimc odelsas convenienatpproximationtso unknownfunctionosfinterests,o identificatiocannbe studiednon-parametrically.
+
+ABADIE SEMIPARAMETRICDIFFERENCE-IN-DIFFERENCES
+
+5
+
+(thepropensityscore)and theweightsare determinendon-parametricaullsyinglocal linear regression.T3hisarticleh, oweverp,roposesa directweightinsgchemeonthepropensitsycore thatcanbe usedtoestimatteheeffecotfthetreatmenotnthetreatedwithouetstimatinwgeights non-parametricailnlya previoustep.
+Estimatorosf treatmenetffecttshatweighton functionosf theprobabilityof treatment arebasedon theHorvitz-Thompsosntatisti(cHorvitzandThompson1, 952).Non-parametric generalizationosf theHorvitz-Thompsosntatistihc avebeen studiedin Imbens,Hiranoand Ridder(2003). IchimurandLinton(2002) havedevelopedhigher-ordaesrymptotiecxpansions forthisclassofestimatortsoguidebandwidthselectionR. obinsandco-authorhsaveproposed relatedestimatorisn thecontextof parametrimc odelsfortime-varyintgreatment(see, e.g. HerminB,rumbackandRobins,2001). In thesestudiesitis assumedthatall otherfactorsa,side fromthetreatmentth, ataffectheoutcomevariableare eitherobservedo, rtheirdistributioisn thesamefortreatedanduntreatedC.onsequentlyal,lfactorws hichconfoundsimplecomparisons of the outcomedistributiobnetweentreatedand untreatedare observed.In contrastt,he
+identificatiocnonditionus sed in thisarticleallow forthedistributioonf bothobservedand
+unobservefdactortsodiffebretweentreatedanduntreatedas, longas theeffecotfunobserved factorosn theoutcomedoes notvarywithtime(or,moregenerallyif, itexperiencetshesame variationo,naveragef, ortreatedanduntreated).
+
+3. NON-PARAMETRICIDENTIFICATION
+Inthepreviousectionw, ereferretdoa as the"impactofthetreatmenotr"the"treatmeneftfect", buttheexactmeaningofthesetermws asleftundefined.
+As inRubin(1974) andHeckman(1990),theeffecotfthetreatmenwtillbe definedinterms ofpotentiaolutcomesY. o(i, t) representtsheoutcomethatindividuail wouldattainattimet in absenceofthetreatmenItn. thesamefashionY, 1(i, t) representtsheoutcomethatindividuail wouldattainattimet ifexposedtothetreatmenTth. eeffecotfthetreatmenotntheoutcomefor individuailattimet is thennaturalldyefinedas Y1(i, t) - Yo(i,t).
+The fundamentiadl entificatiopnroblemis thatforanyparticulairndividuail and time periodt,we do notobservebothpotentiaolutcomesYo(i, t) andY1(i, t); so we cannotcompute tthhaeitcnadnibveideuxaptlrreesastemdaesneYft(if,etc)Yt=1(iY,ot()i-,t)Y-o((1i,-t)D. W(i,eto)n) +lyoybl(sie,rtv)e-tDh(eir,eta)l.izSeindocuet,icnotmheesY,i(mi,ptl)e scenarioconsideredhere,thetreatmenistonlyadministereadfterperiodt = 0, we candenote D(i) = D(i, 1), thenwe havethatY(i, 0) = Yo(i,0) and Y(i, 1) = Yo(i, 1) - (1 - D(i)) + Yl(i,G1i)v.-eDn(tih).eimpossibilitoyfcomputinigndividuatlreatmenetffectsr,esearcherosftenfocus on estimatingsome averageeffectl,ike theaverageeffectof thetreatmenotn thetreated E[Y1 (i, 1) - Yo(i, 1) I D(i) = 1] (see,e.g.Heckman1, 990).Sometimesw, henthedesiredlevel ofaggregatioins lower,researchertsrytolearnaboutsomeconditionavlersionoftheaverage effecotnthetreatedE[y1(i, 1) - Yo(i, 1) 1X(i), D(i) = 1].
+Fortherestofthearticlet,heindividuaalrgumenitwillbe droppedtoreducenotationI.will takethenextassumptiotnoholdthroughoutht isarticle.
+Assumption3.1. E[Yo(1) - YO(0) I X, D = 1] = E[Yo(1) - Y0o(0)I X, D = 0].
+Assumptio3n.1isthecrucialidentifyinrgestrictioinDID models.Itstatesthatc,onditional on thecovariatest,heaverageoutcomesfortreatedandcontrolswouldhavefollowedparallel
+3. Blundeelltal.(2001)proposaerelateedstimatworhichcombineDsID andmatchinognthepropensistcyore.
+
+6
+
+REVIEW OF ECONOMIC STUDIES
+
+pDat=hsi0n],aAbssesnucmeopfttiohn3e.t1rceoatllmapesnetsNt.4ootaic"estehleacttwiohneonnEo[Yb(s0eOrv) aIbXle,sDr"es=tr1ic]t=io(nEE[[YYo(0(1O))
+
+I X,
+I X,
+
+D = 1] = E[Yo(1) I X, D = 0]) whichcanbe usedin cross-sectionsatl udiesto identiftyhe
+
+effectofthetreatmenotn thetreated.T5hereforet,heresultsin thisarticlealso applyto this
+
+particulasrituationT.hisis thecase forAshenfelterd'sipexampled, iscussedinSection2. I will
+
+comebacktothispointinSection3.2.
+
+Existenceoftheexpectationiss assumedthroughouUt.nderAssumption3.1,theeffecotf
+
+thetreatmenotnthetreatedconditionaoln X canbe expressedas (Heckmanetal., 1997):6
+
+E[Y1(1) - Yo(l) I X, D = 1] = {E[Y(l) IX, D = 1] - E[Y(l) I X, D = 0]}
+- {E[Y(O) I X, D = 1] - E[Y(O) I X, D = 0]}. (9)
+
+Even when Assumption3.1 holds unconditionallyif, it also holds conditionalon some predeterminceodvariateosfinteres(te.g.gender)w, e maystillusetheconditionaildentification resultto evaluatetheeffecotfthetreatmenftordifferengtroupsofthepopulation(e.g. women vs. men).
+In principlet,heidentificatiornesultin equation(9) can be used to estimateE[Y1(1) Y0(1) I X, D = 1] byproducingnon-parametreisctimateosfeachoneofthefourexpectations on theR.H.S. of equation(9). In practicet,henumberof observationrsequiredto attainan acceptableprecisionforthistypeof non-parametreisctimatoirncreasesveryrapidlywiththe dimensionof X. Thisproblemo,ftencalledthecurseofdimensionalitmy,ayprevenuts from usingnon-parametreisctimatorfsorE[Y1 (1) - Y0(1) I X, D = 1] inmanypracticailnstances. In additiona, simplenon-parametreisctimatoorfE[yI (1) - Y0(1) I X, D = 1],directlybased on equation(9), maybe difficultto interpreift thedimensionof X is largerthantwo,so we cannotsummarizteheresultina graphI.n thosecases,someintegratioonverthedistributioonf X forthetreatedis requiredin ordertoproducesummarystatisticsE.venthen,theestimation processis cumbersomeA.nestimatoorfaveragetreatmenetffectfsorthetreateddirectlybased on equation(9) requireesstimatinfgourconditionaelxpectationnson-parametrica(lolrytwoifa samplewithrepeatedoutcomesY, (0) and Y(1), forthesameindividualiss available)andthen integratintgheestimatetsothedesiredlevelofaggregation.
+Thisarticleproposessimpleweightinsgchemestoproduceestimatorosftheaverageeffect on thetreatedE[Y1 (1) - Y0(1) I D = 1] andparsimonioupsarametriacpproximationtos its conditionavlersionE[Y1(1) - Y0(1) I Xk,D = 1],whereXkis a functioonfX (forexample,
+
+4. Using experimentadlata,Heckmanet al. (1997, 1998) have shownthe plausibilityof thisidentifying
+
+assumptioinnthecontexotftheevaluationofa subsidizedtraininpgrogramme.
+
+X, D
+
+5. In thatcase,Assumption3.1 impliesE[y1(1) - YO(l) I X, D = 1] = E[Y(1) I X, D = 1] - E[Y(1) = 0], andpre-treatmednattaarenotrequiredtoidentiftyheaverageeffecotfthetreatmenotn thetreatedI.f,in
+
+additionE,[Y1(1) I X, D = 1] = E[Y1(1) I X, D = 0],thenE[Y1(1)- Y0(l) I X] = E[Y(l) I X, D = 1]- E[Y(l) I
+
+X, D = 0]. Selectionon observableismpliesthatall factorws hichconfoundsimplecomparisonosfoutcomesbetween
+
+treatedandcontrolsareobservedT. hisis a toostringenatssumptionifthedistributioonfunobservedvariableswhich
+
+affectheoutcomeis believedtodiffebretweentreatedandcontrolsS.ee,e.g.Rubin(1977) andHeckmanetal. (1997).
+
+6. A researchecrouldbe interesteidnestimatinEg[Y1(1) I X, D = 1] andE[YO(1) I X, D = 1] separately.
+
+Since Y1(1) is observedforthetreatedb, othconditionael xpectationasre identifiedIn. fact,giventhatY1(1) is
+
+observedforthetreatedi,dentificatiornesultson E[Y1 (1) - y0(1) I X, D = 1] are equivalentto identification
+
+hreassubletesonnthEe[oYbOj(e1c)toIfiXn,tDere=sitn1t]h. Hedeirfef,eIrceonnccee-nint-rdatiofenfetrheleindtceiefrsfateurre(nseecEee,[Ye.1g(.1H)e-ckym0a(n1e)taIl.X(1, D997=,
+
+1] becauseit 1998)). Notice
+
+also thatAssumption3.1 byitselfdoes notidentifytheaveragetreatmenetffectcsonditionaolnlyon thecovariates
+
+(E[Y1(1) X, D =
+
+1]
+
+Y0(1) I X]), = E[Y1(1) -
+
+unlessconditionaalverageeffectcsoincidefortreatedand untreatedE[Y1 Y0(l) I X, D = 0]. The reasonis thatAssumption3.1 identifieEs[YO(l)
+
+(1) I X,
+
+y0(1) I D = 1],
+
+andthereforteh, eeffecotfthetreatmenotn thetreatedH. oweverA, ssumption3.1leavesE[Y1 (1) I X, D = 0] totally
+
+unrestrictesdo;theeffecotfthetreatmenotntheuntreateids alsounrestricted.
+
+ABADIE SEMIPARAMETRICDIFFERENCE-IN-DIFFERENCES
+
+7
+
+a subsetof thevariablesin X). The weightingschemeis directlybased on thepropensity score,P(D = 1 I X), whichis theonlyfunctionwhichneedsto be estimatedin a first step.As a result,theproposedmethodreducesthefirststepestimationburdenand allows theresearchetro use fouror twotimesmoreobservationfsorfirststepestimationr,elativeto directestimationof equation(9). In practicet,hisfeaturemaybe an importanatdvantageif non-parametreisctimationis carriedout in thefirststep.Whenthenumberof observations is too smallfornon-parametreisctimationin thefirststep,theproposedmethodallowsthe researchetro circumventthecurseofdimensionalitbyyplacingparametrircestrictionosn the propensityscore,whichleaves E[YI(1) - Yo(1) I Xk,D = 1] unrestricterda,therthanon eachoneoftheconditionaml eansofequation(9), whichmayimposeunwantedrestrictionons E[Y1(1) - Yo(1) I Xk, D = 1].
+The estimationof parametriacpproximationtso E[Y1 (1) - YO(1) I Xk,D = 1] has somebenefitsF.irst,itprovidesa simplemethodto produceestimationresultsat thelevelof aggregatiodnesiredbytheanalystI.n additiont,heresultsareparsimoniouslsyummarizebdy theestimateosftheparametertshatdefinetheapproximatiotnoE[Y1 (1) - Yo(1) I Xk,D = 1]. Howevert,hequalityoftheinformatiopnrovidedbyourestimatorwsillbe lowifthequalityof
+theapproximationto E[Y'(1) - YO(1) 1Xk, D = 1] is poor. Since the objectof studyis the effectof the treatmenotn the treatedt, he minimal
+requiremenftortheproblemtobe welldefinedis thatsomefractioonfthepopulationis exposed tothetreatmenItn.additions,inceidentificatiiosnattainedaftercontrollinfgortheeffecotfsome covariateXs , itwillbe requiredthatforeachgivenvalueofthecovariatetshereis somefraction ofthepopulationthatremainus ntreateadndcanbe usedas controls.
+
+Assumption 3.2. P(D = 1) > 0 and withprobabilityone P(D = 1 I X) < 1. NotethatAssumption3.2 impliesthatthesupportofthepropensitsycoreforthetreatedis a subsetofthesupporotfthepropensitsycorefortheuntreatedT.hisis a well-knowcnondition foridentificatioonftheaverageimpacton thetreatedunderselectionon covariates(see, e.g. Heckmanetal., 1997).
+
+3.1. Randomsamplewithrepeatedoutcomes
+In thissectionI, introducteheidentificatiostnrategpyroposedinthisarticlebyconsiderintghe situationinwhichwe canobservebothpre-treatmeanntdpost-treatmeonuttcomesfora random sampleof thepopulationof interestE.xamplesof applicationosf DID estimatortso dataon repeatedoutcomesare Card and Krueger(1994), Heckmanet al. (1997, 1998),Garveyand Hanka(1999) andBlundellet al. (2001). Underthissamplingscheme,foreach individuailn oursamplewe observe(Y (1), Y(0), D, X). Laterin thearticlet,heidentificatiopnroceduries extendedtorepeatedcrosssections.
+
+X)
+
+<
+
+L1e,mwemhaa3v.e1E. [YI1f(A1)ss-umY0p(t1i)oi3n.X1,hDol=ds,1a]n=dfEo[rpova.l(uYe(s1o) f-X
+
+suchthat0 < P(D Y(0)) X], where
+
+=
+
+1I
+
+D - P(D = 1 I X) P(D= 1 I X) . (1 - P(D= 1 I X))
+
+Fornotationaclonveniencele, tpo = -1 ifP(D = 1 I X) = 0 (thischoiceis inconsequential sincetheobjectsofintereswtillbeintegralosverthedistributionftheX conditionaolnD = 1). Theaverageeffecotfthetreatmenftorthetreatedis givenby
+
+8
+
+REVIEW OF ECONOMIC STUDIES
+
+f E[Y'(1) - Yo(1) I D = 1]= E[YI(1)- Yo(1) IX, D = 1]dP(X I D = 1)
+
+f =
+
+-(Y(1) - Y(O)) I X]dP(XI D = 1)
+
+=E
+
+E[po. -po-(Y(1) - Y(O))
+
+P(D = 1 I X)
+P(D = 1)
+
+E[Y(1)- Y(O)
+P(D = 1)
+
+D1 - -
+
+PP((DD==I
+
+1I
+
+X)1(10)
+X)(10)
+
+In words,underAssumption3s.1 and3.2,a simpleweightedaverageoftemporadlifferenciens theoutcomevariablerecoverstheaverageeffectofthetreatmenftorthetreatedT. he weights dependon thepropensitsycore.On an intuitivleevel,thisschemeworksbyweighting-down thedistributioonf Y(1) - Y(0) fortheuntreatefdorthosevaluesofthecovariatews hichare
+over-representaemd ongtheuntreated(thatis, withlow P(D = 1 I X)/P(D = 0 I X)),
+andweighting-uYp(1) - Y(0) forthosevaluesofthecovariateus nder-representamedongthe untreate(dthatis withhighP(D = 1 I X)/P(D = 0 I X)). In thiswaythesamedistributioonf thecovariateiss imposedfortreatedanduntreated.7
+Equation(10) suggestsa simpletwo-stepmethodto estimatetheaverageeffectof the treatmenotn thetreatedunderAssumption3s.1 and 3.2: (i) estimatethepropensityscore, P(D = 1 I X), andcomputethefittedvaluesforthesample;(ii) plugthefittedvaluesinto thesampleanalogueofequation(10) toobtainanestimatoefE[y1(1) - Yo(1) I D = 1].
+Inmanypracticailnstancest,hedesiredlevelofaggregatioins lowerthantheentiretreated populationand theanalystwantsto studyhowthetreatmenatffectsthetreatedfordifferent
+groupsofthepopulationA. s explainedabove,a non-parametreisctimatoorfE[Y1 (1) - Yo(1) I
+X, D = 1]maybe difficutltointerpreets,peciallyifthedimensionofX is large.Sucha problem
+is circumventehderebyfocusingonparametriacpproximatiotnosE[Y1 (1) - Y0(1) IX, D = 1].
+Moregenerallyc,onsiderthesituationinwhichwe needtoconditionon somevectorofrandom variablesX to attainidentificatiobnu,twe areinteresteidn E[Y1(1) - Y0(l) I Xk,D = 1],
+
+whereXkis somedeterministfiucnctionofX.8 Thissituationis relevanwt henthenumberof covariatens eededinordertoattainidentificatioisnlarge,so theanalystmaybe willingtoallow fora higherlevelofaggregatioinnthesecondstepinordertoobtainparsimonioursesults. integCroanbsliwedeitrahrcelsapssecotftoapPp(XrokxiImDati=nfgu1n).cTtihoenngs,a=lea{gst(Xsqku;0ar) es:a0ppEro0ximCatRiokfn}r,osmqugarteoE[Y1(1) - Yo(1) I Xk,D = 1]is givenbyg(Xk;00) where
+
+0o= argminoeE[{E[yl(1) - Yo(1) IXk,D = 1] - g(Xk;0)}2 ID = 1]. (11)
+Forexamplei,fg = {X'0 : 0 E E C IRk},then00definesa linearleastsquaresapproximation toEr[Y'(1) - YO(1) I Xk,D = 1].Itis assumedthat00existsuniquely.
+
+Proposition3.1. IfAssumption3s.1 and3.2 hold,then
+Oo= argminoeoE[P(D = 1 I X) -{Po-(Y(1) - Y(0)) - g(Xk;0)12].
+
+7. SimilarlyH, eckmanet al. (1997) use matchingon thepropensityscoreto accountforimbalancesin the distributioonfthecovariatebsetweentreatedanduntreatedM. atchingonthepropensitsycoreworksbecauseitimposes thesamedistributioonfthecovariatefsorthetwogroups(see RosenbaumandRubin,1983).
+8. Forexample,Xkmaycontaina subsetofthevariablesin X. In otherinstancesX, maycontainindicatorfsor all differenvtaluesofa discretve ariableincludedinXk.
+
+ABADIE SEMIPARAMETRICDIFFERENCE-IN-DIFFERENCES
+
+9
+
+As beforei,tis easytoconstrucattwo-stepestimatobrasedonthesampleanalogueoftheresult inthelastpropositionA.ftersomealgebra,theresultinequation(10) canbe obtainedapplying Propositio3n.1 tothecase wheng(Xk,0) is constant.
+
+3.2. Someextensionasndparticularcases This sectioncontainsextensiontso repeatedcrosssections,andmultilevetlreatmentIst.also discussesthecase ofselectiononobservables.
+
+3.2.1. Repeatedcrosssections. Oftena, randomsamplewithrepeatedoutcomesis not available.In sucha case, repeatedcross-sectiondata-sets(pre-treatmeanntd post-treatment) maybe usedtoconstrucDtID estimatorHs.owevert,heuse ofrepeatedcrosssectionsforDID presentsomeissuesof dataavailabilityF.irst,treatmenstatus(in thepost-treatmepnetriod) mustbe knownfortheindividualisnthepre-treatmesnamt ple.Thisrequiremenistsatisfiedf,or examplei,ftreatmenetxposurecanbe determinefdromsomeindividuaclharacteristoibcserved inbothperiods.91,0In additionc,ovariatems ustbe observedinthepost-treatmesnamt ple.Since covariateasreoftenpre-treatmevnatriablest,hissecondrequiremenmtayprovea problemwhen covariateasretime-varyinangdtherearenotretrospectivcoevariatedataavailable.Examplesof applicationosfDID estimatorwsithcovariatetsorepeatedcrosssectionsareCard(1990,1992), Meyeretal. (1995),Eissa andLiebman(1996),AcemogluandAngris(t2001),Corak(2001) and Finkelstei(n2002). Here,I showhowto applythemethodsproposedinthisarticletorepeated crosssectionsT. he datarequirementasrethesameas fortraditionadlifference-in-differences estimatorws hichuse cross-sectiondalataandcovariates.
+Assumethatrandomsamplesare availableforthepre-treatmeanntdthepost-treatment periodsF. oreachindividuailnthepooledsample(post-treatmeanntdpre-treatmenwte),observe Z = (Y, D, T, X) whereT is a timeindicatotrhattakesvalueoneiftheobservatiobnelongsto thepost-treatmesnamt ple.
+
+Assumption3.3. ConditionaolnT = 0, thedataarei.i.d.fromthedistributioonf(Y(0), D, X); conditionaoln T = 1,thedataarei.i.d.fromthedistributioonf(Y(1), D, X).
+
+Thissamplingschemeproducesthefollowingmixturdeistribution:
+
+PM(Y = y,D = d, X = x, T = t) = -. t -P(Y(1) = y,D = d, X = x) + (1 - X) . (1 - t) . P(Y(O) = y,D = d, X = x),
+
+where Ee (0, 1) reflecttsheproportionof theobservationssampledin thepost-treatment
+
+period." Let
+
+denoteexpectationwsithrespectto PM(-).
+
+EM[']
+
+Lemma3.2. IfAssumption3s.1 and3.3 hold,andforvaluesofX suchthat0 < P(D =
+1 IX) < 1,wehaveE[Y1(1) - Yo(1) IX, D = 1] = EM[qPo Y I X], where
+
+T -X
+
+D - P(D = I X)
+
+.0 (1 - 1) P(D = 1 1X) .P(D = O) X)
+
+9. NotethatidentificatironequireisnturnthatsuchindividuaclharacteristiiscexcludedfromX. Otherwiset,he supporctonditioninAssumptio3n.2 wouldbe violatedT. hisexclusionrestrictioinsproblematiicftheexcludedvariable influencetshedynamicosftheoutcomevariables,o Assumptio3n.1 is notplausible.
+10. Therequiremenmtayalsobe satisfieidnothercases,forexamplewhenthepre-treatmesnamt plecanbe linked to administratidvaetarecordson treatmenptarticipation.
+11. ForsimplicityI ,do notconsidermorecomplicatedsituationisnwhichthedatamaybe generatebdystratified sampling(on X or D). In sucha case, theresultsin thissectionapplyfora suitablyreweightesdample(see, e.g. Wooldridge2,002).
+
+10
+
+REVIEW OF ECONOMIC STUDIES
+
+Then,followinga reasoningsimilartothatoftheprevioussectionwe havethattheaverage treatmenetffecotnthetreatedis identifiebdy
+
+EMP[ (D = P(D
+
+=1
+
+1)YX)
+
+E[Y'(1) - Y0(1)ID = 1].
+
+(12)
+
+Thefollowingpropositioins analogoustoPropositio3n.1.
+
+Proposition3.2. If Assumptions3.1, 3.2, and 3.3 hold, thenfor 0o definedin equation(11) wehave
+
+00= argmin0,EEM[P(D = 1 I X) -{10 - Y - g(Xk;0)12].
+
+(13)
+
+Theresultinequation(12) canbe obtainedbyconsiderinagconstangt(Xk,0) inequation(13).
+
+3.2.2. Selectionon observables. Inthepreviousectioni,tis shownhowtoapproximate conditionaalveragetreatmenetffectbs y firstweightingtemporadl ifferenceins theoutcome variableon the propensityscore,and thenprojectingthe weighteddifferenceosn a set of parametrifcunctionosf thecovariatesT. he interpretatioofntheresultingfunctionalass approximationtosconditionaalveragetreatmeneftfectcsomesfromthedifference-in-differences conditionin Assumption3.1. Howeveri,t shouldbe noticedthatthesame"firstweightt,hen project"strategcyanbe appliedinothercontextsI.nparticulatrh, eresultisntheprevioussection carryovernaturalltyo "selectionon observables":
+
+E[Yo(l) I X, D = 1] = E[Yo(1) I X, D = 0].
+
+(14)
+
+The reasonis that"selectionon observables"can be expressedas a particularcase of
+Assumption3.1 (whenE[Yo(0) I X, D = 1] = E[Yo(0) I X, D = 0]). As a result,if
+equation(14) holds,then
+
+=
+
+= 1 1X) . {Po Y - g(Xk;0)12],
+
+for00 definedin eq0uoatiaorng(1m1)inanod,EY[P=(D Y(1).12,1' 3Similarestimatorhsavebeenconsideredin
+
+Wooldridg(e2001). Imbensetal. (2003) considerthesituationinwhichtheaveragetreatment
+
+effectis estimatedfora givendistributioonf thecovariatesA. badie (2003) appliessimilar
+
+approximatiomnethodisnthecontexotfinstrumentvaalriablemodelsfortreatmeneft fects.
+
+3.2.3. Multileveltreatments. So far,we have consideredonlythe case of a binary treatmenwt,hichis theusualfocusofDID estimatorHs.owevert,hesameideascanbe applied whenindividualms aybe exposedtodifferenletvels(ordoses)ofthetreatmenLte.t W represent thelevelofthetreatmenFto. runtreateidndividualsl,et W = 0. Forthetreateds,upposethat W takeson a finitne umberofpositivevalueswI < -.. < wj, withpositiveprobability.L1e4t
+
+12. For thiscase, it is usefulto defineY = Y(1) becauseequation(14) maybe adoptedas an identification
+
+restrictioinabsenceofmeasuresontheoutcomevariableina pretreatmepnetriodH. owevera,s shownforAshenfelter's dipexample,itmaybe necessarytoconditionon thevaluesoftheoutcomevariableina pre-treatmepnetriodinorder
+
+forequation(14) tohold. 13. Alternativeliyf,theobjectsof interesatre averagetreatmenetffectcsonditionaolnlyon thecovariates0,0
+
+can be redefineads 00 = argminogE[{E[yl(1) - y0(1) I Xk] - g(Xk,0)12]. However,equation(14) does not
+identiftyheeffectofthetreatmenotn theuntreatebdecauseitleavesE[Y1 (1) 1X, D = 0] completelyunrestricted.
+
+If we assumein additionthatE[Y1(1) I X, D = 1] = E[Y1(1) I X, D = 0], then00 is identifiebdy 00 =
+
+arg
+
+E[(p0
+
+mi1n40. oHere,I
+
+Y - g(Xk;0))2]. a?ssumethattreatmenltevels
+
+are
+
+ordered(e.g.
+
+numberof
+
+weeks
+
+in
+
+a
+
+trainingprogramme)F.or
+
+expositionaslimplicitayndsinceitis oftenthecase inapplicationsI,consideronlya finitne umberoftreatmenletvels.
+
+Howevert,heanalysispresenteidnthissectioncanbe generalizedtocontinuoutsreatmenbtys substitutindgensitiefsor
+
+W forprobabilitiefsorW,andintegralosverthosedensitiefsorsums.
+
+ABADIE SEMIPARAMETRICDIFFERENCE-IN-DIFFERENCES
+
+11
+
+W+ = {w1,..., (thatis, lA(W) =
+
+w1ij}f,wthEeAnD,ze=roolwth+e(Wrw),isweF)h.oerrweleA({'0) }iUs tWh+einanddictaEto{fr0u,n1c},tlieotnfYo"r(tth) ebseetthAe
+
+potentiaolutcomefortreatmenletvelw andperiodt.SupposethatAssumptio3n.1holdsforeach
+
+treatmenletvel:E[Yo(1) - Yo(0) I X, W = w] = E[Yo(1) - Yo(0) I X, W = 0],forw W+.
+
+In words,thisassumptionrequiresthat,in absenceofthetreatmentth, eaverageoutcomesfor
+
+all treatmengtroupswouldhavefollowedparalleltrendsc,onditionaoln thecovariatesA. s in
+
+theusualDID case witha binarytreatmenvtariablet,heassumptioanllowsthelevelsofaverage
+
+potentiaolutcomeswithouthetreatmentot diffearrbitrariblyetweentreatmengtroups.
+
+Forw e W+, letpw = (I{)(W)/P(W = wI X))-(1{o)(W)/P(W = 0 I X)). (Notethat,
+
+forpo definedinLemma3.1,po = p1.) Then,followingthesamereasoningas forLemma3.1,
+
+we obtainE[po(Y(1) - Y(0)) I X] = E[YW(1) - Yo(1) I X, W = w]. In additionf,orsome
+
+classofsquare-integrabalpeproximatinfgunctiongs = {g(W, Xk;0) : 0e 01, redefine
+
+0o = argmin0,oE[(E[yW(1) - Y0(1) I Xk, Wi - g(W, Xk; 9))2 I D = 1]. (15)
+
+Theparameter8s0definea leastsquaresapproximatiotnoa functiodnescribinagverageeffects
+forthetreatedE[YW(1) - Y0(1) IXk,W = w].Then,theseparameterasreidentifiebdy
+
+ThisrTeos=ultacrogllmapisne0stooetEheresultPin(WPro=powsIijtioXn3)(.p1oif
+
+(Y(1) W is
+
+- Y(0)) - g(wj, binarya,ndcanbe
+
+Xk; 0))2 provenusingthe
+
+sameargumenats forPropositio3n.1.
+
+4. ESTIMATIONAND ASYMPTOTIC DISTRIBUTION ForconcretenesIsw, illconcentratheereonlinearapproximationtosE[Y' (1) - Y0(1) I Xk,D = 1] whereXk is a deterministficunctionof X. In addition,onlythecase of repeatedcross sectionsis explicitlyconsideredhere.Howevert,heanalysisis also validforthecase ofrepeated observationifs Y(1) - Y(0) is substitutefdor((T - )/X(1- X)) . Y, andexpectationasretaken withrespecttothedistributioonf(Y(1), Y(0), D, X). Consider
+
+o= arg
+
+{X0Y( - X }2]
+
+where7ro(X)= P(D = 1 I X), andminpSEM[ro0.
+
+(PoT - k
+
+D - ro(X)
+
+XP=(1 - ) iro(X) (1 - rro(X))
+
+Consideralso thefollowingestimatoorfPo:
+
+In1 = n
+
+Xkri (Xi)Xkki
+
+-n
+
+n
+=XkiX(Xi) iYi,
+
+I1
+
+i1
+
+where"2(Xi) is anestimatoorf-ro(Xi),and
+
+forX =
+
+n
+
+/(no+
+
+nl).
+
+(Pi
+
+Ti -
+..(1 - X)
+
+Di - r(Xi)
+(Xi)- (1 - (Xi))
+
+Undertheconditionosfthetheoremsstatedbelow,f is welldefinedwith
+
+probabilitaypproachinogne.
+
+4.1. Non-parametrfiicrststepestimatioonfthepropensitsycore
+
+Here,I considerthecase in whichnon-parametr(ipcowerseries)regressionis used in a first
+
+stepto estimatero. Let " =
+
+(1, ,r)' ....
+
+be a vectorof non-negativientegerws herer is
+
+12
+
+REVIEW OF ECONOMIC STUDIES
+
+thedimensionof X. Also let Xr = sequencecontainingall distincvt ectors
+
+1, jw=IitxhITa1nnodnI-decreasij=nFgo..ijr.
+
+Let {t(k)}' 1 be a a positiveintegerK,
+
+let pK (X) = (plK(X) ... P, KK(X))' wherePkK(X) = X?(k). Then, forK = K(n) -- oo a
+
+powerseriesnon-parametreisctimatoorf 0rios givenby
+
+K(X=) pK (X)'-
+
+(16)
+
+wgehneerrea7lize=dinv(eLrEseofpthKe(mXia)tprKix(AX.i))-(in=
+
+pK(Xi)Di) and A- denotesany symmetric
+
+Assumption 4.1. (i) K6/n = o(l), 7ro(X) is continuouslydifferentiabloef orders, and nK-2s/r = O(1); (ii) the supportof X is a Cartesian productof compact intervalson which
+X has densitythatis boundedawayfromzero; (iii) xro(X) is boundedawayfromzero and one; (iv) Po is an interiorpoint of a compact set 0 C IRk;(v) EmMY2< 00, IXk is bounded,and E[Xk Xk I D = 1] is non-singular.
+
+Let
+
+T-hD-1 6(X) = EM Xk k-(1 -
+
+)
+
+(1 -
+
+2 7o)2
+
+Y-
+
+k
+
+XX.
+
+Theorem 4.1. If no,nl --+ oo, nl/(no + n1) = X e (0, 1) and Assumptions3.1, 3.3
+
+c = and
+
+4.1 hold, thennl/2(8P-_o) d EM [/n'], r -= Xk ro(X)(?pOY-
+
+N(0, V), where V = Q-1EQX'ko) + 8(X) . (D - iro(X)).
+
+Q = E[XkDXk],
+
+To construcatnestimatoorftheasymptotivcariancel,etV = Q-1E -1, where
+
+( - 1 n
+
+Ln
+
+XkiDiXk, i
+
+1
+n
+
+n
+
+i=1
+
+i
+i
+
+6(Xi) = S
+
+n i=1
+
+Xki
+
+Ti - X
+
+Di - 1
+
+(1l
+
+r) (1 - R(Xi))2
+
+YI-
+
+- ki pPK(X(X), i)
+
+X Zi=lpK(Xi)
+
+pK(Xi) pK(Xi)
+
+and t/ij= Xki~f(Xi)(' Yi - Xkifj + 6(Xi) . (Di - '(Xi)). The followingtheoremestablishes theconsistencoyfV.
+
+Theorem 4.2. IftheassumptionsofTheorem4.1 hold and K7/n -* 0, thenV -+ V.
+
+4.2. Parametricfirststepestimationofthepropensityscore
+Oftens,amplesaretoosmalltousea non-parametresictimatoirnthefirssttep.Thisisparticularly likelywhentheanalystdealswithlongitudinadlata-setsI.n suchcases,itmaybe convenient to use a parametrircestrictioin thefirststepandestimatethepropensitsycorebymaximum likelihoodT. his sectionprovidesdistributiotnheoryforthatcase. The resultsincludeprobit, logitandlinearprobabilitfyirssttepestimatioonfIo as specialcases.
+Assumption 4.2. (i) Yo is an interiorpoint of a compact set I C Ir; (ii) the support of X is a subset of a compactset S; E[XX'] is non-singular;(iii) thereis a (known)function
+: RI [0, 1] such thatiro(X) = xr(X'yo); (iv) let V = {x('y : x e S, y E 1};for v e V, r(v) is boundedawayfromzero and one, strictlyincreasingand continuouslydifferentiablwe ith
+
+ABADIE SEMIPARAMETRICDIFFERENCE-IN-DIFFERENCES
+
+13
+
+derivativbeoundedawayfromzeroand infinity(v;) &o is an interioprointofa compactset
+E C IRk;(vi) EMY2 < 00, IXk is boundeda,ndEr[XXkk I D = 1] is non-singular
+
+Underthisassumptiony,ocanbe estimatebdymaximumlikelihood:
+
+L 1 -n
+1argmax ~
+
+log7(Xiy) + (1 - Di)log(1 - 7r(X'y)).
+
+Then, 5r(Xgi)=_==arg7mr(aXx7y).r-OnBnZoDuii=n1dednessof X is not a necessaryrestrictiobnut allows
+
+Assumption4.2 to encompassmaximumlikelihoodestimationof thelogit,probitand linear
+
+probabilitmy odels.Forsimplicityan, dsinceinmostcases Xkis somesubsetofthevariablesin
+
+X, Xkis also assumedtobe boundedI.fthecovariateasrediscreteandthevectorX is saturated
+
+withindicatorosfall thepossiblevaluesofthecovariatest,henthefunctionaflormofJris not
+
+restrictivane dtheestimatioonf'r(X) is completelynon-parametric.
+
+AssuLmetpt*io4n=.2(i)-r(i(vv))/),lavisaansdymopt=o-ticra(lXlliy'nyeoa)r.t,Uhnatdisenr1st/a2n(yd-ayrodr)e-gunl-a1r/it2ycond1Citfiyo(onZs(ie)+.g.
+
+Op(1),where Let
+
+i=l
+
+F 11 ryo(Z)E
+
+0 V-ron(Zo))
+
+X= XE '
+
+0(1
+
+X
+
+ro(1 -
+
+(D no)
+
+-
+
+ro).
+
+S(O--(10(D)1--71ro)2 Mo EM Xk
+
+(1 Y - Xkfr) Orox'.
+
+(17)
+
+Theorem4.3. Ifno,n-iI 00, nl/(no+ nl) = X E (0, 1) andAssumption3s.1, 3.3
+
+and 4.2 hold,then
+
+- Po)
+
+E = EM[r 4'], 4r =,/m-I((Zf, o~Y, o)+
+
+N(0, V), whereV = Myo0yo,mV(Z, o, Yo)=
+
+Q-1Q-1, Y
+Xk7OO0?
+
+Q -
+
+= E[XkDX], XkJo].
+
+Let V = - 1 -1, where
+
+n1
+Q=- n i=l Xki DI i Xiki?
+
+1n E =i n Ii=l
+
+MAy= -1
+
+n n 1Xki -i=
+
+-(1 -
+
+X)
+
+(1
+
+Di - I -Di '(Xi))2
+
+-I
+
+X
+
+~ (X )X,
+
+*Y(Zi)
+
+=
+
+(1 n
+-n Li=1
+
+(X*(X )2 rt(Xi)(1- '(Xi)) XiX_
+
+-1 Xi
+
+((Xi) 7r(Xi)(1 - '(Xi))
+
+(Di
+
+- r'(Xi)),
+
+and = of VI.li_
+
+Xki(Xi)(Oi3
+
+Yi -
+
+XkiF) + M4r-(Zi).
+
+Thefollowintgheoremestablishecsonsistency
+
+Theorem4.4. If theassumptionosfTheorem4.3 holdand r(v) is twicedifferentiable withboundedsecondderivativienV, thenV - V.
+
+5. CONCLUSIONS
+In thisarticleI, haveintroduceadfamilyofsemiparametrdiicfference-in-differenstciems ators of treatmenetffectbs ased on conditionaildentificatiornestrictionTsh. eseestimatorms aybe particularlayppropriatwe henthedistributioonf observedcharacteristitchs atare thoughto be relatedto thedynamicsof theoutcomevariabledifferbs etweentreatedand untreated.
+
+14
+
+REVIEW OF ECONOMIC STUDIES
+
+IdentificatiodnoesnotentailparametrricestrictionHso. wevert,hemethodpsresentehderecanbe usedtoestimatpe arsimonioupsarametriacpproximationtosconditionavlersionsoftheaverage treatmeneft fecftorthetreated.
+
+APPENDIX. PROOFS
+ProofofLemma3.1. For0 < P(D = 1 I X) < 1,wehavethat
+E[pog (Y(1) - Y(0)) I X] = E[p0. (Y(1) - Y(0)) I X, D = 1]. P(D = 1 1X) + E[po0 (Y(1) - Y(O)) IX, D = 0] . P(D = 0 I X)
+= E[Y(l) - Y(O) I X, D = 1] - E[Y(1)- Y(O) I X, D = 0].
+Applyingequation(9) we obtaintheresult. II
+
+ProofofProposition3.1. LetG(O) = E[P(D = 1 I
+
+-(Y(1)- Y(O))-g(Xk; 0)}2]. Addingandsubtracting
+
+E[Y1(1) - Y0(1) I Xk,D = 1],we obtain
+
+X){p0o
+
+G(O) = E[P(D = 1 IX) . {po-(Y(1) - Y(0)) - E[Y1(1) - Y0(1) IXk,D = 1]}2]
++ E[P(D = 1 I X) -{E[Y1(1)- Y0(1) I Xk,D = 1] - g(Xk; 8)}2]
++2E[P(D = 1 I X) . (po -(Y(1) - Y(O)) - E[Y1(1) - Y0(1) IXk,D = 1])
+x (E[Y1(1) - y0(1) I Xk,D = 1] - g(Xk; 0))].
+
+(A.1)
+
+ThefirstermontheR.H.S. ofequation(A.1) doesnotdependon0. Bythelawofiteratedexpectationtsh, esecondtermontheR.H.S. ofequation(A.1) is equalto
+
+E[D {E[Y1(1) - Y0(1) I Xk,D = 1] - g(Xk; 8)}2]
+= E[{E[Y1(1) - Y0(1) IXk,D = 1] - g(Xk; Q)12ID = 1]P(D = 1).
+
+Thereforbe,yAssumptio3n.2 andequation(11),thesecondtermontheR.H.S. ofequation(A.1) is minimizedat00. TheexpectatioinnthethirdtermontheR.H.S. ofequation(A.1) is equalto
+E[E[P(D = 1 I X) . (pO-(Y(1) - Y(0)) - E[Y1(1) - Y0(1) I Xk,D = 1]) 1Xk] x (E[Y1(1) - Y0(1) I Xk,D = 1] - g(Xk; 0))].
+
+Applyingthelaw ofiteratedexpectationasndLemma3.1:
+E[P(D = 1 I X) -po -(Y(1) - Y(0)) I Xk] = E[P(D = 1 I X)E[PO -(Y(1) - Y(0)) I X] I Xk] = E[P(D = 1 I X)E[Y1(1) - y0(1) I X, D = 1] I Xk] = E[E[D(Y1(1) - y0(1)) I X] I Xk] = E[D(Y1(1) - Y0(1)) I Xk] = P(D = 1 I Xk) . E[Y1(1) - y0(1) I Xk,D = 1].
+
+Therefore,
+
+E[P(D = 1 I X) . (po (Y(1) - Y(0)) - E[Y1(1) - Y0(1) I Xk,D = 1]) I Xk] = E[P(D = 1 I X) -pO-(Y(1) - Y(O)) I Xk]- P(D = 1 I Xk)E[Y1(1)- Y0(1) I Xk,D = 1] = 0.
+
+Consequentlyth, ethirdtermontheR.H.S. ofequation(A.1) is equaltozero,andtheresultofthepropositiohnolds.
+
+ProofofLemma3.2. Noticethat
+
+EM[ po Y I X] = EM[EM[po - Y I X, T] I X] = EM[E[YO - Y I X, T] I X]
+
+=
+
+E[po
+
+Y I X, T =
+
+1] - E[p0. Y I X, T = 0] =
+
+E[p0 "Y(1)
+
+I X] -
+
+E[p0
+
+Y(0) "
+
+I X]
+
+= {E[Y(1) I X, D = 1]- E[Y(1) I X, D = 0]}- {E[Y(O) I X, D = 1]- E[Y(0) I X, D =0]},
+
+andtheresultfollowsfromequation(9). II
+
+ProofofPropositio3n.2. Theprooffollowsthesamestepsas theproofofPropositio3n.1.
+
+ProofofTheorem4.1. Let I I| denotethesupremumnormB. yAssumptio4n.1(i),(ii) andTheorem4 inNewey (1997), itfollows thatI| - sr0|l = Op(K . [(K/n)1/2 + K-s/r]) = op(1). Let m(Z, f, r) = Xkxr(q(r) Y - XJk).
+?
+
+ABADIE
+
+SEMIPARAMETRIC DIFFERENCE-IN-DIFFERENCES
+
+15
+
+Assumption4.1(v) guaranteetshatEM[m(Z, /, 7r0)]has a uniquezeroat /3 = (E[XkrOXj)-1EM[XkrOqoY].
+
+In
+
+addition,
+
+supn -L=1
+
+m(Zi, /3, ) - EM [m(Z, /, 7ro)] <5 ,
+
+m(Zi , , ) - m(Zi, , 0)
+
++ sup/
+
++ n
+
+upi=1=1 m(Zi,/3
+
+ro) - EM[m(Z,
+
+/, 7ro)] .
+
+(A.2)
+
+Let
+
+Oi =
+
+'
+
+Ti - x . (1 - X)
+
+Di - ro(Xi) rno(Xi)-(1 - 0ro(Xi))
+
+Noticethat, m(ZO,
+
+),
+
+) - m(Zi,
+
+, r0) = Xki{('(Xi)
+
+i - ro0(Xi9) 0i) Yi - ('(Xi) - ro(Xi)) Xki}, and
+
+By
+
+7(Xi)
+
+Oi -
+
+0o(Xi)
+
+oi-T
+
+Ti--X
+X(1 - 7)
+
+Assumptio4n.1(iii) anduniformconvergencoef ',
+
+D1 Di
+
+--1I(r(Xi)
+
+(1 - 70(Xi))(1- ro(Xi))
+
+withprobabilitaypproachinogne
+
+'
+
+70(Xi))
+is boundedawayfromone
+
+andthereis a constanCt suchthat
+
+supE
+
+m(Zi,, ) - m(Zi, 7, ro) C .=1
+
+YiII+ IIXki11211/1-r101
+=I{Xki
+
+iTisnhdNeoremewfieonyraaettn,ehddbeMyfiacrnFsatidnerdtmeengo(rf1a9tbh9lf4eeu)Rin.mHct.pSilo.ineoTsf.thheeqanutt,ashtienioscneec(mAon.(2Zd),ti/esr,o7mpro(0f1))it.shAceoRsns.Hutim.nS.upootfuioaesnt4q.ue1aactahilos/on(iAm0.E2p)liicesosatmlhsoaptaoIcIpmt(,L1(e)Zm,a/nm,drat02h.o4a)tII E[m(Z, /, rno)]is continuousN.ow,theusualconsistencayrgumenftorestimatorbsasedonmomenetquations(e.g.van
+
+derVaSairnt(c1e9I9r8-,Tzhoelooroecmo5n.9v)e)rpgreoisvnepstrhoabtfab-ilpit/tyo0zoe.ro,withprobabilitaypproachinognen-1 non-singulaarnd
+
+=l Xki7(Xi)Xfi is
+
+n1/2(f P0) SinceXk has secondmoments,
+
+1 Xki(Xi)Xki
+
+E Xki'(Xi)(i Yi- Xki3O)
+i=1
+
+Now,letus provethat
+
+n K 1iS=1 Xkic(Xi)Xki
+
+= E[XkDXk] + Op().
+
+1 Consider
+
+r Sm(Zi,0, ) = 1
+
+1
+
+Xkif(Xi)(iYi
+
+Xki0)
+
+=
+
+1 (Zi) + Op(1).
+
+A(Z,, , i,1)rY= - m(Z/, r)1.7=
+
+r = Xk -(-X)
+
+- Xp .
+
+Itcanbe easilyseenthatfor7r,7 boundedawayfromonewehave
+
+7-r(1-7)) (1-)-2 m(Z, ,r) - m(Z, /,7) - A(Z, 7r- 7, , -i) = Xk
+
+T -X
+-
+
+D -1 (1 - )(1 -
+
+r
+
+Therefores,ince,withprobabilitaypproachinogne,(1 - ')-1 is boundedbysomeconstanCt , wehave
+
+=
+
+m(Zi
+
+, lon)
+
+- m(Zi, o, o) - A(Z,7-i,
+
+0
+, 0)
+
+Yi ,1
+
+n/2C1 Zn
+n
+
+1
+
+Ti . (1- 1)
+
+Di
+
+This resultholds because Assumption4.1(i) implie.si=thatn1/2K2.(K/n+K-2s/r(1) -e
+
+-1
+
+0)2
+
+=Op(1).
+
+-* 0, and thereforen1/2I-_
+
+012 =
+
+op(1). The assumptions EM IY I < co, IXk IIbounded and rnobounded away fromone take care of the sample average
+
+term.Therefore
+
+I
+
+m(Zi,o/30, ) =
+
+1Li=
+
+1i=
+
+m(Zi,Po, r0)
+1
+
+1A(Zi, - no,o, 0) + op(1).
+i
+
+16
+
+REVIEW OF ECONOMIC STUDIES
+
+NotethatiIA(Z, r, o, ro)II < b(Z). Iln7r withb(Z) = IIXk[(T- X)/(X.(1 ))] -[(D - 1)/(1-
+
+Y - X o0l.l
+
+By EMY2 < oo and IIXkIIboundedw, e havethatEMb(Z)2 < 00. Then,itf--ollowsfromtheproonforf0T)2h]e?orem6.1 in
+
+Newey(1994) that
+
+1
+
+/n1i={1A(Z(i,
+
+-
+
+no,
+
+o,
+
+ro0)
+
+EM [A(Z, r -
+
+nro,
+
+,
+
+0))
+
+= Op(K-s/r)+ Op(K . [(K/n)1/+2 K-sir]) = op(1).
+
+NotethatEM[A(Z, r, o, nro)]= E[8(X)sr(X)]. If:
+
+(a) ForeachK, therexists4K suchthat
+
+(b) K5/n -+ 0,
+
+E[IIS(X)--KpK(X)II2]
+
+(c) K2 . K-2s/r -> 0,
+
+-+ OandnK-2s/rE[IIS(X)-?KpK (X)112] 0, --
+
+then,Assumption6.6 in Newey(1994) holdsforA(Z, 7r, 00n, ro).Condition(a) holdsby Assumption4.1(i) andby square-integrabiloift3y(X). Condition(sb) and(c) followfromAssumptio4n.1(i).UndersuchconditionsN,ewey(1994) showsthat
+
+1 n1 So theresultofthetheoremfollowsfromexistenceofsecondmomentosfir. II
+
+ProofofTheorem4.2. BythelawoflargenumberQs convergeisnprobabilittyo Q, whichisnon-singulaNr.otice that
+
+Xki~f(Xi)(QiYi - Xki') - Xki 0(Xi)(PiYt - Xki o)
+
+( Ti-X
+
+Di - I
+
+i('(Xi) - no(Xi)) - XkiXki(P-
+
+-Xki i- )((X
+
+fO)"
+
+Now,sinceIlXk1i1is boundedE, My2 < o, nr0is boundedawayfromzero,andI --nro0ooandllN- 0oIIareop(l), we
+
+obtain
+
+( T-1(1-x0()1-+n) n i= I|Xki'(Xi)( Yi - XkiP)- Xk7ir0(Xi)t(ifYi-
+Forirboundedawayfromone,we havethat
+
+)2 = op(1).
+
+(A.3)
+
+A(Z, #,P,Nr) - A(Z, i, N,ro0X) k=
+
+X(12I-X)X)
+
+(1-ro) (1- ,r)2+((l
+
+-
+
+(D 7r0)2Dk
+
+1)Y
+
+-
+(nr
+
+-
+
+-
+
+o) XkXk(
+
+0)
+
+.
+
+Thereforet,hereexistssomefunctionb,(.), suchthatIIA(Z, Nr,) - A(Z, #,N0,ro)||I< b(Z)(Inr- nrIo I+N+ -
+
+o11l)l1lwooithEMb(Z) < 00. Thisresulta,longwithK7/n -,+, 0 guaranteetshat
+
+n
+
+|1I8(Xi)(Di -
+
+r(Xi))
+
+-
+
+6 (Xi)(Di
+
+-
+
+7ro(Xi)) I2 =
+
+oP(1)
+
+(see Newey,1994).Equations(A.3) and(A.4), alongwiththeTriangleandHilder'sinequalitiesi,mplyE -
+
+resultV, - V. II
+
+(A.4) E. As a
+
+ProofofTheorem4.3. First,let us provethatunderAssumption4.2(i)-(iv), ' is asymptoticalllyinearwith
+
+influencefunctiongiven by equation (17). By Assumption4.2(ii), E[XX'] is non-singulart,herefore(y -
+
+o)'E[XX'](y Since r(v) is
+
+- Yo) > 0 for y strictlyincreasingin v
+
+o. As a result, for y yo, X'y
+
+X'yo in a set of positive probability.
+
+e V, we havethatn(X'y) #rn(X-'y0) in a set of positiveprobabilityL.et
+
+my = Dlog(r(X'y)) + (1 - D)log(l - r(X'y)).
+
+E[my - myoI X] = E[Dlog(r(X'y)/r(X'yo)) + (1 - D)log((1 - n(X'y))/(1 - n(X'yg))) I X]
+
+= n(X'yg) log(r(X'y)/nr(X'yg))+ (1 - n(X'y0)) log((1 - r(X'y))/(1 - x(X'yg)))
+
+< 0.
+
+(A.5)
+
+The lastinequalityfollowsfromlog . < X - 1,forX > positiveprobabilityth, entheinequalityin equation(A.5)
+
+0, is
+
+whichis strictforX 1. Sincen(X'y) # stricwt ithpositivepro-babilitayndE[my -
+
+r(X'y0) with my0o<] 0 for
+
+y #yo.Since r(v) is boundedawayfromzeroandoneinV, thentheabsolutevalueofmyis boundedbya constant
+
+ABADIE SEMIPARAMETRICDIFFERENCE-IN-DIFFERENCES
+
+17
+
+foranyy E F. Thislastfact,alongwithcompactnesosfF and S, continuitoyf.r(.), andLemma2.4 in Neweyand McFadden(1994) guaranteetshatE[my] is a continuoufsunctioonfy andthat
+
+supy. P
+
+my(Zi) - E[my(Z)] p 0.
+
+Theseconditionasresufficienftor -+ yo(senei,=e1.g.NeweyandMcFadden(1994,Theorem2.1)).
+
+Now,letus studytheasymptotidcistributioonf /ni(7- yo). Assumptio4n.2 alongwithLemma7.6 invander
+
+Vaart(1998) guaranteetshatf, orpy = 7r(X'y)D(1 - r(X'y))(l-D), themapy p1/2is differentiabinlequadratic
+
+meanwithderivative
+
+1/=
+
+X
+- r(X'y)(1
+
+-
+
+(D - 7r(X'y)).
+r(X'y))
+
+Thereforet,hemap y pl/2 is differentiabilne quadraticmeanat yo withderivativ1ey0.Take a convexopen
+
+neighbourhooNdy0of Y0 containedin F. By Assumption4.2(ii) and (iv), Ilamy/ayllis boundedby a constanton NY0.Thereforeb,yTheorem9.19 inRudin(1976), 1myl- my2l MlIyl - Y211foranyY1,Y2 e NYoandforsome
+
+constantM. Finallynoticethat,byAssumption4.2(ii)-(iv),
+
+o] = E[{0r2/( r0(1- Or0))}XX']is non-singular.
+
+Thereforbe,yTheorem5.39 invanderVaart(1998),we Letm(Z, P, y) = Xk7r(X'y)[(p(Z,y)Y - Xk].
+
+obtaiEn[no1l/Y2o(- Yo) = n-1/2 ni=1 0Y(Zi) + By Assumptio4n.2(vi),EM[m(Z, /,Y0)]has a
+
+OP(1). uniquezeroat
+
+at0eo=ach(E([PX,ky)rOeXk]x)-1rE.MSi[nXcke7nrroOY(X].'yU)ins dbeorutnhdeaesdsauwmaypftrioonmoszfetrhoeatnhdeoorneem,at,nhdefbuonthcYtioanmnd(ZI,lXfk,yIIh) aivsecfoinntiitnefuiorusts
+momentst,henIlm(Z,P, y)ll is dominatedbya variablewithfinitefirsmt omentT. hereforeb,yLemma2.3 inNewey
+
+1-n p andMcFadden(1994)
+
+and E[m(Z,
+
+f, y)]
+
+sup(p,y)exxr is continuouasteach(f,
+
+y)
+
+e
+
+=e1
+
+m(Zi, , y) -
+
+, y)]
+
+EM[m(Z',
+
+x F. BytheTriangleinequality,
+
+p
+
+0,
+
+(A.6)
+
+supE
+
+! m(Zi,~,
+=1
+
+) - E[m(Z,P,yo)] <--supP
+
+n
+
+=)1m(Zi,
+
+- E[m(Z,, )]
+
++ supPEOIIE[m(Z,P, 7)] - E[m(Z, P,yo)]l1. (A.7)
+
+7 Equation(A.6) impliesthatthefirstermoftheR.H.S. ofequation(A.7) is op(l). Continuitoyf E[m(Z, P, y)] and
+consistencoyf givepointwisceonvergencfeorthesecondtermoftheR.H.S. ofequation(A.7),uniformconvergence
+
+holdsbItyc6anbbeeinsghcoowmnpthacattT.I|hme(sZe,cPo1n,dYi1t)io-ngmsu(aZr,aPn2t,eY$e2")1p1<o0.IlXkll2 11p,-1 P211+ Iir(X'yl) - Tr(X'y2)11,forsomeC > 0 and P1,P2 E R. UsingTheorem9.19 in
+
+(C . IYI1 |XkII + IIXk112I11211) Rudin(1976), it is easyto show
+
+thatfor 1,y2 in some open ball containingyo,and X e S, IIr(X'yl) - 7r(X'y2)1l< M111 - y211f,orsome
+
+M > 0. ThisLipschitzpropertyal,ongwiththeexistenceof finitesecondmomentfs orY and Xk, impliesthatthe
+
+class of function{sm(Z, P, y) : 11P- Poll < c, IIy - Yl11< c} is Donskerforsomec > 0 (see, e.g. van der
+
+Vaart(1998,p. 271)). In additionE, M IIm(Z,0, y) - m(Z, 0oY, 0)112-> 0 as (p, y) -+ (P0, YO).Existenceoffinite
+
+secondmomentfsorIIXkIIalso impliesthataEM[m(Z, P, y)]/8p = -E[Xk7r(X'y)Xk] whichis non-singulairn a
+
+neighbourhooodf yoby continuityN.oticethatMYois thederivativoef EM[m(Z, Pb,y)] at y0.Applyingthedelta
+methodn: l/2EM[m(Z,Po, )] = nl/2Myo(7 --0) + Op(1). Now,since7 is asymptoticalliynear,applyTheorem
+
+5.31invanderVaart(1998) toget
+
+nl/2("n-/p20_))P) == Q-1 nl1/2 ni=1 m(Zi0,&YO) + MYo*Yo(Zi) + Op(1). Then,existenceofsecondmomentosf4'impliestheresultofthetheorem. II
+
+ProofofTheorem4.4. LikeintheproofofTheorem4.2,noticethat
+
+Xkif~(X (iYi - Xkif) - Xki
+
+Yi - X ki O)
+
+(XkTi -
+
+=
+
+( (1 - 3)
+
+Xki
+
+0o(Xi)(o0i
+
+(1
+
+-
+
+Di
+
+-1
+-
+
+~2(Xi))(1
+
+no(Xi))
+
+( (Xi) X- knio~(kXii)) -
+
+BytheLipschitzpropertsyhownaboveforr(.), andEMY2 < oo,we obtain
+
+i= ||m(Zi,, n
+
+) - m(Zi,
+
+)||112= op(1).
+
+o0,
+
+( - 0)
+"
+(A.8)
+
+18
+
+REVIEW OF ECONOMIC STUDIES
+
+Continuitoyf*i and Lemma4.3 in NeweyandMcFadden(1994) implythat11M-- MyoII = argumentist,canbe easilyseenthatboundednesosfi impliesthatn-1 =En f1(Zi)- o
+
+op(1). Usingsimilar 2 = op(1). Applythe
+
+TriangleandHolder'sinequalitietsoobtainthedesiredresult. II
+
+AcknowledgementsI. thankJoshuaAngristJ, inyonHgahn,GuidoImbens,Jos6Machado,seminarparticipants at Harvard/MITIT, AM, the2000 AmericanStatisticaAl ssociationMeetings,the2003 EconometriScocietyNorth AmericanWinterMeetingsa,ndthe2003 BankofPortugaCl onferencoen LabourMarketReformt,herefereesa,nd twoeditors(OrazioAttanasioandBernardSalani6)forhelpfuclomments.
+
+REFERENCES
+ABADIE, A. (2003), "SemiparametrIincstrumentValariableEstimationofTreatmenRtesponseModels",Journalof Econometric1s,13,231-263.
+ACEMOGLU, D. andANGRIST,J.D. (2001),"ConsequencesofEmploymenPtrotectionT?heCase oftheAmericans withDisabilitiesAct"J, ournaolfPoliticalEconomy1,09,915-957.
+ANGRIST, J.D. and KRUEGER, A. B. (1999), "EmpiricalStrategieisn LaborEconomics"i,n O. Ashenfeltearnd D. Card(eds.)HandbookofLaborEconomicsV, ol.3A (AmsterdamE:lsevierScience)1277-1366.
+ASHENFELTER, 0. (1978), "EstimatingtheEffectof TrainingProgramson Earnings"R, eviewofEconomicsand Statistics6,0,47-57.
+ASHENFELTER,0. andCARD, D. (1985), "UsingtheLongitudinaSltructuroefEarningstoEstimatetheEffectosf TrainingProgramsR",eviewofEconomicsand Statistics6,7, 648-660.
+ATHEY, S. and IMBENS, G. (2002), "Identificatioannd Inferencien NonlinearDifference-in-DiffereMncoedsels" (Mimeo,StanforUd niversity).
+BESLEY, T. and CASE, A. (1994), "UnnaturaEl xperimentsE?stimatingtheIncidenceof EndogenousPolicies" (WorkingPaperNo. 4956,NationalBureauofEconomicResearch).
+BLUNDELL, R.,COSTA DIAS, M.,MEGHIR,C. andVANREENEN, J.(2001),"EvaluatingtheEmploymenImt pact ofa MandatoryJobSearchAssistanceProgram("Mimeo,UCL).
+BLUNDELL, R. andMACURDY, T. (1999),"LaborSupply:A ReviewofAlternativAepproaches"in, O. Ashenfelter andD. Card(eds.)HandbookofLaborEconomicsV, ol.3A (AmsterdamE:lsevierScience)1559-1695.
+CARD, D. (1990), "The ImpactoftheMarielBoatlifton theMiamiLabourMarket"I,ndustriaalnd LaborRelations Review4, 4, 245-257.
+CARD, D. (1992),"Do MinimumWagesReduceEmploymentA?Case StudyofCalifornia1,987-1989"I,ndustriaalnd LaborRelationsReview4, 6,38-54.
+CARD, D. andKRUEGER,A. B. (1994),"MinimumWagesandEmploymenAt: Case StudyoftheFast-FoodIndustry inNewJerseyandPennsylvaniaA",mericanEconomicReview8, 4,772-793.
+CORAK, M. (2001),"DeathandDivorce:TheLongTermConsequencesofParentaLl oss onAdolescents"J,ournaol f LaborEconomics1, 9,682-715.
+EISSA, N. andLIEBMAN,J.B. (1996),"LaborSupplyResponsetotheEarnedIncomeTax Credit"Q, uarterlyJournal ofEconomics1, 11,605-637.
+FINKELSTEIN, A. (2002), "The Effectof Tax Subsidiesto Employer-ProvidSeudpplementarHyealthInsurance: EvidencefromCanada",JournaolfPublicEconomics8, 4,305-339.
+GARVEY,G. T. andHANKA,G. (1999),"CapitalStructuraendCorporatCeontrolT: heEffectofAntitakeoveSrtatutes onFirmLeverage"J, ournaolfFinance,54,519-546.
+HECKMAN,J.J.(1990),"VarietieosfSelectionBias",AmericanEconomicReview8, 0,313-318. HECKMAN, J. J.,ICHIMURA, H., SMITH, J. and TODD, P. E. (1998), "CharacterizinSgelectionBias using
+ExperimentDalata",E' conometrica6,6, 1017-1098. HECKMAN, J. J., ICHIMURA, H. and TODD, P. E. (1997), "Matchingas an EconometricEvaluation HERNEAstNim,Ma.toArE.:,vBidReUnMcefBrAoCmKEv,Bal.uaantdinRgaOJBoIbNTSr,aJin.Min.gP(r2o0g0r1a),m"MmaeRr'"ge,vinieawlSotfrEuccotnuormaMl iocSdteulsdtioesE6,s4t,i6m0a5t-e6t5h4e.Joint HORVCIaTuZs,aDlE. fGf.eacntodfNTHonOrManPdSOomN,izDeT.drJe.a(1t9m5e2n),t"sJA"o,GurenneaolrfatlihzeaAtimoonefrSicaamnSptalitnisgwtiictaAhl ossuoRtceiaptliaocne9m,6,e4n4ft0r-o4m4a8F. inite
+Universe"J,ournaolftheAmericanStatisticaAl ssociation4,7,663-685. ICHIMURA, H. and LINTON, 0. (2002), "AsymptotiEcxpansionsforsome SemiparametrPicrogramEvaluation
+Estimators("Mimeo,LondonSchoolofEconomics). IMBENS, G., LIEBMAN, J.B. and EISSA, N. (1997), "The Econometricosf Differencien Differences("Mimeo,
+HarvardUniversity). IMBENS, G. W.,HIRANO,K. andRIDDER, G. (2003),"EfficienEtstimationofAverageTreatmenEtffectUs singthe
+EstimatedPropensitSycore",Econometrica7,1 (4), 1161-1189. MEYER, B. D. (1995),"NaturaalndQuasi-ExperimenitnsEconomics"J' ournaolfBusiness& EconomicStatistics1,3,
+151-161. MEYER, B. D., VISCUSI, W. K. and DURBIN, D. L. (1995), "Worker'sCompensationand InjuryDuration:
+Evidencefroma NaturaEl xperimentA",mericanEconomicReview8, 5,322-340. NEWEY, W.K. (1994),"TheAsymptotVicarianceofSemiparametrEicstimatorsE"c,onometrica6,2, 1349-1382. NEWEY,W.K. (1997),"ConvergencReatesandAsymptotNicormalitfyorSeriesEstimatorsJ",ournaolfEconometrics,
+79, 147-168.
+
+ABADIE SEMIPARAMETRICDIFFERENCE-IN-DIFFERENCES
+
+19
+
+NEWEDY. ,MWcF. Kad. danend(MedcsF.)AHDanDdEbNo,okDo.fE(1c9o9n4o),m"LetarrgiceVsS,oaml.4p(lAeEmstsitmeradtaiomnEan:lsdeHviyeprSoctihenescieTs)e. sting"i,nR. E Engleand ROEHRIG,C. S. (1988), "ConditionfsorIdentificatioin Nonparametrainc dParametriMc odels",Econometrica5,6,
+433-447. ROSENBAUM,P.andRUBIN,D. (1983),"TheCentraRl oleofthePropensitSycoreinObservationaSltudiesforCausal
+EffectsB",iometrik7a,0,41-55. RUBINof,EDd. uBc.a(t1i9o7n4a)Pl,s"yEscthiomloagtiy6n,6Cg,a6u8s8a-lE70f1f.ectosfTreatmentins RandomizedandNonrandomizeSdtudies"J, ournal RUBIN,D. B. (1977),"AssignmenttoTreatmenotftheBasisofa Covariate"J,ournaolfEducationaSl tatistics2,, 1-26. RUDIN,W.(1976) PrinciplesofMathematicaAlnalysis(NewYork:McGraw-Hill). VANDER VAART,A. W.(1998)AsymptotSitcatistic(sCambridgeC: ambridgUe niversitPyress). WHITE, H. (1981), "Consequencesand Detectionof MisspecifiedNonlinearRegressionModels",Journalof the
+AmericanStatisticaAl ssociation7,6,419-433. WOOLDRIDGE, J. M. (2001), "EstimatingAveragePartialEffectsunderConditionalMomentIndependence
+Restrictions(M" imeo,MichiganStateUniversity). WOOLDRIDGE, J.M. (2002)EconometriAcnalysisofCrossSectionandPanelData (CambridgeM: IT Press).
+
+

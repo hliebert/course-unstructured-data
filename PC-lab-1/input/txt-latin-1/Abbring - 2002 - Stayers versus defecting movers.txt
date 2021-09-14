@@ -1,0 +1,297 @@
+Economics Letters 74 (2002) 327­331
+
+www.elsevier.com / locate / econbase
+
+Stayers versus defecting movers: a note on the identification of defective duration models
+Jaap H. Abbring*
+Department of Economics, Free University, De Boelelaan 1105, 1081 HV Amsterdam, The Netherlands Received 28 April 2001; accepted 23 July 2001
+
+Abstract
+This note discusses non-parametric identification of duration models with a stayer­mover structure and potentially defective duration distributions for movers. © 2002 Elsevier Science B.V. All rights reserved. Keywords: Defective; Duration; Identification; Mover­stayer; Non-parametric JEL classification: C41; C14
+
+1. Introduction
+In many applications of duration analysis, structural interpretations can be given to defects in duration distributions. In studies of fecundity, defects in durations until first birth correspond to sterility (e.g., Heckman and Walker, 1990). Defects in unemployment duration distributions are sometimes associated with structural unemployment (e.g., Ridder and van den Berg, 1998). In the job matching model by Jovanovic (1979), some workers and firms learn rapidly that their matches are of exceptional value and should be cherished, and job tenure distributions are defective. In medicine, some proportion of a population under study may not be susceptible to developing a disease (e.g., Hougaard et al., 1994).
+An early and well-known model of defective duration distributions is the mover­stayer model by Blumen et al. (1955). They assume that a population of job holders consists of a group of `stayers', who never leave their jobs, and a group of `movers', who leave their jobs at constant rates. The resulting job duration distribution of the population has a defect equal to the share of the stayers in the population. In the duration-to-birth example, stayers can be identified with sterile couples, and movers
+*Tel.: 131-20-444-6047; fax: 131-20-444-6005. E-mail address: jabbring@econ.vu.nl (J.H. Abbring).
+0165-1765 / 02 / $ ­ see front matter © 2002 Elsevier Science B.V. All rights reserved. PII: S0165-1765(01)00568-7
+
+328
+
+J.H. Abbring / Economics Letters 74 (2002) 327 ­331
+
+with fertile couples. However, not all fertile couples necessarily have children. This suggests an extension of the mover­stayer model with an additional group, `defecting movers' (e.g., Go¨nu¨l, 1989). Unlike stayers, defecting movers have typically been at risk of moving, but have eventually ended up never moving. Such a group exists if the hazard rates of moving decrease sufficiently fast with duration, for instance exponentially.
+If mover hazards vary with regressors, the share of defecting movers typically varies with the regressors as well, and is generally lower for groups with high hazards. For example, if socioeconomic circumstances increase the rate at which couples reproduce, they are less likely to grow old without having at least one child. Alternatively, defects could vary with regressors through the share of stayers (Heckman and Walker, 1987).
+In this note, we discuss identification of potentially defective duration models. Even though such models have been estimated in various special and parametric forms, non-parametric identification has hardly been discussed in the literature. Section 2 introduces a mixed proportional hazard (MPH) duration model with stayers and defective movers. We first assume that the share of stayers is independent of the regressors, and show that we only need data for two samples corresponding to two values of the regressors for identification. Existing identification proofs for the two-sample case routinely assume defectiveness away (Elbers and Ridder, 1982; Kortram et al., 1995). Section 3 qualifies this result by discussing models in which the share of stayers depends on the regressors.
+
+2. An identification theorem
+
+Consider the following MPH model for a random variable T $ 0 conditional on a k 3 1-vector of regressors X (e.g., Lancaster, 1979):
+
+E Pr(T . tuX) 5 +(z(t)f(X)): 5 e2z(t)f(X )vdG(v),
+
+(1)
+
+with f:- , Rk  (0, `), z:[0, `)  [0, `) continuously differentiable with z9 . 0 and z(0) 5 0, G the distribution of some nonnegative random variable V independent of X, and + its Laplace transform.1 Eq. (1) is a mixture of the distribution of T u(X, V ) over the distribution G of V. The hazard rate corresponding to the distribution of T u(X, V ) is z9(t)f(X)V, which explains the name `mixed proportional hazard'.
+Suppose that X assumes only two values, say x1 and x2. Denote the corresponding survival functions by F¯1(t): 5 Pr(T . tuX 5 x1) and F¯2(t): 5 Pr(T . tuX 5 x2), and the cumulative distribution functions by F1: 5 1 2 F¯1 and F2: 5 1 2 F¯2. We have that limt` F¯i(t) 5 limt` +(f(xi )z(t)) . 0 if either limt` z(t) , ` or limz` +(z) 5 Pr(V 5 0) . 0, or both. Obviously, Pr(V 5 0) is the share of stayers. Limt` F¯i(t) includes both stayers and defecting movers, and is smallest for that i such that f(xi ) is largest. We have the following non-parametric identification result.
+Proposition 1. If E[V ] 5 1, f(x1) 5 1, and c: 5 f(x2) ± 1, there corresponds a unique triple (z, c, + ) to each pair (F¯1,¯F2) consistent with Eq. (1).
+
+1The assumptions that z is continuously differentiable and that z9 . 0 are made for expositional convenience only, and can be relaxed. Also, we could allow for `observed' stayers, i.e. f(x) 5 0 for some x, but this would be trivial.
+
+J.H. Abbring / Economics Letters 74 (2002) 327 ­331
+
+329
+
+Proof. The proof closely follows Kortram et al. (1995). First, l'Ho^spital's rule gives c 5 limt0 F2(t) /F1(t). Suppose that c . 1 (the case c , 1 is similar). We have that, for any t [ [0, `), y: 5 F¯2(t) 5 +(cz(t))z(t) 5 c21+ 21( y). Also, t 5 F¯ 221( y), so that
+
+F¯ 1
+
+(
+
+F¯
+
+21 2
+
+(
+
+y))
+
+5
+
+F¯ 1
+
+(t
+
+)
+
+5
+
++
+
+(z(t
+
+))
+
+5
+
++
+
+(c
+
+21+
+
+2
+
+1
+
+(
+
+y))
+
+By induction, it follows that, for y [ (]l, 1], with ]l: 5 limt` F¯2(t),
+
+(F¯ 1
+
++
+
+F¯
+
+2 2
+
+1
+
+)(n)(
+
+y)
+
+5
+
++
+
+(c
+
+2n+
+
+21(
+
+y)),
+
+(2)
+
+where
+
+F¯ 1
+
++ F¯
+
+21 2
+
+is
+
+the
+
+composition
+
+of
+
+F¯ 1
+
+with
+
+F¯
+
+21 2
+
+,
+
+and
+
+superscript
+
+(n)
+
+denotes
+
+the
+
+n-fold
+
+composition.
+
+Now, l'Ho^spital's rule gives
+
++
+
+21(
+
+y)
+
+5lim n`
+
+1 2 +(c2n+ 21( y)) ]]]c2] n ]]
+
+5lim n`
+
+] s1 2](F¯] 1 +cF] 2¯ n221])(n)] ( y)]d .
+
+(3)
+
+This + 21
+
+identifies + on (]l, 1] we
+
+21 on (]l, 1]. can identify
+
+Finally, we + on [0, +
+
+have 21(l] ))
+
+z(t) 5 + 21(F¯1(t)) 5 c21+ 21(F¯2(t)) on [0, `). From 5 [0, c limt` z(t)). As + is real analytic, it can be
+
+extended uniquely to [0, `). h
+
+The conditions in the Proposition are standard in the MPH literature (e.g., Elbers and Ridder, 1982).
+
+The normalizations are innocuous, apart from requiring that E[V ] , `. Unlike Kortram et al. (1995), we have to keep track of the intervals on which + 21 and + are identified, and exploit the real
+
+analyticity of + to extend identification to [0, `).
+
+The result can be partially extended to censored data by applying the identification theorem for
+
+interval-censored
+
+data
+
+provided
+
+by
+
+Kortram
+
+et
+
+al.
+
+(1995).
+
+They
+
+exploit
+
+the
+
+analyticity
+
+of
+
+F¯ 1
+
++
+
+F¯
+
+21 2
+
+to
+
+identify + from interval-censored data, again routinely assuming defectiveness away. We could
+
+extend our result along these lines and identify the share of stayers from interval-censored data.
+
+However, with right-censoring, and therefore interval-censoring, the share of defecting movers is not
+
+identified.
+
+3. Some extensions and qualifications
+The result in Section 2 breaks down if we extend the model by allowing the share of stayers to depend on the regressors. To investigate this case, denote the share of stayers for a given vector of regressors x by q:x [ - Pr(V 5 0uX 5 x) [ [0, 1). Assume that the unobservable V is independent of X among movers, i.e. V *Xu(V . 0). Now, even though V will in general depend on X unconditionally, the specific structure of this dependence facilitates identification. We give two conditions that ensure identification by somehow identifying non-defecting movers.
+First, we could assume that none of the movers defect, i.e. that limt` z(t) 5 `, which gives a model similar to that in Heckman and Walker (1987). Then, for each x [ -, the share of stayers q(x) is immediately identified as the defect in the observed conditional duration distribution. This can be used to correct our data and model for defects, as in
+
+330
+
+J.H. Abbring / Economics Letters 74 (2002) 327 ­331
+
+Pr(T # tuX 5 x) ]] 1 2]q(x]) ]
+
+5
+
+1 2 +(z(t)f(x)) ]] 1 2]q(x]) ]
+
+5
+
+1
+
+2
+
++~ (z(t)f(x)),
+
+where +~ is the Laplace transform of the distribution of V u(V . 0). As +~ is independent of x by
+assumption, the results in e.g. Kortram et al. (1995), or just Proposition 1, can be applied to prove
+identification of the corrected model in the two-sample case.
+Alternatively, we could assume that the regressors can be varied to single out a limiting group of
+non-defecting movers, without varying the share of stayers. More formally, suppose that - 5 -0 3 -q, with -0 , Rl and -q , Rk2l, and that q((x0, xq)) 5 q~(xq ) for all x0 [ -0 and xq [ -q, for some q~ :-q  [0, 1). In other words, the first l regressors are excluded from the share of stayers, but may affect the mover hazards. Furthermore, for any given xq [ -q, a sequence hn [ -0 exists such that limn` f((hn, xq)) 5 `. This `large support' assumption ensures that a limiting group of non-defecting movers exists within each group characterized by the last k 2 l regressors. Then, for each xq [ -q, we can identify q~(xq) as the defect in the conditional duration distribution for this limiting group. The model of Section 2 can be considered a special case where all regressors are excluded from q. It
+should be noted that the large support assumption of Heckman and Singer (1984), requiring f to
+assume all values in (0, `), trivially yields identification in this model, as in our second case above.
+However, Proposition 1 shows that we do not need such a large support assumption in this special
+case, but only data for two samples corresponding to different values of the regressor effect f.
+
+Acknowledgements
+I acknowledge financial support by the Royal Netherlands Academy of Arts and Sciences. This note was written during a visit to the Department of Economics of the University of Chicago. I would like to thank Jim Heckman for stimulating discussions.
+
+References
+Blumen, I., Kogan, M., McCarthy, P.J., 1955. The Industrial Mobility of Labor as a Probability Process. Cornell Studies in Industrial and Labor Relations. Cornell University Press, Ithaca, NY.
+Elbers, C., Ridder, G., 1982. True and spurious duration dependence: the identifiability of the proportional hazard model. Review of Economic Studies 64, 403­409.
+Go¨nu¨l, F.F., 1989. Comparison of hazard functions with duration dependence and stayer­mover structure with an application to divorce. Economics Letters 30, 31­36.
+Heckman, J.J., Walker, J.R., 1987. Using goodness of fit and other criteria to choose among competing duration models: a case study of the Hutterite data. In: Clogg, C. (Ed.), Sociological Methodology 1987. American Sociological Association, Washington.
+Heckman, J.J., Singer, B., 1984. The identifiability of the proportional hazard model. Review of Economic Studies 51, 231­241.
+Heckman, J.J., Walker, J.R., 1990. The relationship between wages and income and the timing and spacing of births. Econometrica 58, 1411­1441.
+Hougaard, P., Myglegaard, P., Borch-Johnsen, K., 1994. Heterogeneity models of disease susceptibility, with an application to diabetic nephropathy. Biometrics 50, 1178­1188.
+Jovanovic, B., 1979. Job matching and the theory of turnover. Journal of Political Economy 87, 972­990.
+
+J.H. Abbring / Economics Letters 74 (2002) 327 ­331
+
+331
+
+Kortram, R.A., Lenstra, A.J., Ridder, G., van Rooij, A.C.M., 1995. Constructive identification of the mixed proportional hazards model. Statistica Neerlandica 49, 269­281.
+Lancaster, T., 1979. Econometric methods for the duration of unemployment. Econometrica 47, 939­956. Ridder, G., van den Berg, G.J., 1998. Estimating measures of labor market imperfection for five OECD countries, using
+aggregate data in an equilibrium search framework. Working paper, Free University, Amsterdam.
+
+

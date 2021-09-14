@@ -1,0 +1,1019 @@
+Bootstrap Tests for Distributional Treatment Effects in Instrumental Variable Models Author(s): Alberto Abadie Source: Journal of the American Statistical Association, Vol. 97, No. 457 (Mar., 2002), pp. 284-292 Published by: Taylor & Francis, Ltd. on behalf of the American Statistical Association Stable URL: https://www.jstor.org/stable/3085782 Accessed: 17-10-2019 16:05 UTC REFERENCES Linked references are available on JSTOR for this article: https://www.jstor.org/stable/3085782?seq=1&cid=pdf-reference#references_tab_contents You may need to log in to JSTOR to access the linked references.
+JSTOR is a not-for-profit service that helps scholars, researchers, and students discover, use, and build upon a wide range of content in a trusted digital archive. We use information technology and tools to increase productivity and facilitate new forms of scholarship. For more information about JSTOR, please contact support@jstor.org. Your use of the JSTOR archive indicates your acceptance of the Terms & Conditions of Use, available at https://about.jstor.org/terms
+American Statistical Association, Taylor & Francis, Ltd. are collaborating with JSTOR to digitize, preserve and extend access to Journal of the American Statistical Association
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+Alberto ABADIE
+
+Bootstrap Tests for Distributional Treatment
+Effects in Instrumental Variable Models
+
+This article considers the problem of assessing the distributional consequences of a treatment on some outcome variable of interest treatment intake is (possibly) nonrandomized, but there is a binary instrument available for the researcher. Such a scenario is com observational studies and in randomized experiments with imperfect compliance. One possible approach to this problem is to co the counterfactual cumulative distribution functions of the outcome with and without the treatment. This article shows how to estimate
+these distributions using instrumental variable methods and a simple bootstrap procedure is proposed to test distributional hypotheses, such as equality of distributions, first-order and second-order stochastic dominance. These tests and estimators are applied to the study of the effects of veteran status on the distribution of civilian earnings. The results show a negative effect of military service during the Vietnam era that appears to be concentrated on the lower tail of the distribution of earnings. First-order stochastic dominance cannot be rejected by the data.
+KEY WORDS: Compliers; Empirical processes; Kolmogorov-Smirnov test; Stochastic dominance.
+
+1. INTRODUCTION
+
+(for P(l) dominating P(0)), then these distributions will be
+
+ranked in the same way by any monotonic utilitarian social Although most empirical research on treatment effects focus on the estimation of differences in mean outcomews,elafnaraelyfusntsction (u' > 0). If two income distributions can be
+ranked by second-order stochastic dominance, have long been interested in methods for estimating the impact
+of a treatment on the entire distribution of outcomes. This is
+especially true in economics, where social welfare compar-(fdr ())dP y fz (f dP()fy(o))) dz Vx > (2)
+
+isons may require integration of utility functions under alter-
+
+native distributions of income. Following Atkinson (197(0f)o,r P(M) dominating P(0)), then these distributions will be consider the class of symmetric utilitarian social welfarraenked in the same way by any concave monotonic utilitar-
+
+functions:
+
+ian social welfare function (u' > O, u" < 0) (see Foster and
+
+W(P, u)= f u(y) dSP hor(ry ock)s ,1988 for details). Therefore, stochastic dominance
+
+where P is an income distribution and u: lR ~- R is a twice can be used to evaluate the distributional consequences of treatments under mild assumptions about social preferences.
+continuously differentiable individual utility function. LetAnP(o1t)her possible question is whether the treatment has any and P(0) denote the (potential) distributions that income weofufeldct on the distribution of the outcome, that is, whether or follow if the population were exposed to the treatment in one case, and excluded from the treatment in the other casen. oIft tuhe two distributions P(1) and P(0) are the same.
+In general, the assessment of the distributional conseis completely specified (u = u) we rank P(1) and P(0) by cqoume-nces of treatments may be carried on by estimating paring W(P(l), u) and W(P(o), u). Note that affine transformations of u do not affect the ranking of any two distributiPo(n) sa.nd P(0). Estimation of the potential income distribu-
+
+Typically, u is not fixed by the analyst but is restrictedtiotnos, P(M) and P(0), is straightforward when the treatment have some desirable properties. In particular, social welfaisrerandomly assigned in the population. However, this type (W(P, u)) is usually assumed to increase with the incoofmanealysis becomes difficult in observational studies (or in of any subset of individuals in the population (u' > 0r)a.nIdfomized experiments with imperfect compliance) when u is affine, then W(P, u) ranks income distributions storleealtyment intake is not randomly determined. Recently, Imbens on the basis of average income. However, distributional caonnd-Rubin (1997) have shown that, when there is a binary siderations often motivate social welfare functions that favor instrumental variable available for the researcher, the poten-
+
+tial distributions of the outcome variable are identified for the
+income redistribution to the poorer (u' > 0 and u" < 0). Under
+
+these assumptions, stochastic dominance can be used to estabs-ubpopulation potentially affected in their treatment status by
+
+lish a partial ordering on the distributions of income. If twovariation in the instrument (the so-called compliers). In addi-
+
+income distributions can be ranked by first-order stochastiction, Abadie, Angrist and Imbens (in press) have studied dis-
+
+dominance,
+
+tributional effects of treatments for compliers in instrumental
+
+Jx J Vx>0 (1)x
+
+variable models using quantile regression techniques. How-
+
+dP() (y) < dP(o)(y) Vx > 0 (1) ever, up to date, no testing procedure has been proposed to
+
+compare entire potential outcome distributions for compliers.
+
+This article proposes a bootstrap strategy to perform this kind
+
+Alberto Abadie is Assistant Professor, John F. Kennedy Schoool fofcomparison. In particular, equality of distributions, firstGovernment, Harvard University, Cambridge, MA 02138 (E-omrdaielr: and second-order stochastic dominance hypotheses, all
+
+alberto_abadie@harvard.edu). The author thanks Joshua Angrist foirmcpoomr-tant for social welfare comparisons, are considered.
+ments and for providing the data, and Jinyong Hahn, Kei Hirano, Guido
+
+Imbens, Tom Knox, Guido Kuersteiner, Whitney Newey, Emmanuel Saez, Jim
+
+Stock, seminar participants at the 2000 Econometric Society North American
+
+Winter Meeting in Boston and the 2001 Conference of Econometrics and Mathematical Economics in Rochester, the editor, an associate editor, and
+the referees for helpful comments.
+
+? 2002 American Statistical Association Journal of the American Statistical Association March 2002, Vol. 97, No. 457, Theory and Methods
+
+284
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+Abadie: Bootstrap Tests for Distributional Treatment Effects
+
+285
+
+The proposed method is applied to the study of the individual with treatment. Define Di to be the treatment p
+
+effects of Vietnam veteran status on the distribution of civil- ipation indicator (that is, Di equals one when individua
+
+ian earnings. Following Angrist (1990), random variation in been exposed to the treatment, Di equals zero otherwis
+
+enrollment induced by the Vietnam era draft lottery is usedZi be a binary variable that is independent of the resp
+
+to identify the effects of veteran status on civilian earningsY. ,(0) and Yi(l) but that is correlated with Di in the
+
+However, the focus of the present article is not restricted totion (an instrument). Denote Di(0) the value that Di
+
+the average treatment effect for compliers. The entire marginahl ave taken if Zi = 0; Di(l) has the same meaning for
+
+distributions of potential earnings for veterans and nonveter-In practice, for any particular individual the analyst d
+
+ans are described for this subgroup of the population. These observe both potential treatment indicators Di(0) an
+
+distributions differ in a notable way from the correspond- Instead the realized treatment Di = Di (1) . Zi + Di (0) (1
+
+ing distributions of realized earnings. Veteran status appearsis observed. In the same fashion, the analyst does not
+
+to reduce lower quantiles of the earnings distribution, leav- both Yi(0) and Y,(1) for any individual i, one of these ing higher quantiles unaffected. Although the data show a fairtial outcomes is counterfactual. Only the realized ou amount of evidence against equality in potential income dis- Yi = Yi(l) - Di + Y,(0) - (1 - Di), is observed. In the analy tributions for veterans and nonveterans, statistical testing fallrsandomized experiments with imperfect compliance, Z
+short of rejecting this hypothesis at conventional significanceally represents treatment assignment (randomized) whe levels. First- and second-order stochastic dominance of the represents treatment intake (nonrandomized). In observ
+
+potential income distribution for nonveterans are not rejecstteuddies, instruments are often provided by the so-calle
+
+by the data.
+
+ral experiments or quasiexperiments. For the rest of the
+
+The rest of the article is structured as follows. In Section 2,
+
+use the following identifying assumption:
+
+a framework for identification of treatment effects in instru-
+
+Assumption 2.1.
+
+mental variable models is briefly reviewed. It also shows how to estimate the distributions of potential outcomes for compliers. In contrast with Imbens and Rubin (1997) who report histogram estimates of these distributions, here a simple method is shown to estimate the cumulative distribution functions (cdf) of the same variables. An approach based on cdfs rather than
+
+(i) Independence of the Instrument: (Yi(0), Yi(1), Di ()) is independent of Zi.
+(ii) First Stage: 0 < P(Zi = 1) < 1 and P(Di(1) = P(Di(O) = 1).
+(iii) Monotonicity: P(Di,() > Di(0)) = 1.
+
+histograms is often convenient. First, the problem of choosing adequate binwidths for histograms is avoided. The cdf,
+
+Assumption 2.1 contains a set of nonparametric restri under which instrumental variable models identify th
+
+estimated by instrumental variable methods, can be evaluated at each observation in our sample, just as for the conven-
+
+effect of the treatment for the subpopulation pote affected in their treatment status by variation in the i
+
+tional empirical distribution function. Moreover, as inspec-
+
+ment: Di(l) = 1 and Di(0) = 0 (see Imbens and Angris
+
+tion of equations (1) and (2) reveals, first- and second-order
+
+Angrist, Imbens, and Rubin 1996). This subpopula
+
+stochastic dominance can be easily defined in terms of cdfs.
+
+sometimes called compliers. When the treatment intak
+
+Estimated cdfs may therefore suggest stochastic dominance
+
+is itself randomized, Assumption 2.1 holds for Zi =
+
+between estimated distributions in a way that would be hard
+
+every individual is a complier.
+
+to visualize from histograms. In addition, tests for stochastic
+
+Notice that there are some important exclusion restri
+
+dominance can be easily constructed within the well-known
+
+implicit in the notation. First, for each individual i, po
+
+family of tests which are based on differences in cdfs (see Dar-
+
+treatment indicators (Di(0), Di(l)) are not affected by t
+
+ling 1957 for a review of this class of tests). In summary, an
+
+ues taken by the instrument for other individuals Z1,
+
+approach to estimation of distributions of potential outcomes based on cdfs is important because it is often easier to define,
+
+in the same fashion, potential outcomes (Yi(0), Y,(1)) ar affected by the values taken by the treatment and inst
+
+visualize, and test some distributional hypotheses of inter-
+
+for other individuals (Zj, Dj), j - i. This restriction i
+
+est, such as first- or second-order stochastic dominance, using
+
+stable-unit-treatment-value-assumption (SUTVA) and i
+
+cdfs rather than histograms (see, however, Anderson 1996 for
+
+quently used in statistical models of causal inferen
+
+an approach to test for stochastic dominance based on his-
+
+Rubin 1990). In addition, potential outcomes (Yi(0),
+
+tograms; approaches based on nonparametric density estima-
+tion can also be conceived for the case in which the outcome
+
+not depend on Zi. This last restriction, commonly inv instrumental variable models, allows us to attribute corr
+
+variable of interest has a continuous distribution). Abectowmeen- the instrument and the outcome variables to the effect
+
+plete description of the bootstrap strategy is also proviodfedthientreatment alone (see Angrist et al. 1996 for a more elab-
+
+Section 2, along with a proposition which states the asyomrapt-e discussion of the restrictions in Assumption 2.1).
+
+totic validity of the bootstrap for the tests proposed in tIhnisthis article, distributional effects of possibly nonrandom-
+
+article. Section 3 describes the data and presents the empiizreidcatlreatments are studied by comparing the distributions
+
+results. Section 4 concludes.
+
+of potential outcomes Y,(1) and Y,(0) with and without the
+
+treatment. The first step is to show that the identification con-
+
+2. STATISTICAL METHODS
+
+ditions in Assumption 2.1 allow us to estimate these distributions for the subpopulation of compliers. To estimate the cdfs
+
+Let Yi(0) be the potential outcome for individuaolfi pwotietnhtoiaul toutcomes for compliers, the following lemma will treatment, and Y,(l) be the potential outcome fboerustefhuel. same
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+286
+
+Journal of the American Statistical Association, March 2002
+
+Lemma 2.1. Let h(.) be a measurable function on the real line such that EIh(Yi)I < oo. If Assumption 2.1 holds, then
+
+First-order stochastic dominance: FA dominates FB if
+
+FA(Y) < FB() Vy E
+
+(H.2)
+
+E[h(Yi)DilZi = 1] - E[h(Y)DilZi = 0] E[Di Zi = 1]- E[Di Zi = 0] = E[h(Y(l))IDi(O) = 0, Di(l) = 1], (3)
+
+Second-order stochastic dominance: FA dominates F. if
+
+FA(x) dx < FB(x) dx VyE R
+
+-x
+
+-O0
+
+(H.3)
+
+and
+
+One possible way to carry out these tests for the distribu-
+
+tions of potential outcomes for compliers is to use statistics
+
+E[h(Yi)(1 - i)lZi = 1] - E[h(Yi)(l - Di)lZ = 0] E[(1-Di)|Z = 1] - E[(1 -Di)IZi = 0]
+= E[h(Yi(0))D,(0) = 0, Di(l) = 1]. (4)
+
+directly based on the comparison between the estimates for
+F) and Fc. However, it is easier to test the implications of these hypotheses on the two conditional distributions of the outcome variable, given Zi = 1 and Zi = 0. Denote F, the cdf
+
+of the outcome variable conditional on Zi = 1, and define Fo in
+
+Proof. Note that h(Yi)Di is equal to h(Yi(l)) if Di = 1 andthe same way for Zi = 0. That is, F (y) = E[l {Yi < y}lIZ = I] equal to 0 if Di = 0. By Lemma 4.2 in Dawid (1979), we have and Fo(y) = E[{Yi < y}lZ, = 0].
+
+that (h(Yi(1)), 0, Di(0), Di(1)) is independent of Zi. Then by Proposition 2.1. Under Assumption 2.1, hypotheses
+
+Theorem 1 in Imbens and Angrist (1994), we have that
+
+(H.1)-(H.3) hold for (FA, FB) = (F), FC)) if and only if they
+
+hold for (FA, F) = (F, Fo).
+
+E[h(Y(l))lDi(0) = 0, D(1l) = 1] E[h(Yi) . DilZi = 1] - E[h(Y,) . DiiZi = 0] E[D,lZi = 1]-E[DilZi = 0]
+
+Proof. From equations (5) and (6), we have F) (y) - F() (y)
+
+The second part of the lemma follows from an analogous argu-
+ment.
+
+E[{Yi < y}Zi= 1]-E[l{Yi < y}Zi = 0] E[D, IZ = 1]- E[D,IZi = 0]
+
+Lemma 2.1 provides a simple way to estimate the cumulTa-herefore, Fc()- F() = K (F1 - Fo) for K = 1/(E[D lZi = tive distribution functions of the potential outcomes for co1m] -- E[Di[Zi = 0]) < oo, and the result of the proposition
+pliers. Define Fc)(y) = E[l{Y(1) < y}lD(l) = 1, Di(0) =h0o]lds.
+
+and F(o)(y) = E[l{Yi(0) < y}]Di(l) = 1, Di(0) = 0]. ApplyOf course F1 and Fo can easily be estimated by the empir-
+
+Lemma 2.1 with h(Y) = 1 {Yi < y} to get
+
+ical distribution of Yi for Zi = 1 and Z_ = 0, respectively.
+
+Divide (Y, ..., Yn) into two subsamples given by different val-
+F((y) = {E[1{Yi < y}DilZi = 1]-E[I{Yi < y}DilZi = 0]} ues for the instrument, (Y ,l ..., Y I ) are those observations
+
+/{E[Di Z, = 1]- E[D IZi = 0]}, (5)
+
+with Zi = 1 (n1 = Ei Zi) and (Y ..., Y ,,o) are those with Zi = 0 (no = Ei 1 - Zi). Consider the empirical distribution
+
+and
+
+functions
+
+F(o)(y) = {E[l{Yi < y}(l - Di)jZi = 1]
+
+1 n'
+F,,n,(y)= E { Yi < y
+
+-E[l{Yi < y}(l - D)Zi = 0]}
+/{E[( -Di)|Zi = 1]-E[(1 - Di)Zi = 0]}. (6)
+
+F0.no(Y)= - y l{Yj _y}. no j=lI
+
+Suppose that we have a random sample, {(Yi, Di, Zi)}l, Then, the Kolmogorov-Smirnov statistic provides a natdrawn from the studied population. The sample counterpartusral way to measure the discrepancy in the data from of equations (5) and (6) can be used to estimate FC()(y) antdhe hypothesis of equality of distributions. A two-sample
+
+F(o)(y) for y = {Y..., . ., . We can compare the distribu-Kolmogorov-Smirnov statistic can be defined as tions of potential outcomes by plotting the estimates of Fc)
+
+and F(). This comparison tells us how the treatment affects
+
+Teq _ n=no)
+
+sup IF,., (y)-F O) nO(y)
+
+(7)
+
+different parts of the distribution of the outcome variable, at
+
+e[R
+
+least for the subpopulation of compliers.
+
+Following McFadden (1989), the Kolmogorov-Smirnov
+
+Researchers often want to formalize this type of comparisostnatistic can be modified to test the hypotheses of first-order
+
+using statistical hypothesis testing. In particular, a researchesrtochastic dominance (for Fl dominating Fo)
+
+may want to compare Fc) and F() by testing the hypotheses
+
+of equality in distributions, first-order or second-order stochas-
+
+T= sup , (y) - , ,0 (Y)), rfsd (nl no )/2 sup(F (Y)F-n o (y/))
+
+(8)
+
+tic dominance. For two distribution functions FA and FB, the
+
+n vER
+
+hypotheses of interest can be formulated as follows. Equality of distributions:
+
+and second-order stochastic dominance
+
+FA(y)=(y) FB() Y R.
+
+(H.1)
+
+T (Sd = (nUt0) / sup (F,ln(x)-Fo,, ())d(9x) . \---- yER oc
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+Abadie: Bootstrap Tests for Distributional Treatment Effects
+
+287
+
+Kolmogorov-Smirnov type nonparametric distance tests simplifies the asymptotic analysis considerably and is hardly
+
+generally have good power properties. Unfortunately, the restrictive for empirical applications.
+
+asymptotic distributions of the test statistics under the null
+
+The results of a simulation study to assess the small sample
+
+hypotheses are generally unknown, because they depend performance of the tests proposed in this article are reported in on the underlying distribution of the data (see e.g., Appendix B. This simulation study suggests that the bootstrap
+
+Romano 1988). In this article, a bootstrap strategy is used distribution of the tests provides a good approximation to the
+
+to overcome this problem. This strategy is described by the nominal level even in fairly small samples.
+
+following 4 steps:
+
+The idea of using resampling techniques to obtain criti-
+
+Step 1: In what follows, let Tn be a generic notation for Teq Tfsd or TSSd. Compute the statistic Tn for the original samples (Y,,, .... Yln, ) and (Y0o,, ... Yo,no)'
+
+cal values for Kolmogorov-Smimov type statistics probably originated with Bickel (1969) and has also been used by Romano (1988), McFadden (1989), Klecan, McFadden, and McFadden (1991), Praestgaard (1995) and Andrews (1997)
+
+Step 2: Resample n observations (Y ...,) from among others. A related approach based on simulation of p-
+
+(Y, . . ., Y with replacement. Divide (Y1 .. ., Y) intvoalutews ocan be found in Barrett and Donald (1999).
+
+samples: (Yl1, ...Y, ,n) given by the nl first elemNeontetsthat Proposition 2.2 naturally applies to tests based
+
+of (Y ..., Yn), and (Y0,1 ..., Y,no) given by the no laosntpeelref-ectly randomized experiments (in which Zi = Di for
+
+ments of (Yl, ..., Y). Use these two generated samapllleis). tIno such case, the entire population is madeup of com-
+
+compute the test statistic Tn,b.
+
+pliers. Another interesting special case arises when Di(0) = 0
+
+for all i. This happens, for example, in randomized trials if
+
+Step 3: Repeat Step 2, B times. Note that no andinnd1ivairdeuals in the control group are perfectly excluded from
+
+constant across bootstrap repetitions.
+
+treatment intake (not ruling out noncompliance in the treat-
+
+Step 4: Calculate the p-values of the tests with p-mveanlutegr=oup). Then, the distribution of (Yi(0), Yi(1)) for the
+E= 1 {Tn,b > Tn}/B. Reject the null hypotheses if the tpr-evaatleudeis the distribution for compliers (see, e.g., Abadie et al. is smaller than some significance level a, 0 < a < 0.5in. press).
+
+By resampling from the pooled data set (Y1 ..., Yn) we approximate the distribution of our test statistics when F1 =
+
+3. EMPIRICAL EXAMPLE
+
+Fo. Note that for (H.2) and (H.3), F, = Fo represents the least favorable case for the null hypotheses. This strategy allowThs eusdata used in this study consist of a sample of 11,6 to estimate the supremum of the probability of rejectiownhuintedemr en, born in 1950-1953, from the March Current the composite null hypotheses, which is the conventionualladteiofn- Surveys of 1979 and 1981-1985. Annual labor inition of test size. The proof of next proposition showisntghsa,tw , eekly wages, Vietnam veteran status and an i under a nondegeneracy condition, the asymptotic distrcibauttoironosf draft-eligibility based on the Vietnam draft of Tfsd and Tssd are continuous, perhaps except for an taetormy aotutcome are provided for each individual in the
+zero that must have probability mass less than 0.5. Theprelef.orAed, ditional information about the data can be fou
+the restriction that a < 0.5 is necessary to establish asyAmpppetnodtiixc C.
+
+size a. This restriction is, however, consistent with conveFnig-ure 1 shows the empirical distribution of realized annual
+
+tional test levels.
+
+labor earnings (from now on, annual earnings) for veterans and
+
+nonveterans. We can observe that the distribution of earnings
+
+Assumption 2.2. The distribution of the outcome variablefor veterans has higher low quantiles and lower high quantiles
+
+is nondegenerate with bounded support.
+
+than that for nonveterans. Naive reasoning would lead us to
+
+Justification of the asymptotic validity of this procedure ciosnclude that military service during the Vietnam era reduced
+
+provided by the following proposition.
+
+the probability of extreme earnings without a strong effect
+
+on average earnings. The difference in means is indeed quite
+
+Proposition 2.2. Under Assumption 2.2, the procedursme all. On average, veterans earn only $264 less than nonvet-
+
+described in Steps 1-4, for Tn equal to the test statistics inerans and this difference is not significant at conventional test
+
+equations (7)-(9) and hypotheses (H.1)-(H.3), (i) providleevsels. However, this analysis does not take into account that
+
+correct asymptotic size, a, (ii) is consistent against any fixevdeteran status was not randomly assigned in the population. In
+
+alternative, (iii) has power (greater or equal to size) againfasctt, there was a strong selection process in the military dur-
+
+contiguous alternatives.
+
+ing the Vietnam era. Some individuals volunteered, and oth-
+
+This proposition is proven in Appendix A. Note that the deirss- avoided enrollment using different methods, like student tribution of Yi is not assumed to be continuous. This is impoorr-occupational deferments. In addition, there was a screening
+
+tant because outcome variables of interest in economics typpir-ocess in the military prior to enrollment which disqualified cally have probability atoms (for example, earnings variablseosme individuals for service for a variety of reasons such as
+
+typically have probability mass at zero; wage variables typih-aving health problems or for having committed a felony (see cally have probability mass at the minimum wage.) If the ouBta-skir and Strauss 1978 for an account of the issues involved
+
+come variable is absolutely continuous, then exact asymptotinicmilitary enrollment during the Vietnam era). Thus, enrollresults can be obtained (as in Dudley 1989, chap. 12). Tmheent for military service during the Vietnam era was influ-
+
+bounded support assumption is stronger than necessary, buetnced by variables associated with future potential earnings.
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+288 1
+
+Journal of the American Statistical Association, March 2002
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5
+
+0.4
+
+0.3
+
+0.2
+
+0.1
+
+0
+30,000 40,0C Annual earnings
+Figure 1. Empirical Distributions of Earnings for Veterans and Nonveterans.
+
+Therefore, we cannot draw causal inferencaebsoubt yhyspiom thepsleys (Hc.o)m -(H-.3) for the subpopulation of com-
+
+paring the distributions of realized earningpsliebres.t(w Theeecnomvpuetteer rcoadnesused for these calculations is avail-
+
+and nonveterans.
+
+able from the author on request.) Table 1 reports p-values for
+
+If draft eligibility is a valid instrument, then the marginatlhe tests of equality of distributions, first-order and second-
+
+distributions of potential outcomes for compliers are consiso-rder stochastic dominance. Notice that, for this example, the
+
+tently estimated by using sample analogs of equations (5) ansdtochastic dominance tests are for earnings for nonveterans
+
+(6). Figure 2 is the result of applying our data to those equad-ominating earnings for veterans. The first row of Table 1
+
+tions. Note that in finite samples, the instrumental variablecsontains the results for annual earnings as the outcome vari-
+
+estimates of the potential cdfs for compliers may not be nona-ble. In the second row the analysis is repeated for weekly
+
+decreasing functions (see Imbens and Rubin 1997 for a relatedwages. Bootstrap resampling was performed 2,000 times discussion). The most remarkable feature of Figure 2 is the (B =2,000). change in the estimated distributional effect of veteran status First, consider the results for annual earnings. The on earnings with respect to the naive analysis. The average Kolmogorov-Smirov statistic for equality of distributions is effect of military service for compliers can be easily estimateredvealed to take an unlikely high value under the null hypothusing the techniques in Imbens and Angrist (1994). On aver-esis. However, we cannot reject equality of distributions at age, veteran status is estimated to have a negative impact of $1,278 on earnings for compliers, although this effect is facronventional test levels. The lack of evidence against the null from being statistically different from zero. Now, veteran stha-ypothesis increases as we go from equality of distributions tus seems to reduce low quantiles of the income distributionto, first-order stochastic dominance, and from first-order to leaving high quantiles unaffected. If this characterization issecond-order stochastic dominance. The results for weekly true, the potential outcome for nonveterans would dominatweages are slightly different. For weekly wages we fall far from
+
+that for veterans in the first-order stochastic sense.
+
+rejecting equality of distributions at conventional test levels.
+
+Following the strategy described in Section 2, hypothe-This example illustrates how useful it can be to think in ses testing is performed. First, the test statistics in terms of distributional effects, and not merely average effects, equations (7)-(9) are computed for the draft-eligible/draft- when formulating the null hypothesis. Once we consider dis-
+ineligible samples. Then, the distributions of the test statis- tributional effects, the belief that military service in Vietnam tics under the least favorable null hypothesis are approximatedhad a negative effect on civilian earnings can naturally be
+
+by resampling from the pooled sample and recomputing the incorporated in the null hypothesis by first- or second-order test statistics. In this way, we are able to make inferencestochastic dominance.
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+Abadie: Bootstrap Tests for Distributional Treatment Effects
+
+289
+
+1
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5
+
+0.4
+
+0.3
+
+0.2
+
+0.1
+
+0 10,000 20,000 30,000 40,000 50,000 60,000
+Annual earnings
+Figure 2. Estimated Distributions of Potential Earnings for
+
+4. SUMMARY AND DISCUSSION OF POSSIBLE EXTENSIONS
+
+est. Estimates of cumulative distrib tial outcomes for compliers show an
+
+When treatment intake is not randomized, instrumtenatray l vaerix- perience on the lower tail of
+
+earnings. However, equality of distri able models allow us to identify the effects of a treatatcmonevnetntoionnal confidence levels. First- and second-order
+
+some outcome variable, for the subpopulation whose treatment stochastic dominance are not rejected by the data. Results
+status is determined by variation in the instrument. For this more favorable to the hypothesis of equality of distributi
+
+group of the population, called compliers, the entire marginal distribution of the outcome under different treatments can be when using weekly wages as the outcome variable.
+
+Equality of distributions and first- and second-order stoch estimated. In this article, a strategy to test for distributional
+tic dominance are not the only hypotheses that can be tes effects of treatments within the population of compliers is
+using the bootstrap to compare the distribution of the outco
+
+developed. In particular, the focus is on the equality of distributions, first-order and second-order stochastic dominancveariable for different values of the instrument. For examp
+a test for a constant treatment effect, a = Y(1)- Y(0), c hypotheses. First, how to estimate the distributions of poten-
+be implemented by applying the test of equality of distri
+
+tial outcomes for compliers is explained. Then, bootstrap samt-ions to Wi = Yi- a . Di. If a is unknown and needs to
+
+pling is used
+statistics.
+
+to
+
+approximate
+
+the
+
+null
+
+distribution
+
+of
+
+the
+
+teessttimated,
+
+the
+
+asymptotic
+
+distribution
+
+of
+
+the
+
+test
+
+statistic
+
+w
+
+be affected. Nuisance parameters may also arise if parame I illustrate this method with an application to the studymofodels are used to adjust for the effect of covariates. Altho the effects of veteran status on civilian earnings. Followinegstimation of nuisance parameters is not explicitly address
+
+Angrist (1990), use variation in veteran status induced by rainn- the present article, modifications along the lines of Rom
+
+domly assigned draft eligibility to identify the effects of inter(1- 988) or theorem 19.23 in van der Vaart (1998) look l
+
+promising starting points to obtain results analogous to tho
+
+Table 1. Tests on Distributional Effects of Veteran Status on Civilian
+
+in Proposition 2.2.
+
+Earnings, p-values
+
+Another interesting question is how to make the cdf est
+
+First-order Second-order
+Outcome Equality in stochastic stochastic
+variable distributions dominance dominance
+
+mators proposed in this article nondecreasing. One pos ble approach is to choose the nondecreasing function t minimizes a weighted average quadratic distance to the est
+
+Annual earnings .1245 .6260 .7415 Weekly wages .2330 .6490 .7530
+
+mated cdf. This can be accomplished using well-know isotonic regression methods as in Robertson, Wright, Dykstra (1988).
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+290
+
+Journal of the American Statistical Association, March 2002
+
+Finally, using techniques similar to those in Appendix A, it can be seen that the results in Proposition 2.2 also hold for the permutation versions of the tests proposed in this article (for permutation tests resampling is done without replacement). An appealing feature of permutation tests is that, by construction, they provide exact level in finite samples (see, e.g., Efron and Tibshirani 1993).
+
+define the pooled empirical measure
+H = ,,
+/i=
+then Pl,,, - , = (1 - 7rn)(Pl,,l - Po,,n). Let (Y,,..., Y,) be a random sample from the pooled empirical measure. Define the bootstrap empirical measures:
+
+APPENDIX A: ASYMPTOTIC VALIDITY OF THE BOOTSTRAP
+
+1 nl n1 i=l
+
+j1 1
+P0o,no= - E .
+nO j=n,l ,+1
+
+Proof of Proposition 2.2.
+
+By theorem 3.7.7 in van der Vaart and Wellner (1996), if
+
+Part (i) can be proven by extending the argument in vannd-e-rooV, atahretn n /2(P1, - l-H) =? GH given almost every sequence
+
+and Wellner (1996) chap. 3.7 to tests for first- and sec(oYnl,d.-..oYrd,1e,,r1), (Yo,, ..., Yo,n), where H = rr.P, +(1 - 7r) Po.
+stochastic dominance. Let PI, PO, be the probability lawsTohfe sYamceornes-ult holds for no2(P ,0o - H,). Let ditional on Z = 1 and Z = 0, respectively. Let Q be the probability
+
+law of Z which is Bernoulli with parameter 7r. Define the empirical
+measures
+
+Dn= (I? (P1 I 11)-Fho, I ).
+
+1 nI 1 n
+pI , ,,/ *=nn/ o== -YY11,l,i 0nOj=j1 =
+
+Note that T(D,,) = T( - 17 ,,)' /2nl / ,, - H) - l /2nl (P H,)). Therefore, T(D,) converges in distribution to T((1-
+
+7r) 1/2GH - 7/2GH) almost surely, where GH and G' are indepen-
+
+where 5r indicates a probability mass point at Y. Let ' = dent H-Brownian bridges. Because (1- 7r)1/2GH- 7Tr/2GH is also an
+
+{l(-oo, y]} : y E lR}, that is, the class of indicators of all lower haHlf-Brownian bridge, we have that, if P1 = Po = P, then T(D,) con-
+
+lines in 1R. Because Y is known to be universally Donsker, by thevoe-rges in distribution to T(Gp) almost surely. Let P be the bootstrap
+
+rem 3.5.1 in van der Vaart and Wellner (1996) we have
+
+probability measure for the sample, and let
+
+G ,,n = n /2(l,nl - Pl) X Gpl, Go, n = no/ (Po,, -Po) =X GP
+
+c, = inf{c: P(T(D,) > c) < a}.
+
+in 1 (Y), where "=" denotes weak convergence, 1? (oY) is the Tseotobotfain the result of asymptotic size equal to a note that Teq, Tfsd, all uniformly bounded real functions on Y and Gp is a P-BrowanndiaTnssd are convex continuous functionals. Note also that if P is
+
+bridge. Let
+
+nondegenerate, T(Gp) has support equal to [0, oo). By theorem 11.1
+
+n I no 1/2
+Dn = (npi,h,-PO,no)
+
+in Davydov, Lifshits, and Smorodina (1998), T(Gp) has continuous and strictly increasing cdf everywhere except possibly at zero. If P
+
+As n -> oo, rnT = nl/n -->. E (0, 1) almost surely. Theisn,noinfdPegI e=nerate, Pr(supf IGp(f)l = 0) = 0 so Teq(Gp) has absoPo = P, D,n = (1 - 7r)1/2 Gp - G T1/2 G'p, where Gp launtedlyGc'onatrienuous distribution. It is left to be shown that TfSd(Gp)
+
+independent versions of a P-Brownian bridge. Becausean(1d-Trss)d(1G/p2) cannot have probability mass greater than 0.5 at zero.
+
+Gp - T1/2 *
+For f E .,
+
+Gp is also a P-Brownian bridge,
+let a(f) = sup{t E R: f(t) = 1} and
+
+wAebheatvheethatBheaDcvaneus=te>htahGtepPv. rar(siaunpcfe0o:fGGpp(f(f))
+
+is zero
+= 0) =
+
+outside
+Pr(A f
+
+the support
+E F : Gp(f)
+
+of P,
+> 0).
+
+we
+By
+
+Lebesgue measure on R. For z E 1'(Y), define the followingsymmetry of Gaussian measures, Pr(3f E F : Gp(f) > 0) = Pr(i,
+
+maps:
+
+Teq(z)
+
+=
+
+supfE
+
+Iz(f)J,
+
+Tfsd(z)
+
+=
+
+supfEY
+
+z(f)
+
+and
+
+T"Sd(z)
+
+f=PrE(/t f:
+
+Gp(f) < 0). By
+E Y : Gp(f)
+
+Assumption
+> 0n ]f E .
+
+2.2, P is
+: Gp(f)
+
+nondegenerate, hence
+< 0)= 0. Therefore,
+
+SUpfE fSgE:a(g)a(g)(f)} z(g) dt(g) where tics are Teq(Dn), Tfsd(D,) and Tsd(Dn). tion for Teq, Tfsd or Tssd. Notice that,
+
+== Let for
+
+A o a. T be a z1, z2
+
+OEgue1rnXet(Fre)is,ctTns(toza2tt)ai-<sG1- p>(fP) r=(,0f).
+
+E.: The
+
+Gp(f) > 0 U Af E G : same reasoning applies
+
+Gp(f) < 0) = 2 Pr(sup,f to Tssd(Gp) once we sub-
+
+T(zl)+T(z2-z1). Because Teq is equal to the norm in Io(S), triv-stitute f{gEa(g)<a()f)) Gp(g) dlt(g) for Gp(f). Therefore, for a < .5,
+
+ially Teq is continuous. Tfsd is also continuous because Tfd(z2 w- e have cn -> Cp(a) almost surely. Then, the first result of the the-
+
+orem holds by continuity of T(Gp) - cp(a) at zero.
+
+zl) < Teq(z2- z). Finally, the bounded support condition allows us to restrict ourselves to functions z2, z E {x E 10(.F) : x(a-~(t)) =
+
+By
+
+tightness
+
+of
+
+the
+
+limiting
+
+process,
+
+c,,
+
+is
+
+bounded
+
+in
+
+probability
+
+and the tests are consistent against any fixed alternative. This proves
+
+0 for t E (-0o, 1) U (u, oo)}, for some real 1, u (I < u) such that th(ei) and (ii).
+
+support of P is contained in the interval [1, u]. Then, it is easy to To prove (iii), let M = Q P. Under M, see that Tssd(z2 - Zl) < (U - I) - Tfsd(z2 - ), hence Tsd, is continu-
+
+ous. For the stochastic dominance tests we will use the least favor-
+
+( n?nl )1/2
+
+able case (P1 = P0) to derive the null asymptotic distribution. Under DI'(f) =( (P,l I/(f)-P0n(f))
+
+the least favorable null hypotheses, by continuity, the tests statistics
+
+converge in distribution to Teq(Gp), Tfsd(Gp), and Tssd(Gp), respectively. Note that, in general, the asymptotic distribution of our test
+
+[( 1- 12 ) 1/2 Zi -)]. ((Y) - Pf(Y)) /1/2 '/2 n1
+
+statistics under the least favorable null hypotheses depends on the underlying probability P. It can easily be seen that our test statistics tend to infinity under any fixed alternative.
+
+n=1/I 2E[i(=1l )7Z1-' (1)i-- r(1c~-,Z~]",12,
+
+Let Cp(a) = inf{c : P(T(Gp) > c) < a}. Consider a test that rejects
+
+(f(Yi) - Pf(Yi)) + o().
+
+the null hypothesis if T(D,) > c,,. Because cp(a) depends on P, the sequence {c,} is determined by a resampling method. Consider the Local alternatives are given by M, = Q P,, where P, is a sequence
+
+pooled- sample (Y,, ... Y, ,) = (Y1, . .., Yl,, , Y, , *.... Y, ,o), andof conditional probability measures equal to P:, for Z = z. P(,,) and
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+Abadie: Bootstrap Tests for Distributional Treatment Effects
+
+291
+
+Table 2. True Test Size in Small Samples, Monte Carlo Simulation
+
+Distribution Nominal test level
+
+Sample
+size
+
+Empirical example N(0, 1) U(0, 1) b(.5, 10)
+.10 .05 .01 .10 .05 .01 .10 .05 .01 .10 .05 .01
+
+Equality 25 .119 .062 .017 .121 .063 .011 .130 .063 .014 .107 .053 .010
+of distributions 50 .114 .059 .015 .127 .072 .017 .148 .085 .020 .108 .061 .013 100 .114 .055 .012 .114 .058 .011 .127 .069 .016 .115 .060 .016 250 .106 .051 .011 .119 .058 .011 .111 .053 .011 .121 .058 .013 500 .099 .047 .010 .107 .052 .010 .112 .055 .010 .106 .053 .012
+First-order 25 .122 .059 .015 .125 .060 .012 .134 .070 .014 .101 .050 .011 stochastic dominance 50 .109 .055 .012 .135 .068 .018 .131 .072 .016 .118 .051 .013 100 .106 .056 .012 .115 .058 .011 .123 .067 .016 .112 .056 .015 250 .105 .053 .011 .120 .061 .013 .119 .056 .010 .110 .062 .014 500 .091 .049 .010 .106 .055 .011 .114 .057 .011 .093 .046 .009
+Second-order 25 .110 .058 .011 .106 .052 .006 .107 .050 .011 .101 .049 .009 stochastic dominance 50 .101 .050 .012 .110 .059 .010 .103 .054 .011 .103 .052 .009 100 .104 .051 .009 .100 .047 .007 .105 .052 .011 .105 .053 .012 250 .098 .049 .011 .095 .048 .010 .100 .045 .007 .105 .051 .011 500 .100 .048 .011 .102 .053 .009 .101 .051 .009 .092 .045 .011
+s.e. .005 .003 .002 .005 .003 .002 .005 .003 .002 .005 .003 .002
+
+Pl, approach a common limTiht e samP e resiuln t holdt s fh or feirst-fano d sleclonod-w orderidn omg inanceste estn s se: (note that for these tests the sequence of contiguous alternatives
+j[nld2(dP 1- 2xdP/s2 hou)ld be-spx ecifiedd sucP h thjat]Tfsd0 (vl - vf 0) >o0 ar nd Tsszd(vl -=v0)0> 0,,
+respectively.)
+where xI, xo are measurable real functions. Therefore, APPENDIX B: SMALL SAMPLE BEHAVIOR
+
+IfSl/2^(dm /i/^2 (2nJ/2 - dM'I/2 To)asse-ss-the x smd all sM ampl'e/ perIfor-maO nce0of,the tests proposed
+this article a Monte Carlo study was conducted. To mimic as clo
+
+for x(Zi, Yi) = (1 - Zi) xo(Y) + Zi aX s po(ssYibile).the actual small sample behavior of these tests in
+
+It can be shown (van der Vaartapapln icadtionW s, oenlelonf ethre d(i1 str9ib9u6tio)n,s luesem d fom r tahe simulation s
+
+3.10.11) that the sequences of produisctthe m emepiarsicualrdeisstriM butn ionaon f d annM ual"eaarnrinegscforn om- the data
+
+tiguous, Mx = 0, Mx2 < oo, and
+
+in Section 3. The other three distributions are a standard nor
+
+a uniform on (0,1), and a binomial with parameters (.5, 10). (N
+
+dMn no dMn I n 1 2
+
+that the simulation considers a distribution, the standard normal,
+
+lodg lMd n -i= = dEMlo n1 g/2( 2Zi, Yi b)elon-gs=to a lIargeZ r fa,milyYth-an M permx itte2 d by + the reogulp arit(ylc)on,ditio
+
+under M. Therefore
+
+because it does not have bounded support.) For each distribution each Monte Carlo iteration, a sample of size n was drawn (n eq
+
+to 25, 50, 100, 250, and 500). Each sample was divided into
+(D"(f)l?og ? dM -n 0 (P(f-Pf)2T(f )subsamples following the proportion of draft eligibles/nonelig
+DJ l}ogdMn" N -Mx/j2'\ r'(f) Mx2 in the original data for the first distribution, and a 1/1 propo
+
+where r(f) = T/2(1 /2( - T2(vl(f)- Vo(f)) and v,(f) = Px(azpfp. roximate for n odd) for the other three distributions. Then,
+
+Applying LeCam's third lemma
+
+test statistics in equations (7)-(9) were computed and the boots
+
+tests were performed using 2,000 bootstrap iterations. This pro
+
+was repeated for 4,000 Monte Carlo iterations. Table 2 shows
+DO(f) : N(0, P(f - Pf)2) + 7/2( - )/2(I (f) - vo(f)).results of this simulation study for samples sizes equal to 25, 50,
+
+250, and 500 and nominal test levels equal to 0.10, 0.05, and Using the Donsker property of F, we obtain the uniform versioAnsyofmptotic standard errors (as the number of Monte Carlo itera last result (see van der Vaart and Wellner 1996, theorem 3.10.12te.)nds to infinity) are reported in the last row of the table. The t
+
+D, =$ Gp + irT/2(1- _ - )1/2 ' (VI -_o0).
+
+shows highly satisfactory performance of the tests, even in f small samples (n = 25).
+
+In addition, suPfy I nl/2(Pz, - P)f - v,(f)I -* 0 for z = 0, 1, and
+
+therefore suPf,E In'/2(P,, - P0,,)f - (v (f) - v0(f))l - 0.
+
+APPENDIX C: DATA DESCRIPTION
+
+Mn
+
+By contiguity arguments cn - cp(a). Then, using a version oTfhe data set was especially prepared for Angrist and Kru
+
+Anderson's lemma for general Banach spaces (see, e.g., van der V(1aa9r9t5). Both annual earnings and weekly wages are in real te
+
+and Wellner 1996, lemma 3.11.4), we obtain the desired result W foerekly wages are imputed by dividing annual labor earnings by
+
+the test of equality of distributions.
+
+number of weeks worked. The Vietnam era draft lottery is caref
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+292
+
+Journal of the American Statistical Association, March 2002
+
+described in Angrist (1990), where the validity of draft eligibility as an instrument for veteran status is also discussed. This lottery was conducted every year between 1970 and 1974 and it used to assign numbers (from 1 to 365) to dates of birth in the cohorts being drafted.
+
+Baskir, L. M., and Strauss, W. A. (1978), Chance and Circumstance: the Draft, the War, and the Vietnam Generation. New York: Alfred A. Knopf.
+Bickel, P. J. (1969), "A Distribution Free Version of the Smirnov Two Sample Test in the p-Variate Case," The Annals of Mathematical Statistics, 40, 1-23.
+
+Men with lowest numbers were called to serve up to a ceiling determined every year by the Department of Defense. The value of that ceiling varied from 95 to 195 depending on the year. Here, an indicator for lottery numbers lower than 100 is used as an instrument for veteran status. The fact that draft eligibility affected the probability of enrollment along with its random nature makes this variable a good candidate to instrument veteran status.
+
+Darling, D. A. (1957), "The Kolmogorov-Smimov, Cramer-von Mises Tests," The Annals of Mathematical Statistics, 28, 823-838.
+Davydov, Y. A., Lifshits, M. A., and Smorodina, N. V. (1998), Local Properties of Distributions of Stochastic Functionals. Providence: American Mathematical Society.
+Dawid, A. P. (1979), "Conditional Independence in Statistical Theory," Journal of the Royal Statistical Society, 41, 1-31.
+Dudley, R. M. (1989), Real Analysis and Probability. New York: Chapman
+& Hall.
+
+[Received March 2000. Revised May 2001.]
+
+Efron, B., and R. J. Tibshirani (1993), An Introduction to the Bootstrap. New York: Chapman & Hall.
+Foster, J. E., and Shorrocks, A. F. (1988), "Poverty Orderings," Econometrica 56, 173-177.
+
+REFERENCES
+
+Imbens, G. W., and Angrist, J. D. (1994), "Identification and Estimation o Local Average Treatment Effects," Econometrica, 62, 467-476.
+
+Imbens, G. W., and Rubin, D. B. (1997), "Estimating Outcome Distribution
+
+Abadie, A., Angrist, J. D., and Imbens, G. W. (in press), "Instrumenftoarl VCoarmi-pliers in Instrumental Variable Models," Review of Economic Studables Estimates of the Effect of Subsidized Training on the Quaienst,i6le4s, 5o5f5-574.
+
+Trainee Earnings," Econometrica.
+
+Klecan, L., McFadden, R., and McFadden, D. (1991), "A Robust Test fo
+
+Anderson, G. (1996), "Nonparametric Tests for Stochastic DomSitnoacnhcasetiicnDominance," unpublished manuscript, MIT.
+
+Income Distributions," Econometrica, 64, 1183-1193.
+
+McFadden, D. (1989), "Testing for Stochastic Dominance," in Studies in th
+
+Andrews, D. W. K. (1997), "A Conditional Kolmogorov Test," EconEocmoneotm ricicas, of Uncertainty in Honor of Josef Hadar, ed. by T. B. Fomby
+
+65, 1097-1128.
+
+and T. K. Seo. New York. Springer-Verlag.
+
+Angrist, J. D. (1990), "Lifetime Earnings and the Vietnam Era Draft Lottery: Prestgaard, J. T. (1995), "Permutation and Bootstrap Kolmogorov-Smirnov
+
+Evidence from Social Security Administrative Records," American Eco- Tests for the Equality of Two Distributions," Scandinavian Journal o
+
+nomic Review, 80, 313-336.
+
+Statistics, 22, 305-322.
+
+Angrist, J. D., Imbens, G. W., and Rubin, D. B. (1996), "Identification of Robertson, T., Wright, F. T., and Dykstra, R. L. (1988), Order Restricted
+
+Causal Effects Using Instrumental Variables," Journal of the American Sta- Statistical Inference. New York: Wiley.
+
+tistical Association, 91, 444-472.
+
+Romano, J. P. (1988), "A Bootstrap Revival of Some Nonparametric Distan
+
+Angrist, J. D., and Krueger, A. B. (1995), "Split-Sample Instrumental Vari- Tests," Journal of the American Statistical Association, 83, 698-708.
+
+ables Estimates of the Return to Schooling," Journal of Business and Eco- Rubin, D. B. (1990), "Formal Models of Statistical Inference for Causa
+
+nomic Statistics, 13, 225-235.
+
+Effects," Journal of Statistical Planning and Inference, 25, 279-292.
+
+Atkinson, A. B. (1970), "On the Measurement of Inequality," Journal of Eco- van der Vaart, A. W. (1998), Asymptotic Statistics. New York: Cambridg
+
+nomic Theory, 2, 244-263.
+
+University Press.
+
+Barrett, G., and Donald, S. (1999), "Consistent Tests for Stochastic Domi- van der Vaart, A. W., and Wellner, J. A. (1996), Weak Convergence an
+
+nance," unpublished manuscript.
+
+Empirical Processes. New York: Springer-Verlag.
+
+This content downloaded from 206.253.207.235 on Thu, 17 Oct 2019 16:05:27 UTC All use subject to https://about.jstor.org/terms
+
+

@@ -3,7 +3,7 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: So Mär  1 15:41:38 2020
-## Last-Updated: Mi. Sep 23 10:47:53 2020
+## Last-Updated: Do Aug 26 14:59:31 2021
 ################################################################################
 
 #================================== Libraries ==================================
@@ -28,7 +28,13 @@ library("factoextra")
 library("word2vec")
 library("plotly")
 library("fpc")
+library("doc2vec")
+library("glmnet")
+library("caret")
 
+# new
+library("text")
+library("golgotha")
 
 #======================= Get data from TheyWorkForYou API ======================
 
@@ -124,7 +130,7 @@ dtm <- DocumentTermMatrix(
   )),
   control = list(
     language = "english",
-    ## weighting = weightTfIdf,
+    ## weighting = "weightTfIdf",
     weighting = weightTf,
     tolower = TRUE,
     removePunctuation = TRUE,
@@ -618,6 +624,9 @@ berlin <- wordvectors["paris", , drop = FALSE] - wordvectors["france", , drop = 
 cosinesim <- sim2(x = wordvectors, y = berlin, method = "cosine", norm = "l2")
 head(sort(cosinesim[,1], decreasing = TRUE), 5)
 
+
+#========================== Averaged document vectors ==========================
+
 ## simple way to get a document representation: just averaging word vectors within a document
 ## assuming dtm is a document-term-matrix
 
@@ -642,3 +651,178 @@ dim(docvectors)
 ## check which is most similar to first document
 cosinesim <- sim2(x = docvectors, y = docvectors[1, , drop = FALSE], method = "cosine", norm = "l2")
 head(sort(cosinesim[,1], decreasing = TRUE), 5)
+
+
+#=================================== Doc2vec ===================================
+
+# this does not return great results, corpus probably too small
+
+## input
+corp <- data.frame(doc_id = brexit.debates$gid,
+                   text = text,
+                   stringsAsFactors = FALSE)
+
+## low dimension, just for illustrations
+pv.model <- paragraph2vec(
+  x = corp,
+  type = "PV-DM",
+  dim = 5,
+  iter = 3,
+  min_count = 5,
+  lr = 0.05,
+  threads = 1
+)
+
+## More realistic settings, careful, this will run for a bit.
+## pv.model <- paragraph2vec(
+##   x = corp,
+##   type = "PV-DBOW",
+##   dim = 100,
+##   iter = 20,
+##   min_count = 5,
+##   lr = 0.05,
+##   threads = 4
+## )
+## saveRDS(pv.model, "Data/pv-model.rds")
+## pv.model <- readRDS("Data/pv-model.rds")
+
+## Extract the embeddings
+word.embeddings <- as.matrix(pv.model, which = "words")
+head(word.embeddings)
+
+doc.embeddings <- as.matrix(pv.model, which = "docs")
+tail(doc.embeddings)
+
+## Extract the vocabulary
+doc.vocab <- summary(pv.model, which = "words")
+head(doc.vocab)
+
+## word.vocab <- summary(pv.model, which = "docs")
+## head(word.vocab)
+
+# retriev word embeddings (as previously)
+predict(pv.model, "brexit", type = "embedding")
+
+# retrieve most similar words to a word (as previously)
+predict(pv.model,
+  newdata = "brexit",
+  type = "nearest",
+  which = "word2doc"
+)
+
+# retrieve document embeddings
+predict(pv.model,
+  newdata = c("2021-02-11b.563.0", "2021-02-11b.504.0", "2021-02-11b.468.2"),
+  type = "embedding",
+  which = "docs"
+)
+
+# retrieve most similar documents to a document
+predict(pv.model,
+  newdata = "2021-02-11b.563.0",
+  type = "nearest",
+  which = "doc2doc"
+)
+
+## find document closest to a sentence
+predict(pv.model,
+  newdata = list(sent = c("brexit", "will", "not", "disrupt", "trade")),
+  type = "nearest",
+  which = "sent2doc"
+)
+
+## Get embeddings of sentences.
+sentences <- list(
+  sent1 = c("germany", "and", "france", "dominate", "the", "eu"),
+  sent2 = c("brexit", "was", "well", "planned")
+)
+predict(pv.model, newdata = sentences, type = "embedding")
+
+
+
+#===================== feeding document embeddings to a prediction model =====================
+
+docembeddings <- as.data.frame(cbind(speaker.name = rownames(docvectors), as.data.frame(docvectors)))str(docembeddings)
+str(docembeddings)
+str(brexit.debates)
+
+## aggregate alsoo using the party affiliation
+brexit.speakers <- aggregate(body ~ speaker.name + person_id + speaker.party, data = brexit.debates, paste)
+
+## merge embeddings onto speaker data
+brexit.speakersplus <- merge(brexit.speakers[, c("speaker.name", "speaker.party")], docembeddings, by = "speaker.name")
+brexit.speakersplus <- brexit.speakersplus[complete.cases(brexit.speakersplus), ]
+str(brexit.speakersplus)
+
+## inidicators for tory/labour party
+brexit.speakersplus$tory <- as.numeric(brexit.speakersplus$speaker.party == "Conservative")
+brexit.speakersplus$labour <- as.numeric(brexit.speakersplus$speaker.party == "Labour")
+
+## Partition data in test and training sample
+set.seed(100)
+testids <- sample(floor(nrow(brexit.speakersplus)/5))
+
+# Train and test data
+xtrain <- as.matrix(brexit.speakersplus[-testids, !(names(brexit.speakersplus) %in% c("speaker.name", "speaker.party", "tory", "labour"))])
+xtest  <- as.matrix(brexit.speakersplus[ testids, !(names(brexit.speakersplus) %in% c("speaker.name", "speaker.party", "tory", "labour"))])
+
+ytrain <- as.factor(brexit.speakersplus[-testids,  "tory"])
+ytest  <- as.factor(brexit.speakersplus[ testids,  "tory"])
+
+dim(xtrain)
+length(ytrain)
+
+dim(xtest)
+length(ytest)
+
+## Supervised text regression: L1 penalized logistic regression
+l1classifier <- cv.glmnet(xtrain, ytrain, alpha = 1, family = "binomial")
+l1pred <- as.factor(predict(l1classifier, xtest, s = "lambda.min", type = "class"))
+summary(l1pred)
+
+## Performance statistics
+round(1-mean(as.numeric(l1pred != ytest)), 2)
+confusionMatrix(l1pred, ytest)
+
+
+## random forest
+rfclassifier <- train(
+  y = ytrain,
+  x = xtrain,
+  method = "ranger",
+  num.trees = 200,
+  tuneGrid = expand.grid(
+    mtry = seq(2, 2 * floor(sqrt(ncol(xtrain))), length.out = 10),
+    splitrule = "gini",
+    min.node.size = c(1,3)
+  ),
+  trControl = trainControl(
+    method = "oob"
+  )
+)
+rfpred <- predict(rfclassifier, xtest)
+
+## Performance statistics
+1 - mean(as.numeric(rfpred != ytest))
+confusionMatrix(rfpred, ytest)
+
+
+
+#======= Convenient access to BERT and other pre-trained embedding models ======
+
+## Check these libraries
+library("text")
+library("golgotha")
+
+# using golgotha
+transformer_download_model("bert-base-multilingual-uncased")
+
+model <- transformer("bert-base-multilingual-uncased")
+x <- data.frame(doc_id = c("doc_1", "doc_2"),
+                text = c("give me back my money or i'll call the police.",
+                         "talk to the hand because the face don't want to hear it any more."),
+                stringsAsFactors = FALSE)
+embedding <- predict(model, x, type = "embed-sentence")
+embedding <- predict(model, x, type = "embed-token")
+tokens    <- predict(model, x, type = "tokenise")
+

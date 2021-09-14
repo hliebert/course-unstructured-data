@@ -1,0 +1,2773 @@
+Econometrica, Vol. 74, No. 1 (January, 2006), 235­267
+LARGE SAMPLE PROPERTIES OF MATCHING ESTIMATORS FOR AVERAGE TREATMENT EFFECTS
+BY ALBERTO ABADIE AND GUIDO W. IMBENS1
+Matching estimators for average treatment effects are widely used in evaluation research despite the fact that their large sample properties have not been established in many cases. The absence of formal results in this area may be partly due to the fact that standard asymptotic expansions do not apply to matching estimators with a fixed number of matches because such estimators are highly nonsmooth functionals of the data. In this article we develop new methods for analyzing the large sample properties of matching estimators and establish a number of new results. We focus on matching with replacement with a fixed number of matches. First, we show that matching estimators are not N1/2-consistent in general and describe conditions under which matching estimators do attain N1/2-consistency. Second, we show that even in settings where matching estimators are N1/2-consistent, simple matching estimators with a fixed number of matches do not attain the semiparametric efficiency bound. Third, we provide a consistent estimator for the large sample variance that does not require consistent nonparametric estimation of unknown functions. Software for implementing these methods is available in Matlab, Stata, and R.
+KEYWORDS: Matching estimators, average treatment effects, unconfoundedness, selection on observables, potential outcomes.
+1. INTRODUCTION
+ESTIMATION OF AVERAGE TREATMENT EFFECTS is an important goal of much evaluation research, both in academic studies, as well as in substantive evaluations of social programs. Often, analyses are based on the assumptions that (i) assignment to treatment is unconfounded or exogenous, that is, independent of potential outcomes conditional on observed pretreatment variables, and (ii) there is sufficient overlap in the distributions of the pretreatment variables. Methods for estimating average treatment effects in parametric settings under these assumptions have a long history (see, e.g., Cochran and Rubin (1973), Rubin (1977), Barnow, Cain, and Goldberger (1980), Rosenbaum and Rubin (1983), Heckman and Robb (1984), and Rosenbaum (1995)). Recently, a number of nonparametric implementations of this idea have been proposed. Hahn (1998) calculates the efficiency bound and proposes an asymptotically efficient estimator based on nonparametric series estimation. Heckman,
+1We wish to thank Donald Andrews, Joshua Angrist, Gary Chamberlain, Geert Dhaene, Jinyong Hahn, James Heckman, Keisuke Hirano, Hidehiko Ichimura, Whitney Newey, Jack Porter, James Powell, Geert Ridder, Paul Rosenbaum, Edward Vytlacil, a co-editor and two anonymous referees, and seminar participants at various universities for comments, and Don Rubin for many discussions on the topic of this article. Financial support for this research was generously provided through National Science Foundation Grants SES-0350645 (Abadie), SBR-9818644, and SES-0136789 (Imbens). Imbens also acknowledges financial support from the Giannini Foundation and the Agricultural Experimental Station at UC Berkeley.
+235
+
+236
+
+A. ABADIE AND G. W. IMBENS
+
+Ichimura, and Todd (1998) focus on the average effect on the treated and consider estimators based on local linear kernel regression methods. Hirano, Imbens, and Ridder (2003) propose an estimator that weights the units by the inverse of their assignment probabilities and show that nonparametric series estimation of this conditional probability, labeled the propensity score by Rosenbaum and Rubin (1983), leads to an efficient estimator of average treatment effects.
+Empirical researchers, however, often use simple matching procedures to estimate average treatment effects when assignment for treatment is believed to be unconfounded. Much like nearest neighbor estimators, these procedures match each treated unit to a fixed number of untreated units with similar values for the pretreatment variables. The average effect of the treatment is then estimated by averaging within-match differences in the outcome variable between the treated and the untreated units (see, e.g., Rosenbaum (1995), Dehejia and Wahba (1999)). Matching estimators have great intuitive appeal and are widely used in practice. However, their formal large sample properties have not been established. Part of the reason may be that matching estimators with a fixed number of matches are highly nonsmooth functionals of the distribution of the data, not amenable to standard asymptotic methods for smooth functionals. In this article we study the large sample properties of matching estimators of average treatment effects and establish a number of new results. Like most of the econometric literature, but in contrast with some of the statistics literature, we focus on matching with replacement.
+Our results show that some of the formal large sample properties of matching estimators are not very attractive. First, we show that matching estimators include a conditional bias term whose stochastic order increases with the number of continuous matching variables. We show that the order of this conditional bias term may be greater than N-1/2, where N is the sample size. As a result, matching estimators are not N1/2-consistent in general. Second, even when the simple matching estimator is N1/2-consistent, we show that it does not achieve the semiparametric efficiency bound as calculated by Hahn (1998). However, for the case when only a single continuous covariate is used to match, we show that the efficiency loss can be made arbitrarily close to zero by allowing a sufficiently large number of matches. Despite these poor formal properties, matching estimators do have some attractive features that may account for their popularity. In particular, matching estimators are extremely easy to implement and they do not require consistent nonparametric estimation of unknown functions. In this article we also propose a consistent estimator for the variance of matching estimators that does not require consistent nonparametric estimation of unknown functions. This result is particularly relevant because the standard bootstrap does not lead to valid confidence intervals for the
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+237
+
+simple matching estimator studied in this article (Abadie and Imbens (2005)). Software for implementing these methods is available in Matlab, Stata, and R.2
+
+2. NOTATION AND BASIC IDEAS
+2.1. Notation
+We are interested in estimating the average effect of a binary treatment on some outcome. For unit i, with i = 1 N, following Rubin (1973), let Yi(0) and Yi(1) denote the two potential outcomes given the control treatment and given the active treatment, respectively. The variable Wi, with Wi  {0 1}, indicates the treatment received. For unit i, we observe Wi and the outcome for this treatment,
+
+Yi =
+
+Yi(0) Yi(1)
+
+if Wi = 0, if Wi = 1,
+
+as well as a vector of pretreatment variables or covariates, denoted by Xi. Our main focus is on the population average treatment effect and its counterpart for the population of the treated:
+
+ = E[Yi(1) - Yi(0)] and t = E Yi(1) - Yi(0)|Wi = 1
+
+See Rubin (1977), Heckman and Robb (1984), and Imbens (2004) for discussion of these estimands.
+We assume that assignment to treatment is unconfounded (Rosenbaum and Rubin (1983)), and that the probability of assignment is bounded away from 0 and 1.
+
+ASSUMPTION 1: Let X be a random vector of dimension k of continuous covariates distributed on Rk with compact and convex support X, with (a version
+of the) density bounded and bounded away from zero on its support.
+
+ASSUMPTION 2: For almost every x  X, where X is the support of X, (i) (unconfoundedness) W is independent of (Y (0) Y (1)) conditional on
+X = x; (ii) (overlap)  < Pr(W = 1|X = x) < 1 -  for some  > 0.
+
+The dimension of X, denoted by k, will be seen to play an important role in the properties of matching estimators. We assume that all covariates have
+
+2Software for STATA and Matlab is available at http://emlab.berkeley.edu/users/imbens/ estimators.shtml. Software for R is available at http://jsekhon.fas.harvard.edu/matching/Match. html. Abadie, Drukker, Herr, and Imbens (2004) discuss the implementation in STATA.
+
+238
+
+A. ABADIE AND G. W. IMBENS
+
+continuous distributions.3 Compactness and convexity of the support of the covariates are convenient regularity conditions. The combination of the two conditions in Assumption 2 is referred to as strong ignorability (Rosenbaum and Rubin (1983)). These conditions are strong and in many cases may not be satisfied.
+Heckman, Ichimura, and Todd (1998) point out that for identification of the average treatment effect, , Assumption 2(i) can be weakened to mean independence (E[Y (w)|W X] = E[Y (w)|X] for w = 0 1). For simplicity, we assume full independence, although for most of the results, mean independence is sufficient. When the parameter of interest is the average effect for the treated, t, Assumption 2(i) can be relaxed to require only that Y (0) is independent of W conditional on X. Also, when the parameter of interest is t, Assumption 2(ii) can be relaxed so that the support of X for the treated (X1) is a subset of the support of X for the untreated (X0).
+
+ASSUMPTION 2 : For almost every x  X, (i) W is independent of Y (0) conditional on X = x; (ii) Pr(W = 1|X = x) < 1 -  for some  > 0.
+
+Under Assumption 2(i), the average treatment effect for the subpopulation with X = x equals
+
+(1)
+
+(x) = E Y (1) - Y (0)|X = x
+
+= E[Y |W = 1 X = x] - E[Y |W = 0 X = x]
+
+almost surely. Under Assumption 2(ii), the difference on the right-hand side of (1) is identified for almost all x in X. Therefore, the average effect of the treatment can be recovered by averaging E[Y |W = 1 X = x] - E[Y | W = 0 X = x] over the distribution of X:
+
+ = E[(X)] = E E[Y |W = 1 X = x] - E[Y |W = 0 X = x]
+
+Under Assumption 2 (i), the average treatment effect for the subpopulation with X = x and W = 1 is equal to
+
+(2)
+
+t(x) = E Y (1) - Y (0)|W = 1 X = x
+
+= E[Y |W = 1 X = x] - E[Y |W = 0 X = x]
+
+3Discrete covariates with a finite number of support points can be easily dealt with by analyzing estimation of average treatment effects within subsamples defined by their values. The number of such covariates does not affect the asymptotic properties of the estimators. In small samples, however, matches along discrete covariates may not be exact, so discrete covariates may create the same type of biases as continuous covariates.
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+239
+
+almost surely. Under Assumption 2 (ii), the difference on the right-hand side of (2) is identified for almost all x in X1. Therefore, the average effect of the treatment on the treated can be recovered by averaging E[Y |W = 1 X = x] - E[Y |W = 0 X = x] over the distribution of X conditional on W = 1:
+t = E[t(X)|W = 1]
+= E E[Y |W = 1 X = x] - E[Y |W = 0 X = x] W = 1
+Next, we introduce some additional notation. For x  X and w  {0 1}, let µ(x w) = E[Y |X = x W = w], µw(x) = E[Y (w)|X = x], 2(x w) = V(Y |X = x W = w), w2 (x) = V(Y (w)|X = x), and i = Yi - µWi (Xi). Under Assumption 2, µ(x w) = µw(x) and 2(x w) = w2 (x). Let fw(x) be the conditional density of X given W = w and let e(x) = Pr(W = 1|X = x) be the propensity score (Rosenbaum and Rubin (1983)). In part of our analysis, we adopt the following assumption.
+
+ASSUMPTION 3: Assume {(Yi Wi Xi)}Ni=1 are independent draws from the distribution of (Y W X).
+
+In some cases, however, treated and untreated are sampled separately and their proportions in the sample may not reflect their proportions in the population. Therefore, we relax Assumption 3 so that conditional on Wi, sampling is random. As we will show later, relaxing Assumption 3 is particularly useful when the parameter of interest is the average treatment effect on the treated. The numbers of control and treated units are N0 and N1, respectively, with N = N0 + N1. We assume that N0 is at least of the same order of magnitude as N1.
+ASSUMPTION 3 : Conditional on Wi = w, the sample consists of independent draws from Y X|W = w for w = 0 1. For some r  1, N1r/N0   with 0 <  < .
+
+In this article we focus on matching with replacement, allowing each unit to be used as a match more than once. For x  X, let x = (x x)1/2 be the standard Euclidean vector norm.4 Let jm(i) be the index j  {1 2 N} that solves Wj = 1 - Wi and
+
+1 Xl - Xi  Xj - Xi = m
+l : Wl =1-Wi
+
+4Alternative norms of the form x V = (x V x)1/2 for some positive definite symmetric matrix V are also covered by the results below, because x V = ((Px) (Px))1/2 for P such that
+P P=V.
+
+240
+
+A. ABADIE AND G. W. IMBENS
+
+where 1{·} is the indicator function, equal to 1 if the expression in brackets is true and 0 otherwise. In other words, jm(i) is the index of the unit that is the mth closest to unit i in terms of the covariate values, among the units with the treatment opposite to that of unit i. In particular, j1(i), which will be sometimes denoted by j(i), is the nearest match for unit i. For notational simplicity and because we consider only continuous covariates, we ignore the possibility of ties, which happen with probability 0. Let JM(i) denote the set of indices for the first M matches for unit i: JM(i) = {j1(i) jM(i)}.5 Finally, let KM(i) denote the number of times unit i is used as a match given that M matches per unit are used:
+
+N
+KM(i) = 1{i  JM(l)}
+l=1
+
+The distribution of KM(i) will play an important role in the variance of the estimators.
+In many analyses of matching methods (e.g., Rosenbaum (1995)), matching is carried out without replacement, so that every unit is used as a match at most once and KM(i)  1. In this article, however, we focus on matching with replacement, allowing each unit to be used as a match more than once. Matching with replacement produces matches of higher quality than matching without replacement by increasing the set of possible matches.6 In addition, matching with replacement has the advantage that it allows us to consider estimators that match all units, treated as well as controls, so that the estimand is identical to the population average treatment effect.
+
+2.2. The Matching Estimator
+
+The unit-level treatment effect is i = Yi(1) - Yi(0). For the units in the sample, only one of the potential outcomes, Yi(0) and Yi(1), is observed and the other is unobserved or missing. The matching estimator imputes the missing potential outcomes as
+
+
+
+ Yi
+
+Yi(0)
+
+=
+
+
+
+1 M
+
+Yj
+
+jJM (i)
+
+if Wi = 0, if Wi = 1,
+
+5For this definition to make sense, we assume that N0  M and N1  M. We maintain this assumption implicitly throughout.
+6As we show below, inexact matches generate bias in matching estimators. Therefore, expand-
+ing the set of possible matches will tend to produce smaller biases.
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+241
+
+and
+
+
+
+Yi(1)
+
+=
+
+ 
+
+1 M
+
+Yj
+jJM (i)
+
+Yi
+
+if Wi = 0, if Wi = 1,
+
+leading to the following estimator for the average treatment effect:
+
+(3)
+
+1 M = N
+
+N
+
+1
+
+Yi(1) - Yi(0)
+
+= N
+
+N
+(2Wi - 1)
+
+1 + KM (i) M
+
+Yi
+
+i=1
+
+i=1
+
+This estimator can easily be modified to estimate the average treatment effect on the treated:
+
+(4)
+
+Mt
+
+=
+
+1 N1
+
+Wi =1
+
+Yi
+
+- Yi(0)
+
+=1 N1
+
+N i=1
+
+Wi
+
+-
+
+(1
+
+-
+
+Wi)
+
+KM (i) M
+
+Yi
+
+It is useful to compare matching estimators to covariance-adjustment or regression imputation estimators. Let µw(Xi) be a consistent estimator of µw(Xi). Let
+
+(5)
+
+Y¯i(0) =
+
+Yi µ0(Xi)
+
+if Wi = 0, if Wi = 1,
+
+Y¯i(1) =
+
+µ1(Xi) Yi
+
+if Wi = 0, if Wi = 1.
+
+The regression imputation estimators of  and t are
+
+(6)
+
+ reg = 1 N
+
+N
+
+Y¯i(1) - Y¯i(0)
+
+i=1
+
+and
+
+ reg t
+
+=
+
+1 N1
+
+Wi =1
+
+Yi
+
+- Y¯i(0)
+
+In our discussion we classify as regression imputation estimators those for which µw(x) is a consistent estimator of µw(x). The estimators proposed by Hahn (1998) and some of those proposed by Heckman, Ichimura, and Todd (1998) fall into this category.7
+If µw(Xi) is estimated using a nearest neighbor estimator with a fixed number of neighbors, then the regression imputation estimator is identical to the matching estimator with the same number of matches. The two estimators
+
+7In a working paper version (Abadie and Imbens (2002)), we consider a bias-corrected version of the matching estimator that combines some of the feature of matching and regression estimators.
+
+242
+
+A. ABADIE AND G. W. IMBENS
+
+differ in the way they change with the sample size. We classify as matching estimators those estimators that use a finite and fixed number of matches. Interpreting matching estimators in this way may provide some intuition for some of the subsequent results. In nonparametric regression methods one typically chooses smoothing parameters to balance bias and variance of the estimated regression function. For example, in kernel regression a smaller bandwidth leads to lower bias but higher variance. A nearest neighbor estimator with a single neighbor is at the extreme end of this. The bias is minimized within the class of nearest neighbor estimators, but the variance of µw(x) no longer vanishes with the sample size. Nevertheless, as we shall show, matching estimators of average treatment effects are consistent under weak regularity conditions. The variance of matching estimators, however, is still relatively high and, as a result, matching with a fixed number of matches does not lead to an efficient estimator.
+The first goal of this article is to derive the properties of the simple matching estimator in large samples, that is, as N increases, for fixed M. The motivation for our fixed-M asymptotics is to provide an approximation to the sampling distribution of matching estimators with a small number of matches. Such matching estimators have been widely used in practice. The properties of interest include bias and variance. Of particular interest is the dependence of these results on the dimension of the covariates. A second goal is to provide methods for conducting inference through estimation of the large sample variance of the matching estimator.
+
+3. LARGE SAMPLE PROPERTIES OF THE MATCHING ESTIMATOR
+In this section we investigate the properties of the matching estimator, M , defined in (3). We can decompose the difference between the matching estimator M and the population average treatment effect  as
+
+(7)
+
+M -  = (X) -  + EM + BM
+
+where (X) is the average conditional treatment effect,
+
+1N
+
+(8)
+
+(X) = N
+
+(µ1(Xi) - µ0(Xi))
+
+i=1
+
+EM is a weighted average of the residuals,
+
+(9)
+
+EM
+
+=
+
+1 N
+
+N
+
+EM
+
+i
+
+=
+
+1 N
+
+N
+(2Wi - 1)
+
+1 + KM (i) M
+
+i
+
+i=1
+
+i=1
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+243
+
+and BM is the conditional bias relative to (X),
+
+(10)
+
+1N
+
+BM = N
+
+BM i
+
+i=1
+
+=1 N
+
+N
+(2Wi - 1) ·
+
+i=1
+
+1 M
+
+M
+
+µ1-Wi (Xi) - µ1-Wi (Xjm(i))
+
+m=1
+
+The first two terms on the right-hand side of (7), ((X) - ) and EM , have zero mean. They will be shown to be of order N-1/2 and asymptotically normal. The first term depends only on the covariates, and its variance is V (X)/N, where V (X) = E[((X) - )2] is the variance of the conditional average treat-
+ment effect (X). Conditional on X and W (the matrix and vector with ith row
+equal to Xi and Wi, respectively), the variance of M is equal to the conditional variance of the second term, V(EM|X W). We will analyze this variance in Section 3.2. We will refer to the third term on the right-hand side of (7), BM , as the conditional bias, and to E[BM] as the (unconditional) bias. If matching is exact, Xi = Xjm(i) for all i and the conditional bias is equal to zero. In general it differs from zero and its properties, in particular its stochastic order, will be
+analyzed in Section 3.1.
+Similarly, we can decompose the estimator for the average effect for the
+treated, (4), as
+
+(11) where
+
+Mt - t = (X) t - t + EMt + BMt
+
+(X) t = 1 N1
+
+N
+Wi(µ(Xi
+i=1
+
+1) - µ0(Xi))
+
+EMt
+
+=
+
+1 N1
+
+N i=1
+
+EMt
+
+i
+
+=
+
+1 N1
+
+N i=1
+
+Wi
+
+-
+
+(1
+
+-
+
+Wi)
+
+KM (i) M
+
+i
+
+and
+
+BMt
+
+=
+
+1 N1
+
+N i=1
+
+BMt
+
+i
+
+=
+
+1 N1
+
+N
+
+1
+
+Wi M
+
+i=1
+
+M m=1
+
+µ0(Xi) - µ0(Xjm(i))
+
+3.1. Bias
+Here we investigate the stochastic order of the conditional bias (10) and its counterpart for the average treatment effect for the treated. The conditional bias consists of sums of terms of the form µ1(Xjm(i)) - µ1(Xi) or
+
+244
+
+A. ABADIE AND G. W. IMBENS
+
+µ0(Xi) - µ0(Xjm(i)). To investigate the nature of these terms, expand the difference µ1(Xjm(i)) - µ1(Xi) around Xi:
+
+µ1(Xjm(i)) - µ1(Xi)
+
+=
+
+(Xjm(i)
+
+-
+
+Xi)
+
+µ1 x
+
+(Xi)
+
++
+
+1 2 (Xjm(i)
+
+-
+
+Xi)
+
+2µ1 x x
+
+(Xi)(Xjm(i)
+
+-
+
+Xi)
+
++
+
+O
+
+Xjm(i) - Xi 3
+
+To study the components of the bias, it is therefore useful to analyze the distribution of the k vector Xjm(i) - Xi, which we term the matching discrepancy.
+First, let us analyze the matching discrepancy at a general level. Fix the covariate value at X = z and suppose we have a random sample X1 XN with density f (x) over a bounded support X. Now consider the closest match to z in the sample. Let j1 = arg minj=1 N Xj - z and let U1 = Xj1 - z be the matching discrepancy. We are interested in the distribution of the k vector U1. More generally, we are interested in the distribution of the mth closest matching discrepancy, Um = Xjm - z, where jm is the mth closest match to z from the random sample of size N. The following lemma describes some key asymptotic
+properties of the matching discrepancy at interior points of the support of X.
+
+LEMMA 1--Matching Discrepancy--Asymptotic Properties: Suppose that f is differentiable in a neighborhood of z. Let Vm = N1/kUm and let fVm (v) be the density of Vm. Then
+
+lim
+N 
+
+fVm
+
+(v)
+
+=
+
+f (z) (m - 1)!
+
+v k f (z) 2k/2
+
+m-1
+exp
+
+- v k f (z)
+
+2 k/2
+
+k  (k/2)
+
+k  (k/2)
+
+where  (y) =
+
+ 0
+
+e-t
+
+t
+
+y-1
+
+dt
+
+( for
+
+y
+
+> 0)
+
+is
+
+Euler's
+
+gamma
+
+function.
+
+Hence
+
+Um = Op(N-1/k). Moreover, the first three moments of Um are
+
+mk + 2
+
+1
+
+ k/2
+
+-2/ k
+
+E[Um] = 
+
+k
+
+(m - 1)!k f (z)  (1 + k/2)
+
+1 f 1
+
+1
+
+×
+
+(z) + o
+
+f (z) x N2/k
+
+N 2/k
+
+mk + 2
+
+1
+
+ k/2
+
+-2/k 1
+
+E[UmUm] = 
+
+k
+
+(m - 1)!k f (z)  (1 + k/2)
+
+N 2/k Ik
+
+1 +o
+N 2/k
+
+where Ik is the identity matrix of size k and E[ Um 3] = O(N-3/k).
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+245
+
+(All proofs are given in the Appendix.) This lemma shows how the order of the matching discrepancy increases with the number of continuous covariates. The lemma also shows that the first term in the stochastic expansion of N1/kUm has a rotation invariant distribution with respect to the origin. The following lemma shows that for all points in the support, including the boundary points not covered by Lemma 1, the normalized moments of the matching discrepancies, Um, are bounded.
+
+LEMMA 2--Matching Discrepancy--Uniformly Bounded Moments: If Assumption 1 holds, then all the moments of N1/k Um are uniformly bounded in N and z  X.
+
+These results allow us to establish bounds on the stochastic order of the conditional bias.
+
+THEOREM 1--Conditional Bias for the Average Treatment Effect: Under Assumptions 1, 2, and 3, (i) if µ0(x) and µ1(x) are Lipschitz on X, then BM = Op(N-1/k), and (ii) the order of E[BM ] is not in general lower than N-2/k.
+Consider the implications of this theorem for the asymptotic properties of the simple matching estimator. First notice that, under regularity conditions,
+N((X) - ) = Op(1) with a normal limiting distribution, by a standard central limit theorem. Also, it will be shown later that, under regularity conditions
+NEM = Op(1), again with anormal limiting distribution. However, the result of the theorem implies that NBM is not Op(1) in general. In particular, if k is large enough, the asymptotic distribution of N(M - ) is dominated by the bias term and the simple matching estimator is not N1/2-consistent. However, if only one ofthe covariates is continuously distributed, then k = 1 and BM = Op(N-1), so N(M - ) will be asymptotically normal.
+The following result describes the properties of the matching estimator for the average effect on the treated.
+
+THEOREM 2--Conditional Bias for the Average Treatment Effect on the
+Treated: Under Assumptions 1, 2 , and 3 (i) if µ0(x) is Lipschitz on X0, then BMt = Op(N1-r/k), and (ii) if X1 is a compact subset of the interior of X0, µ0(x) has bounded third
+derivatives in the interior of X0, and f0(x) is differentiable in the interior of X0 with bounded derivatives, then
+
+BiastM = E[BMt ]
+
+=-
+
+1
+
+M
+
+
+M
+
+m=1
+
+mk + 2 k
+
+1 (m - 1)!k
+
+1 N12r/ k
+
+246
+
+A. ABADIE AND G. W. IMBENS
+
+× 2/k
+
+ k/2
+
+-2/ k
+
+f0(x)  (1 + k/2)
+
+× 1 f0 (x) µ0 (x) + 1 tr 2µ0 (x)
+
+f0(x) x x
+
+2 x x
+
+1 × f1(x) dx + o N12r/k
+
+This case is particularly relevant because often matching estimators have
+
+been used to estimate the average effect for the treated in settings in which a
+
+large number of controls are sampled separately. Typically in those cases the
+
+conditional bias term has been ignored in the asymptotic approximation to
+
+standard errors and confidence intervals. Theorem 2 shows that ignoring the
+
+conditional bias term in the first-order asymptotic approximation to the dis-
+
+tribution of the simple matching estimator is justified if N0 is of sufficiently
+
+high order relative to N1 or, to be precise, if r > k/2. In that case it follows
+
+that BMt = op(N1-1/2) and the bias ple distribution by the two other
+
+term will get t
+terms, (X)
+
+dominated in - t and EMt ,
+
+the large samboth of which
+
+are Op(N1-1/2).
+
+In part (ii) of Theorem 2, we show that a general expression of the bias,
+
+E[BMt ], can be calculated if X1 is compact and X1  int X0 (so that the bias is not affected by the geometric characteristics of the boundary of X0). Under these conditions, the bias of the matching estimator is at most of order N1-2/k. This bias is further reduced when µ0(x) is constant or when µ0(x) is linear and
+
+f0(x) is constant, among other cases. Notice, however, that usual smoothness
+
+assumptions (existence of higher order derivatives) do not reduce the order
+
+of E[BMt ].
+
+3.2. Variance
+In this section we investigate the variance of the matching estimator M . We focus on the first two terms of the representation of the estimator in (7), that is, the term that represents the heterogeneity in the treatment effect, (8), and the term that represents the residuals, (9), ignoring for the moment the conditional bias term (10). Conditional on X and W, the matrix and vector with ith row equal to Xi and Wi, respectively, the number of times a unit is used as a match, KM(i) is deterministic and hence the variance of M is
+
+(12)
+
+V(M |X
+
+W) =
+
+1 N2
+
+N
+
+1 + KM (i) M
+
+2
+ 2(Xi Wi)
+
+i=1
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+247
+
+For Mt we obtain
+
+(13)
+
+V(Mt |X
+
+1 W) = N12
+
+N i=1
+
+Wi
+
+-
+
+(1
+
+-
+
+Wi)
+
+KM (i) M
+
+2
+ 2(Xi Wi)
+
+Let V E = NV(M |X W) and V E t = N1V(Mt |X W) be the corresponding normalized variances. Ignoring the conditional bias term, BM , the conditional
+expectation of M is (X). The variance of this conditional mean is therefore V (X)/N, where V (X) = E[((X) - )2]. Hence the marginal variance of M , ignoring the conditional bias term, is V(M ) = (E[V E] + V (X))/N. For the estimator for the average effect on the treated, the marginal variance is, again ignoring the conditional bias term, V(Mt ) = (E[V E t] + V (X) t)/N1, where V (X) t = E[(t(X) - t)2|W = 1].
+The following lemma shows that the expectation of the normalized variance
+is finite. The key is that KM(i), the number of times that unit i is used as a match, is Op(1) with finite moments.8
+
+LEMMA 3 --Finite Variance: (i) Suppose Assumptions 1­3 hold. Then KM(i) = Op(1) and E[KM(i)q] is bounded uniformly in N for any q > 0. (ii) If, in addition, 2(x w) are Lipschitz in X for w = 0 1, then E[V E + V (X)] = O(1).
+(iii) Suppose Assumptions 1, 2 , and 3 . Then (N0/N1)E[KM(i)q|Wi = 0] is uniformly bounded in N for any q > 0. (iv) If, in addition, 2(x w) are Lipschitz in X for w = 0 1, then E[V E t + V (X) t] = O(1).
+
+3.3. Consistency and Asymptotic Normality
+In this section we show that the matching estimator is consistent for the average treatment effect and, without the conditional bias term, is N1/2-consistent and asymptotically normal. The next assumption contains a set of weak smoothness restrictions on the conditional distribution of Y given X. Notice that it does not require the existence of higher order derivatives.
+ASSUMPTION 4: For w = 0 1, (i) µ(x w) and 2(x w) are Lipschitz in X, (ii) the fourth moments of the conditional distribution of Y given W = w and X = x exist and are bounded uniformly in x, and (iii) 2(x w) is bounded away from zero.
+THEOREM 3--Consistency of the Matching Estimator: (i) Suppose Assumptions 1­3 and 4(i) hold. Then M -  p 0. (ii) Suppose Assumptions 1, 2 , 3 , and 4(i) hold. Then Mt - t p 0.
+8Notice that, for 1  i  N, KM (i) are exchangeable random variables and therefore have identical marginal distributions.
+
+248
+
+A. ABADIE AND G. W. IMBENS
+
+Notice that the consistency result holds regardless of the dimension of the
+covariates.
+Next, we state the formal result for asymptotic normality. The first result gives an asymptotic normality result for the estimators M and Mt after subtracting the bias term.
+
+THEOREM 4--Asymptotic Normality for the Matching Estimator: (i) Suppose Assumptions 1­4 hold. Then
+
+(V
+
+E
+
++
+
+V
+
+ ) (X) -1/2 N (M
+
+-
+
+BM
+
+-
+
+)
+
+- d
+
+N
+
+(0
+
+1)
+
+(ii) Suppose Assumptions 1, 2 , 3 , and 4 hold. Then
+
+(V E t + V (X) t )-1/2 N1(Mt - BMt - t ) - d N (0 1)
+
+Although one generally does not know the conditional bias term, this result is useful for two reasons. First, in some cases the bias term can be ignored because it is of sufficiently low order (see Theorems 1 and 2). Second, as we show in Abadie and Imbens (2002), under some additional smoothness conditions, an estimate of the bias term based on nonparametric estimation of µ0(x) and µ1(x) can be used in the statement of Theorem 4 without changing the resulting asymptotic distribution.
+In the scalar covariate case or when only the treated are matched and the size of the control group is of sufficient order of magnitude, there is no need to remove the bias.
+
+COROLLARY 1--Asymptotic Normality for Matching Estimator--Vanishing Bias:
+(i) Suppose Assumptions 1­4 hold and k = 1. Then
+
+(V
+
+E
+
++
+
+V
+
+ ) (X) -1/2 N (M
+
+-
+
+)
+
+- d
+
+N
+
+(0
+
+1)
+
+(ii) Suppose Assumptions 1, 2 , 3 , and 4 hold, and r > k/2. Then
+
+(V E t + V (X) t )-1/2 N1(Mt - t ) - d N (0 1)
+
+3.4. Efficiency
+The asymptotic efficiency of the estimators considered here depends on the limit of E[V E], which in turn depends on the limiting distribution of KM(i). It is difficult to work out the limiting distribution of this variable for the general
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+249
+
+case.9 Here we investigate the form of the variance for the special case with a scalar covariate (k = 1) and a general M.
+
+THEOREM 5: Suppose k = 1. If Assumptions 1­4 hold, and f0(x) and f1(x) are continuous on int X, then
+
+N · V(M) = E
+
+12(X) + 02(X) e(X) 1 - e(X)
+
++ V (X)
+
++
+
+1 E
+
+2M
+
+1 - e(X) e(X )
+
+12 (X )
+
++
+
+1
+
+-
+
+1 e(X )
+
+-
+
+(1
+
+-
+
+e(X ))
+
+02 (X )
+
++ o(1)
+
+Note that with k = 1 we can ignore the conditional bias term, BM . The semiparametric efficiency bound for this problem is, as established by Hahn (1998),
+
+V eff = E
+
+12(X) + 02(X) e(X) 1 - e(X)
+
++ V (X)
+
+The limiting variance of the matching estimator is in general larger. Relative to the efficiency bound it can be written as
+
+lim N · V(M ) - V eff < 1
+
+N 
+
+V eff
+
+2M
+
+The asymptotic efficiency loss disappears quickly if the number of matches is large enough and the efficiency loss from using a few matches is very small. For example, the asymptotic variance with a single match is less than 50% higher than the asymptotic variance of the efficient estimator and with five matches, the asymptotic variance is less than 10% higher.
+
+4. ESTIMATING THE VARIANCE
+Corollary 1 uses the square roots of V E + V (X) and V E t + V (X) t , respectively, as normalizing factors to obtain a limiting normal distribution for matching estimators. In this section, we show how to estimate these asymptotic variances.
+9The key is the second moment of the volume of the "catchment area" AM (i), defined as the subset of X such that each observation, j, with Wj = 1 - Wi and Xj  AM (i) is matched to i. In the single match case with M = 1, these catchment areas are studied in stochastic geometry where they are known as Poisson­Voronoi tessellations (Okabe, Boots, Sugihara, and Nok Chiu (2000)). The variance of the volume of such objects under uniform f0(x) and f1(x), normalized by the mean volume, has been worked out analytically for the scalar case and numerically for the two- and three-dimensional cases.
+
+250
+
+A. ABADIE AND G. W. IMBENS
+
+4.1. Estimating the Conditional Variance
+Estimating the conditional variance, V E = Ni=1(1 + KM (i)/M)22(Xi Wi)/N, is complicated by the fact that it involves the conditional outcome variances, 2(x w). In principle, these conditional variances could be consistently estimated using nonparametric smoothing techniques. We propose, however, an estimator of the conditional variance of the simple matching estimator that does not require consistent nonparametric estimation of unknown functions. Our method uses a matching estimator for 2(x w), where instead of the original matching of treated to control units, we now match treated units to treated units and control units to control units.
+Let m(i) be the mth closest unit to unit i among the units with the same value for the treatment. Then, for fixed J, we estimate the conditional variance as
+
+(14)
+
+ 2(Xi
+
+Wi)
+
+=
+
+J
+
+J +
+
+1
+
+Yi
+
+-
+
+1 J
+
+J
+
+Y j (i)
+
+2
+
+m=1
+
+Notice that if all matches are perfect so X j(i) = Xi for all j = 1 J, then E[2(Xi Wi)|Xi = x Wi = w] = 2(x w). In practice, if the covariates are continuous, it will not be possible to find perfect matches, so 2(Xi Wi) will be only asymptotically unbiased. In addition, because 2(Xi Wi) is an average of
+a fixed number (i.e., J) of observations, this estimator will not be consistent
+for 2(Xi Wi). However, the next theorem shows that the appropriate averages of the 2(Xi Wi) over the sample are consistent for V E and V E t.
+
+THEOREM 6: Let 2(Xi Wi) be as in (14). Define
+
+VE= 1 N N
+
+1 + KM (i) M
+
+2
+ 2(Xi Wi)
+
+i=1
+
+VEt= 1 N N1 i=1
+
+Wi
+
+-
+
+(1
+
+-
+
+Wi)
+
+KM (i) M
+
+2
+ 2(Xi Wi)
+
+If Assumptions 1­4 hold, then |V E - V E| = op(1). If Assumptions 1, 2 , 3 , and 4 hold, then |V E t - V E t| = op(1).
+
+4.2. Estimating the Marginal Variance
+Here we develop consistent estimators for V = V E + V (X) and V t = V E t + V (X) t. The proposed estimators are based on the same matching approach to
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+251
+
+estimating the conditional error variance 2(x w) as in Section 4.1. In addition, these estimators exploit the fact that
+
+E Yi(1) - Yi(0) -  2
+
+V (X) + E
+
+i2
+
++
+
+1 M2
+
+M
+
+2 jm (i)
+
+m=1
+
+The average on the left-hand side can be estimated as i(Yi(1) - Yi(0) - M)2/N. To estimate the second term on the right-hand side, we use the fact that
+
+1 N
+
+N
+
+E
+
+i2
+
++
+
+1 M2
+
+M
+
+2 jm (i)
+
+X
+
+W
+
+=1 N
+
+N
+
+1 + KM (i) M2
+
+ 2(Xi Wi)
+
+i=1
+
+m=1
+
+i=1
+
+which can be estimated using the matching estimator for 2(Xi Wi). These two estimates can then be combined to estimate V (X) and this in turn can be combined with the previously defined estimator for V E to obtain an estimator
+of V .
+
+THEOREM 7: Let 2(Xi Wi) be as in (14). Define
+
+V= 1 N
+
+N
+
+Yi(1) - Yi(0) - M 2
+
+i=1
+
++1 N N
+i=1
+
+KM (i)
+
+2
++
+
+2M - 1
+
+M
+
+M
+
+KM (i) M
+
+ 2(Xi Wi)
+
+and
+
+Vt =
+
+1 N1 Wi=1
+
+Yi - Yi(0) - Mt
+
+2
+
++1 N1
+
+N
+(1 - Wi)
+i=1
+
+KM (i)(KM (i) - 1) M2
+
+ 2(Xi Wi)
+
+If Assumptions 1­4 hold, then |V - V | = op(1). If Assumptions 1, 2 , 3 , and 4 hold, then |V t - V t| = op(1).
+
+5. CONCLUSION
+In this article we derive large sample properties of matching estimators of average treatment effects that are widely used in applied evaluation research. The formal large sample properties of matching estimators are somewhat surprising in the light of this popularity. We show that matching estimators include
+
+252
+
+A. ABADIE AND G. W. IMBENS
+
+a conditional bias term that may be of order larger than N-1/2. Therefore, matching estimators are not N1/2-consistent in general and standard confidence intervals are not necessarily valid. We show, however, that when the set of matching variables contains at most one continuously distributed variable, the conditional bias term is op(N-1/2), so that matching estimators are N1/2-consistent in this case. We derive the asymptotic distribution of matching estimators for the cases when the conditional bias can be ignored and also show that matching estimators with a fixed number of matches do not reach the semiparametric efficiency bound. Finally, we propose an estimator of the asymptotic variance. This is particularly relevant because there is evidence that the bootstrap is not valid for matching estimators (Abadie and Imbens (2005)).
+John F. Kennedy School of Government, Harvard University, 79 John F. Kennedy Street, Cambridge, MA 02138, U.S.A.; and NBER; alberto_abadie@ harvard.edu; http://www.ksg.harvard.edu/fs/aabadie/
+and Dept. of Economics and Dept. of Agricultural and Resource Economics, University of California at Berkeley, 661 Evans Hall #3880, Berkeley, CA 947203880, U.S.A.; and NBER; imbens@econ.berkeley.edu; http://elsa.berkeley.edu/ users/imbens/.
+Manuscript received August, 2002; final revision received March, 2005.
+
+APPENDIX
+Before proving Lemma 1, we collect some results on integration using polar coordinates that will be useful. See, for example, Stroock (1994). Let Sk = {  Rk :  = 1} be the unit k sphere and let Sk be its surface measure. Then the area and volume of the unit k sphere are
+
+Sk
+
+Sk (d)
+
+=
+
+2 k/2  (k/2)
+
+and
+
+1
+r k-1
+0
+
+Sk
+
+Sk (d) dr
+
+=
+
+2 k/2 k (k/2)
+
+=
+
+
+
+ k/2 (1 + k/2)
+
+respectively. In addition,
+
+Sk (d) = 0
+Sk
+
+and
+
+ Sk (d) =
+Sk
+
+Sk
+
+Sk (d) k
+
+Ik
+
+=
+
+
+
+ k/2 (1 + k/2) Ik
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+253
+
+where Ik is the k-dimensional identity matrix. For any nonnegative measurable function g(·) on Rk,
+
+
+
+g(x) dx = rk-1
+
+Rk
+
+0
+
+g(r)Sk (d) dr
+Sk
+
+We will also use the following result on Laplace approximation of integrals.
+
+LEMMA A.1: Let a(r) and b(r) be two real functions; a(r) is continuous in a neighborhood of zero and b(r) has continuous first derivative in a neighborhood of zero. Suppose that b(0) = 0, b(r) > 0 for r > 0 and that for every r~ > 0, the infimum of b(r) over r  r~ as positive. Suppose also that there exist positive real numbers a0, b0, , and  such that
+
+lim a(r)r1- = a0
+r0
+
+lim b(r)r- = b0
+r0
+
+and
+
+lim
+r0
+
+db dr
+
+(r )r 1-
+
+=
+
+b0
+
+Suppose also that
+
+ 0
+
+|a(r
+
+)|
+
+exp(-N
+
+b(r
+
+))
+
+dr
+
+<
+
+
+
+for
+
+all
+
+sufficiently
+
+large
+
+N.
+
+Then, for N  ,
+
+
+a(r) exp(-Nb(r)) dr = 
+0
+
+ 
+
+a0 b0/
+
+1 N /
+
++o
+
+1 N /
+
+The proof follows from Theorem 7.1 in Olver (1997, p. 81).
+
+PROOF OF LEMMA 1: First consider the conditional probability of unit i being the mth closest match to z, given Xi = x:
+
+Pr(jm = i|Xi = x) =
+
+N -1 m-1
+
+Pr( X - z > x - z ) N-m
+
+× Pr( X - z  x - z ) m-1
+
+Because the marginal probability of unit i being the mth closest match to z is Pr(jm = i) = 1/N and because the density of Xi is f (x), then the distribution of Xi conditional on it being the mth closest match is
+
+fXi|jm=i(x) = Nf (x) Pr(jm = i|Xi = x)
+
+= Nf (x)
+
+N -1 m-1
+
+1 - Pr( X - z  x - z ) N-m
+
+× Pr( X - z  x - z ) m-1
+
+254
+
+A. ABADIE AND G. W. IMBENS
+
+and this is also the distribution of Xjm . Now transform to the matching discrepancy Um = Xjm - z to get
+
+(A.1)
+
+fUm (u) = N
+
+N -1 m-1
+
+f (z + u) 1 - Pr( X - z  u ) N-m
+
+× Pr( X - z  u ) m-1
+
+Transform to Vm = N1/kUm with Jacobian N-1 to obtain
+
+fVm (v) =
+
+N -1 m-1
+
+v f z+
+N 1/k
+
+v 1 - Pr X - z 
+N 1/k
+
+N -m
+
+v
+
+m-1
+
+× Pr X - z 
+
+N 1/k
+
+= N 1-m
+
+N -1 m-1
+
+v f z+
+N 1/k
+
+× 1 - Pr X - z  v
+
+N
+(1 + o(1))
+
+N 1/k
+
+v
+
+m-1
+
+× N Pr X - z 
+
+N 1/k
+
+Note that
+
+Pr X - z  v N-1/k =
+
+v /N1/k
+r k-1
+
+0
+
+f (z + r)Sk (d) dr
+Sk
+
+where as before Sk = {  Rk :  = 1} is the unit k sphere, and Sk is its surface measure. The derivative of Pr( X - z  v N-1/k) with respect to N is
+
+-1 N2
+
+vk
+
+vk
+
+k
+
+f
+Sk
+
+z+  N 1/k
+
+Sk (d)
+
+Therefore, by l'Hospital's rule,
+
+Pr( X - z lim
+
+
+
+v N-1/k) =
+
+N 
+
+1/N
+
+vk f (z)
+k
+
+Sk (d)
+Sk
+
+In addition, it is easy to check that for fixed m,
+
+N 1-m
+
+N -1 m-1
+
+=
+
+(m
+
+1 -
+
+1)!
+
++
+
+o(1)
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+255
+
+Therefore,
+
+f (z)
+
+lim
+N 
+
+fVm
+
+(v)
+
+=
+
+(m
+
+-
+
+1)!
+
+v k f (z) k
+
+Sk (d)
+Sk
+
+m-1
+
+× exp
+
+- v k f (z) k
+
+Sk (d)
+Sk
+
+The previous equation shows that the density of Vm converges pointwise to a nonnegative function that is rotation invariant with respect to the origin. As a result, the matching discrepancy Um is Op(N-1/k) and the limiting distribution of N1/kUm is rotation invariant with respect to the origin. This finishes the proof of the first result.
+Next, given fUm(u) in (A.1),
+
+E[Um] = N
+
+N -1 m-1
+
+Am
+
+where
+
+Am = uf (z + u) 1 - Pr( X - z  u ) N-m
+Rk
+× Pr( X - z  u ) m-1 du
+
+Boundedness of X implies that Am converges absolutely. It is easy to relax the bounded support condition here. We maintain it because it is used elsewhere in the article. Changing variables to polar coordinates gives
+
+
+
+Am =
+
+r k-1
+
+0
+
+rf (z + r)Sk (d)
+Sk
+
+× 1 - Pr( X - z  r) N-m Pr( X - z  r) m-1 dr
+
+Then, rewriting the probability Pr( X - z  r) as
+
+f (x)1{ x - z  r} dx = f (z + v)1{ v  r} dv
+
+Rk
+
+Rk
+
+r
+= sk-1
+0
+
+f (z + s)Sk(d) ds
+Sk
+
+and substituting this into the expression for Am gives
+
+
+
+Am =
+
+r k-1
+
+0
+
+rf (z + r)Sk (d)
+Sk
+
+r
+× 1 - sk-1
+0
+
+N -m
+f (z + s)Sk (d) ds
+Sk
+
+256
+where and
+
+A. ABADIE AND G. W. IMBENS
+
+r
+
+m-1
+
+×
+
+sk-1
+
+f (z + s)Sk (d) ds
+
+dr
+
+0
+
+Sk
+
+
+
+=
+
+e-Nb(r)a(r) dr
+
+0
+
+r
+
+b(r) = - log 1 - sk-1 f (z + s)Sk (d) ds
+
+0
+
+Sk
+
+a(r) = rk f (z + r)Sk (d)
+Sk
+
+×
+
+r 0
+
+sk-1
+
+Sk f (z + s)Sk (d) ds m-1
+
+1-
+
+r 0
+
+sk-1
+
+Sk f (z + s)Sk (d) ds m
+
+That is, a(r) = rkc(r)g(r)m-1, where
+
+c(r) = 1-
+
+Sk f (z + r)Sk (d)
+
+r 0
+
+sk-1
+
+Sk f (z + s)Sk (d)
+
+ds
+
+g(r)
+
+=
+
+1
+
+r 0
+-
+
+sk-1 Sk
+
+r 0
+
+sk-1
+
+f (z + s)Sk (d) ds Sk f (z + s)Sk (d) ds
+
+First notice that b(r) is continuous in a neighborhood of zero and b(0) = 0. By Theorem 6.20 in Rudin (1976), sk-1 Sk f (z + s)Sk(d) is continuous in s and
+
+db (r) =
+
+dr
+
+1-
+
+rk-1 Sk f (z + r)Sk (d)
+
+r 0
+
+sk-1
+
+Sk f (z + s)Sk (d)
+
+ds
+
+which is continuous in r. Using l'Hospital's rule,
+
+lim
+r0
+
+b(r)r-k
+
+=
+
+lim
+r0
+
+1 kr k-1
+
+db (r) dr
+
+=
+
+1f k
+
+(z)
+
+Sk (d)
+Sk
+
+Similarly, c(r) is continuous in a neighborhood of zero, c(0) = 0, and
+
+lim c(r)r-1 = lim dc (r) =
+
+r0
+
+r0 dr
+
+f Sk  Sk (d) x (z)
+
+=
+
+Sk
+
+Sk
+
+(d
+
+)
+
+Ik k
+
+f (z)
+x
+
+=
+
+1 k
+
+f (z)
+x
+
+Sk (d)
+Sk
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+257
+
+Similarly, g(r) is continuous in a neighborhood of zero and g(0) = 0, and
+
+lim g(r)r-k
+r0
+
+=
+
+lim
+r0
+
+1 kr k-1
+
+dg (r)
+dr
+
+=
+
+1 f (z)
+k
+
+Sk (d)
+Sk
+
+Therefore,
+
+lim g(r)m-1r-(m-1)k =
+r0
+
+g(r) lim
+
+m-1
+=
+
+r0 rk
+
+1
+
+m-1
+
+f (z) k
+
+Sk (d)
+Sk
+
+Now, it is clear that
+
+lim a(r)r-(mk+1) = lim g(r)m-1r-(m-1)k lim c(r)r-1
+
+r0
+
+r0
+
+r0
+
+=
+
+1
+
+m-1 1 f
+
+f (z) k
+
+Sk (d)
+Sk
+
+(z) k x
+
+Sk (d)
+Sk
+
+1
+
+m 1 f
+
+=
+
+f (z) k
+
+Sk (d)
+Sk
+
+(z) f (z) x
+
+Therefore, the conditions of Lemma A.1 hold for  = mk + 2,  = k,
+
+a0 =
+
+1
+
+m 1 f
+
+f (z) k
+
+Sk (d)
+Sk
+
+(z) f (z) x
+
+and
+
+1
+
+b0 = k f (z)
+
+Sk (d)
+Sk
+
+Applying Lemma A.1, we get
+
+Am = 
+
+mk + 2 k
+
+a0
+
+1
+
+kb(0mk+2)/k N (mk+2)/k
+
++o
+
+1
+
+N (mk+2)/k
+
+=  mk + 2 1 f (z) k/2
+
+-2/k 1 df
+
+1
+
+(z)
+
+kk
+
+ (1 + k/2)
+
+f (z) dx N(mk+2)/k
+
++o
+
+1
+
+N (mk+2)/k
+
+258
+
+A. ABADIE AND G. W. IMBENS
+
+Therefore,
+
+E[Um] = 
+
+mk + 2 k
+
+1
+
+ k/2
+
+-2/ k
+
+f (z)
+
+(m - 1)!k
+
+ (1 + k/2)
+
+× 1 df (z) 1 + o 1
+
+f (z) dx N2/k
+
+N 2/k
+
+which finishes the proof for the second result of the lemma. The results for
+
+E[UmUm] and E[ Um 3] follow from similar arguments.
+
+Q.E.D.
+
+The proof of Lemma 2 is available on the authors' webpages.
+
+PROOF OF THEOREM 1(i): Let the unit-level matching discrepancy Um i = Xi - Xjm(i). Define the unit-level conditional bias from the mth match as
+Bm i = Wi µ0(Xi) - µ0(Xjm(i)) - (1 - Wi) µ1(Xi) - µ1(Xjm(i))
+= Wi µ0(Xi) - µ0(Xi + Um i) - (1 - Wi)(µ1(Xi) - µ1(Xi + Um i))
+
+By the Lipschitz assumption on µ0 and µ1, we obtain |Bm i|  C1 Um i for some positive constant C1. The bias term is
+
+BM
+
+=
+
+1 NM
+
+N
+
+M
+Bm i
+
+i=1 m=1
+
+Using the Cauchy­Schwarz inequality and Lemma 2,
+
+E[N2/k(BM )2]
+
+ C12N2/kE
+
+1 N
+
+N
+
+i=1
+
+UM i 2
+
+= C12N 2/k-1E
+
+1 N02/ k
+
+E
+Wi =1
+
+N02/ k
+
+UM i
+
+2|W1
+
+WN Xi
+
+ C2E
+
++
+
+1 N12/ k
+
+E
+Wi =0
+
+N12/ k
+
+UM i
+
+2|W1
+
+N 2/k N1 + N 2/k N0
+
+N0
+
+N
+
+N1
+
+N
+
+WN Xi
+
+for some positive constant C2. Using Chernoff's inequality, it can be seen that any moment of N/N1 or N/N0 is uniformly bounded in N (with Nw  M for
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+259
+
+w = 0 1). The result of the theorem follows now from Markov's inequality.
+
+This proves part (i) of the theorem. We defer the proof of Theorem 1(ii) until
+
+after the proof of Theorem 2(ii), because the former will follow directly from
+
+the latter.
+
+Q.E.D.
+
+LEMMA A.2: Let X be distributed with density f (x) on some compact set X of dimension k: X  Rk. Let Z be a compact set of dimension k that is a subset of
+int X. Suppose that f (x) is bounded and bounded away from zero on X, 0 < f  f (x)  f¯ <  for all x  X. Suppose also that f (x) is differentiable in the interior of X with bounded derivatives supxintX f (x)/X < . Then N2/k E[Um] is bounded by a constant uniformly over z  Z and N > m.
+
+The proof of Lemma A.2 is available on the authors' webpages.
+
+PROOF OF THEOREM 2: The proof of the first part of Theorem 2 is very similar to the proof of Theorem 1(i) and therefore is omitted.
+Consider the second part:
+
+E[BMt ] = E
+
+1 NM
+
+N1M
+
+Wi
+i=1 m=1
+
+µ0(Xi) - µ0(Xjm(i))
+
+=1 M
+
+M
+
+E µ0(Xi) - µ0(Xjm(i))|Wi = 1
+
+m=1
+
+Applying a second-order Taylor expansion, we obtain
+
+µ0(Xjm(i)) - µ0(Xi)
+
+=
+
+µ0 x
+
+(Xi)Um
+
+i
+
++
+
+1 2
+
+tr
+
+2µ0 x x
+
+(Xi)Um
+
+iUm
+
+i
+
++ O( Um i 3)
+
+Therefore, because the trace is a linear operator,
+
+E µ0(Xjm(i)) - µ0(Xi)|Xi = z Wi = 1
+
+=
+
+µ0 x
+
+(z)E[Um
+
+i|Xi
+
+=
+
+z
+
+Wi = 1]
+
++ 1 tr 2
+
+2µ0 x x
+
+(z)E[Um
+
+i Um
+
+i|Xi
+
+=
+
+z
+
+Wi = 1]
+
++ O E Um i 3|Xi = z Wi = 1
+
+Lemma 2 implies that the norms of N02/kE[Um iUm i|Xi = z Wi = 1] and N02/kE[ Um i 3|Xi = z Wi = 1] are uniformly bounded over z  X1 and N0.
+
+260
+
+A. ABADIE AND G. W. IMBENS
+
+Lemma A.2 implies the same result for N02/kE[Um i|Xi = z Wi = 1]. As a result, N02/kE[µ0(Xjm(i)) - µ0(Xi)|Xi = z Wi = 1] is uniformly bounded over z  X1 and N0. Applying Lebesgue's dominated convergence theorem along
+with Lemma 1, we obtain
+
+N02/kE µ0(Xjm(i)) - µ0(Xi)|Wi = 1
+
+=
+
+mk + 2 k
+
+1 (m - 1)!k
+
+×
+
+ k/2
+
+-2/ k
+
+f0(x)  (1 + k/2)
+
+× + o(1)
+
+1 f0 (x) µ0 (x) + 1 tr
+
+f0(x) x x
+
+2
+
+2µ0 (x) x x
+
+f1(x) dx
+
+Now the result follows easily from the conditions of the theorem.
+
+Q.E.D.
+
+PROOF OF THEOREM 1(ii): Consider the special case where µ1(x) is flat
+
+over X and µ0(x) is flat in a neighborhood of the boundary, B. Then matching
+
+the control units does not create bias. Matching the treated units creates a bias
+
+that is similar to the formula in Theorem 2(ii), but with r = 1,  = p/(1 - p),
+
+and the integral taken over X  Bc.
+
+Q.E.D.
+
+PROOF OF LEMMA 3: Define f = infx w fw(x) and f¯ = supx w fw(x), with f > 0 and f¯ finite. Let u¯ = supx yX x - y . Consider the ball B(x u) with center x  X and radius u. Let c(u) (0 < c(u) < 1) be the infimum over x  X of
+the proportion that the intersection with X represents in volume of the balls.
+Note that, because X is convex, this proportion is nonincreasing in u, so let c = c(u¯) and c(u)  c for u  u¯ . The proof consists of three parts. First we
+derive an exponential bound for the probability that the distance to a match, Xjm(i) - Xi , exceeds some value. Second, we use this to obtain an exponential bound on the volume of the catchment area, AM(i), defined as the subset of X such that i is matched to each observation, j, with Wj = 1 - Wi and Xj  AM(i). Formally,
+
+AM (i) = x
+
+1{ Xl - x  Xi - x }  M
+
+l|Wl =Wi
+
+Thus, if Wj = 1 - Wi and Xj  AM(i), then i  JM(j). Third, we use the exponential bound on the volume of the catchment area to derive an exponential
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+261
+
+bound on the probability of a large KM(i), which will be used to bound the
+
+moments of KM(i).
+
+For the first part we bound the probability of the distance to a match. Let
+
+x
+
+
+
+X
+
+and
+
+u
+
+<
+
+N 1/k 1-Wi
+
+u¯ .
+
+Then
+
+Pr Xj - Xi > uN1--1W/ki W1
+
+WN Wj = 1 - Wi Xi = x
+
+=1-
+
+r uN1--1W/ki k-1
+
+f1-Wi (x + r)Sk (d) dr
+
+0
+
+Sk
+
+ 1 - cf
+
+r uN1--1W/ki k-1
+0
+
+Sk (d) dr
+Sk
+
+=
+
+1
+
+-
+
+cf
+
+uk
+
+N -1 1-Wi
+
+
+
+ k/2 (1 + k/2)
+
+Similarly,
+
+Pr Xj - Xi  uN1--1W/ki W1
+
+
+
+f¯uk
+
+N -1 1-Wi
+
+
+
+ k/2 (1 + k/2)
+
+WN Wj = 1 - Wi Xi = x
+
+Notice also that
+
+Pr Xj - Xi > uN1--1W/ki W1
+
+WN Xi = x j  JM (i)
+
+ Pr Xj - Xi > uN1--1W/ki W1
+
+WN Xi = x j = jM (i)
+
+M -1
+=
+m=0
+
+N1-Wi m
+
+Pr Xj - Xi > uN1--1W/ki
+
+W1
+
+WN Wj = 1 - Wi Xi = x N1-Wi -m
+
+× Pr Xj - Xi  uN1--1W/ki
+
+× W1
+
+WN Wj = 1 - Wi Xi = x m
+
+In addition,
+
+N1-Wi m
+
+Pr Xj - Xi  uN1--1W/ki W1
+
+
+
+1 m!
+
+ukf¯ 
+
+ k/2 (1 + k/2)
+
+m
+
+WN Wj = 1 - Wi Xi = x m
+
+262
+
+A. ABADIE AND G. W. IMBENS
+
+Therefore,
+
+Pr Xj - Xi > uN1--1W/ki W1
+
+WN Xi = x j  JM (i)
+
+M-1 1 
+
+ukf¯
+
+ k/2
+
+m
+
+m!  (1 + k/2)
+
+m=0
+
+× 1 - ukc f
+
+ k/2
+
+·1
+
+N1-Wi -m
+
+ (1 + k/2) N1-Wi
+
+Then, for some constant C1 > 0,
+
+Pr Xj - Xi > uN1--1W/ki W1
+
+WN Xi = x j  JM (i)
+
+M -1
+ C1 max{1 uk(M-1)}
+m=0
+
+1 - ukc f
+
+ k/2
+
+·1
+
+ (1 + k/2) N1-Wi
+
+ C1M max{1 uk(M-1)} exp
+
+-
+
+uk (M +
+
+1)
+
+c
+
+f
+
+
+
+ k/2 (1 + k/2)
+
+N1-Wi -m
+
+Notice that ability that
+
+this bound also Xjm(i) - Xi >
+
+huoNld1--s1W/fkioirsuzeroN. 11-/kWi
+
+u¯ ,
+
+because
+
+in
+
+that
+
+case
+
+the
+
+prob-
+
+Next, we consider for unit i, the volume BM(i) of the catchment area AM(i),
+
+defined as BM(i) = AM(i) dx. Conditional on W1
+
+WN , i  JM (j), Xi = x,
+
+and AM(i), the distribution of Xj is proportional to f1-Wi (x)1{x  AM(i)}.
+
+Notice that a ball with radius (b/2)1/k/(k/2/ (1 + k/2))1/k has volume b/2.
+
+Therefore, for Xi in AM(i) and BM(i)  b, we obtain
+
+Pr
+
+Xj - Xi
+
+(b/2)1/k >
+(k/2/ (1 + k/2))1/k
+
+f
+
+W1
+
+WN Xi = x AM (i) BM(i)  b i  JM (j)  2f¯
+
+The last inequality does not depend on Am(i) (given BM(i)  b). Therefore,
+
+Pr
+
+Xj - Xi
+
+(b/2)1/k >
+(k/2/ (1 + k/2))1/k
+
+f
+
+W1
+
+WN Xi = x i  JM (j) BM (i)  b  2f¯
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+263
+
+As a result, if
+
+(A.2)
+
+(b/2)1/k Pr Xj - Xi > (k/2/ (1 + k/2))1/k
+
+f
+
+W1
+
+WN Xi = x i  JM (j)   2f¯
+
+then it must be the case that Pr(BM(i)  b|W1 WN Xi = x i  JM(j))  . In fact, inequality (A.2) has been established above for
+
+2uk b=
+
+ k/2
+
+NWi  (1 + k/2)
+
+and
+
+=
+
+2f¯ f
+
+C1
+
+M
+
+max{1
+
+uk(M-1)} exp
+
+-
+
+uk (M +
+
+1)
+
+c
+
+f
+
+
+
+ k/2 (1 + k/2)
+
+Let t = 2ukk/2/ (1 + k/2). Then
+
+Pr NWi BM (i)  t|W1
+
+WN Xi = x i  JM (j)
+
+ C2 max{1 C3tM-1} exp(-C4t)
+
+for some positive constants, C2, C3, and C4. This establishes an uniform exponential bound, so all the moments of NWi BM(i) exist conditional on W1 WN Xi = x i  JM(j) (uniformly in N).
+For the third part of the proof, consider the distribution of KM(i), the number of times unit i is used as a match. Let PM(i) be the probability that an observation with the opposite treatment is matched to observation i conditional
+on AM(i):
+
+PM (i) =
+
+f1-Wi (x) dx  f¯BM (i)
+
+AM (i)
+
+Note that for n  0,
+
+E (NWi PM (i))n Xi = x W1
+
+WN
+
+ E (NWi PM (i))n Xi = x W1
+
+WN i  JM (j)
+
+ f¯nE (NWi BM (i))n Xi = x W1
+
+WN i  JM (j)
+
+264
+
+A. ABADIE AND G. W. IMBENS
+
+As a result, E[(NWi PM (i))n|Xi = x W1
+
+WN] is uniformly bounded. Condi-
+
+tional on PM(i) and on Xi = x W1 WN , the distribution of KM(i) is bino-
+
+mial with parameters N1-Wi and PM(i). Therefore, conditional on PM(i) and Xi = x W1 WN , the qth moment of KM(i) is
+
+E KMq (i)|PM (i) Xi = x W1
+
+WN
+
+q
+=
+n=0
+
+S(q n)N1-Wi !PM (i)n (N1-Wi - n)!
+
+q
+ S(q
+n=0
+
+n)
+
+N1-Wi PM (i)
+
+n
+
+where S(q n) are Stirling numbers of the second kind and q  1 (see, e.g., Johnson, Kotz, and Kemp (1992)). Then, because S(q 0) = 0 for q  1,
+
+E KMq (i)|Xi = x W1
+
+q
+WN  C S(q n)
+n=1
+
+N1-Wi NWi
+
+n
+
+for some positive constant C. Using Chernoff's bound for binomial tails, it can be easily seen that E[(N1-Wi /NWi )n|Xi = x Wi] = E[(N1-Wi /NWi )n|Wi] is uniformly bounded in N for all n  1, so the result of the first part of the lemma follows. Because KM(i)q  KM(i) for 0 < q < 1, this proof applies also
+to the case with 0 < q < 1. Next, consider part (ii) of Lemma 3. Because the variance 2(x w) is
+Lipschitz on a bounded set, it is therefore bounded by some constant, ¯ 2 = supw x 2(x w). As a result, E[(1 + KM /M)22(x w)] is bounded by ¯ 2E[(1 + KM/M)2], which is uniformly bounded in N by the result in the first part of the lemma. Hence E[V E] = O(1).
+Next, consider part (iii) of Lemma 3. Using the same argument as for E[KMq (i)], we obtain
+
+q
+E[KMq (i)|Wi = 0]  S(q n)
+n=1
+
+N1 N0
+
+n
+E (N0PM (i))n|Wi = 0
+
+Therefore,
+
+N0 N1
+
+E[KMq (i)|Wi = 0]
+
+q
+ S(q n)
+n=1
+
+N1 N0
+
+n-1
+E (N0PM (i))n|Wi = 0
+
+which is uniformly bounded because r  1.
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+265
+
+For part (iv) notice that
+
+E[V E t] = E
+
+1 N1
+
+N
+Wi 2(Xi
+i=1
+
+Wi)
+
++E
+
+1N
+
+N1
+
+(1 - Wi)
+i=1
+
+KM (i) M
+
+2
+W2 i (Xi)
+
+ ¯ 2 + ¯ 2 N0 E N1
+
+KM (i) M
+
+2
+Wi = 0
+
+Therefore, E[V E t] is uniformly bounded.
+
+Q.E.D.
+
+PROOF OF THEOREM 3: We only prove the first part of the theorem. The
+second part follows the same argument. We can write M -  = ((X) - ) + EM + BM . We consider each of the three terms separately. First, by Assumptions 1 and 4(i), µw(x) is bounded over x  X and w = 0 1. Hence µ1(X) - µ0(X) -  has mean zero and finite variance. Therefore, by a standard law of large numbers, (X) -  p 0. Second, by Theorem 1, BM = Op(N-1/k) = op(1). Finally, because E[i2|X W]  ¯ 2 and E[ij|X W] = 0 (i = j), we obtain
+
+ E ( NEM )2
+
+=1 N
+
+N
+
+E
+
+i=1
+
+1 + KM (i) M
+
+2
+i2
+
+=E
+
+1 + KM (i) M
+
+2
+ 2(Xi Wi)
+
+= O(1)
+
+where the last equality comes from Lemma 3. By Markov's inequality EM =
+
+Op(N-1/2) = op(1).
+
+Q.E.D.
+
+PROOF OF THEOREM 4: We only prove the first assertionin the theorem because the second follows the same argument. We can write N(M -BM -) =
+N((X) - ) + NEM . First, consider the contribution of N((X) - ). By a standard central limit theorem,
+
+(A.3)
+
+ N (X) - 
+
+- d N (0
+
+V (X))
+
+
+
+
+
+Second, consider the contribution of NEM/ V E =
+
+N i=1
+
+EM
+
+ i/ N
+
+V
+
+E
+
+.
+
+Conditional on W and X the unit-level terms EM i = (2Wi - 1)(1 + KM(i)/M)i
+
+are independent with zero means and nonidentical distributions. The condi-
+
+tional variance of EM i is (1 + KM(i)/M)22(Xi Wi). We will use a Lindeberg­
+
+266
+
+A. ABADIE AND G. W. IMBENS
+
+
+
+
+
+Feller central limit theorem for NEM/ V E. For a given X W, the Linde-
+
+berg­Feller condition requires that
+
+(A.4)
+
+1 NV E
+
+N
+
+ E (EM i)21 |EM i|   NV E
+
+X W 0
+
+i=1
+
+for all  > 0. To prove that the (A.4) condition holds, notice that by Hölder's and Markov's inequalities we have
+
+
+
+E (EM i)21 |EM i|   NV E X W
+
+
+
+E[(EM i)4|X
+
+W] 1/2 E 1
+
+ |EM i|   NV E
+
+X W 1/2
+
+
+
+E[(EM i)4|X
+
+W]
+
+1/2
+
+Pr
+
+|EM
+
+ i|   NV E |X
+
+W
+
+
+
+E[(EM i)4|X
+
+W] 1/2 E[(EM i)2|X 2NV E
+
+W]
+
+Let ¯ 2 = supw x 2(x w) < , 2 = infw x 2(x w) > 0, and C¯ = supw x E[i4| Xi = x Wi = w] < . Notice that V E  2. Therefore,
+
+1 NV E
+
+N
+
+ E (EM i)21 |EM i|   NV E
+
+XW
+
+i=1
+
+1 N NV E
+i=1
+
+1 + KM (i) M
+
+4
+E[i4|X W]
+
+1/2
+
+× (1 + KM (i)/M)22(Xi Wi) 2NV E
+
+¯ 2C¯ 1/2 1 
+
+1N
+
+1 + KM (i) 4
+
+24 N N
+
+M
+
+i=1
+
+Because E[(1 + KM(i)/M)4] is uniformly bounded, by Markov's inequality, the factor in parentheses is bounded in probability. Hence, the Lindeberg­Feller condition is satisfied for almost all X and W. As a result,
+
+N 1/2
+
+N i=1
+
+EM
+
+i
+
+iN=1(1 + KM (i)/M)2 2(Xi
+
+Wi)
+
+1/2
+
+=
+
+N1/2EM VE
+
+- d N (0
+
+1)
+
+
+
+
+
+
+
+Finally, NEM/ V E and N((X)- ) are asymptotically independent
+
+(the central limit theorem for NEM/ V E holds conditional on X and W).
+
+PROPERTIES OF MATCHING ESTIMATORS
+
+267
+
+Thus, the fact that both converge to standard normal distributions, bound-
+
+edness of V E and V (X), and boundedness away from zero of V E imply that
+
+(V E + V (X))-1/2N1/2(M - BM - ) converges to a standard normal distribu-
+
+tion.
+
+Q.E.D.
+
+The proofs of Theorems 5, 6, and 7 are available on the authors' webpages.
+
+REFERENCES
+ABADIE, A., D. DRUKKER, J. HERR, AND G. IMBENS (2004): "Implementing Matching Estimators for Average Treatment Effects in Stata," The Stata Journal, 4, 290­311.
+ABADIE, A., AND G. IMBENS (2002): "Simple and Bias-Corrected Matching Estimators for Average Treatment Effects," Technical Working Paper T0283, NBER. (2005): "On the Failure of the Bootstrap for Matching Estimators," Mimeo, Kennedy School of Government, Harvard University.
+BARNOW, B. S., G. G. CAIN, AND A. S. GOLDBERGER (1980): "Issues in the Analysis of Selectivity Bias," in Evaluation Studies, Vol. 5, ed. by E. Stromsdorfer and G. Farkas. San Francisco: Sage, 43­59.
+COCHRAN, W., AND D. RUBIN (1973): "Controlling Bias in Observational Studies: A Review," Sankhya¯, 35, 417­446.
+DEHEJIA, R., AND S. WAHBA (1999): "Causal Effects in Nonexperimental Studies: Reevaluating the Evaluation of Training Programs," Journal of the American Statistical Association, 94, 1053­1062.
+HAHN, J. (1998): "On the Role of the Propensity Score in Efficient Semiparametric Estimation of Average Treatment Effects," Econometrica, 66, 315­331.
+HECKMAN, J., H. ICHIMURA, AND P. TODD (1998): "Matching as an Econometric Evaluation Estimator," Review of Economic Studies, 65, 261­294.
+HECKMAN, J., AND R. ROBB (1984): "Alternative Methods for Evaluating the Impact of Interventions," in Longitudinal Analysis of Labor Market Data, ed. by J. Heckman and B. Singer. Cambridge, U.K.: Cambridge University Press, 156­245.
+HIRANO, K., G. IMBENS, AND G. RIDDER (2003): "Efficient Estimation of Average Treatment Effects Using the Estimated Propensity Score," Econometrica, 71, 1161­1189.
+IMBENS, G. (2004): "Nonparametric Estimation of Average Treatment Effects under Exogeneity: A Survey," Review of Economics and Statistics, 86, 4­30.
+JOHNSON, N., S. KOTZ, AND A. KEMP (1992): Univariate Discrete Distributions (Second Ed.). New York: Wiley.
+OKABE, A., B. BOOTS, K. SUGIHARA, AND S. NOK CHIU (2000): Spatial Tessellations: Concepts and Applications of Voronoi Diagrams (Second Ed.). New York: Wiley.
+OLVER, F. W. J. (1997): Asymptotics and Special Functions (Second Ed.). New York: Academic Press.
+ROSENBAUM, P. (1995): Observational Studies. New York: Springer-Verlag. ROSENBAUM, P., AND D. RUBIN (1983): "The Central Role of the Propensity Score in Observa-
+tional Studies for Causal Effects," Biometrika, 70, 41­55. RUBIN, D. (1973): "Matching to Remove Bias in Observational Studies," Biometrics, 29, 159­183.
+(1977): "Assignment to Treatment Group on the Basis of a Covariate," Journal of Educational Statistics, 2, 1­26. RUDIN, W. (1976): Principles Mathematical Analysis (Third Ed.). New York: McGraw-Hill. STROOCK, D. W. (1994): A Concise Introduction to the Theory of Integration. Boston: Birkhäuser.
+
+

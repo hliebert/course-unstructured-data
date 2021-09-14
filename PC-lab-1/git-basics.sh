@@ -4,8 +4,9 @@ set -euo pipefail
 # basic user/editor setup
 git config --global user.email "helge.liebert@gmail.com"
 git config --global user.name "Helge Liebert"
-git config --global core.editor "vim"
-git config --global core.editor "emacsclient -nw -a \'\'"
+# git config --global core.editor "vim"
+# git config --global core.editor "emacsclient -nw -a \'\'"
+git config --global core.editor "nano"
 cat ~/.gitconfig
 
 ## clone course file to home directory

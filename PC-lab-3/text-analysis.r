@@ -3,7 +3,7 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Fr Dez  7 15:01:01 2018
-## Last-Updated: Mo. Sep 21 15:27:20 2020
+## Last-Updated: Fr Aug 20 15:13:14 2021
 ######################################################################
 
 ## Libraries
@@ -15,6 +15,7 @@ library(dplyr)
 library(topicmodels)
 library(wordcloud)
 library(SentimentAnalysis)
+library(sentimentr) ## TODO: update code to this.
 library(naivebayes)
 library(fastNaiveBayes)
 library(slam)

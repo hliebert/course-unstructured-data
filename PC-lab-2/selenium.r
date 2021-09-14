@@ -3,7 +3,7 @@
 ## Description: Options of running selenium server
 ## Author: Helge Liebert
 ## Created: Di Mär  3 13:11:44 2020
-## Last-Updated: Do. Sep 10 17:26:48 2020
+## Last-Updated: Di Sep 14 17:23:45 2021
 ################################################################################
 
 ## Variant 1 for running selenium is preferred, 2 and 3 are discouraged.
@@ -11,20 +11,20 @@
 
 #================================== Libraries ==================================
 
-library(RSelenium)
-library(wdman)
+library("RSelenium")
+library("wdman")
 
 
 #================================== Variant 1 ==================================
 
 ## Connect to browser running in docker container. This is the preferred option.
 
-## Run selenium in a docker container
+## - Run selenium in a docker container
 ## docker run -d -p 4445:4444 selenium/standalone-chrome
 ## docker run -d -p 4445:4444 selenium/standalone-firefox
-## to see the browser
+## - to see the browser
 ## docker run -d -p 5901:5900 -p 127.0.0.1:4445:4444 --link http-server selenium/standalone-firefox-debug:2.53.1
-## provides info
+## - provides info
 ## docker ps
 
 ## Connect to server
@@ -39,7 +39,7 @@ remDr$open()
 #================================== Variant 2 ==================================
 
 ## Initiate binary (ff, chrome, phantomjs) provided by library(wdman) using
-## rsDriver(). Could also run this headless using the appropriate options,
+## rsDriver(). Running this headless using the appropriate options will be
 ## faster as it does not show the browser window.
 rD <- RSelenium::rsDriver(browser = "firefox", port = 4567L)
 remDr <- rD$client
@@ -102,3 +102,18 @@ remDr$close()
 
 ## If using rsDriver(), stop selenium server from R.
 ## rD$server$stop()
+
+
+#============================== Apply to WHO site ==============================
+
+site <- "http://apps.who.int/bloodproducts/snakeantivenoms/database/SearchFrm.aspx"
+remDr$navigate(site)
+remDr$getTitle()
+
+# Get all country options
+options <- remDr$findElements(using = 'css selector', "#ddlCountry > option")
+options
+
+options <- options[-1]
+countries <- unlist(lapply(options, function(x) {x$getElementText()}))
+countries

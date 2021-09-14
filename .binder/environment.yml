@@ -7,9 +7,13 @@ dependencies:
   - matplotlib
   - numpy
   - pandas
+  - pip
   - pytorch
   - selenium
   - transformers
+# Python via pip
+  - pip:
+      - bert
   # R
   - r-base>=4.0
   - r-caret
