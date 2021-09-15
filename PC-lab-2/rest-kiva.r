@@ -3,19 +3,19 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Do Jan  4 19:13:53 2018
-## Last-Updated: Fr Sep 10 14:24:53 2021
+## Last-Updated: Mi Sep 15 15:07:05 2021
 ######################################################################
 
 ## Note: This queries Kiva's legacy REST API (v1). The current Kiva API uses
 ## GraphQL. Documentation of the legacy API can be found here:
 ## https://web.archive.org/web/20181110112914/http://build.kiva.org/
 
-
 ## Libraries
-library(jsonlite)
-library(httr)
-library(rvest)
-library(ghql)
+library("jsonlite")
+library("httr")
+library("rvest")
+library("ghql")
+
 
 #================================ Kiva Examples ================================
 

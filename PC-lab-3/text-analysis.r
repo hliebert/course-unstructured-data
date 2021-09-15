@@ -3,25 +3,25 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Fr Dez  7 15:01:01 2018
-## Last-Updated: Fr Aug 20 15:13:14 2021
+## Last-Updated: Mi Sep 15 16:00:42 2021
 ######################################################################
 
 ## Libraries
-library(tm)
-library(data.table)
-library(ggplot2)
-library(tidytext)
-library(dplyr)
-library(topicmodels)
-library(wordcloud)
-library(SentimentAnalysis)
-library(sentimentr) ## TODO: update code to this.
-library(naivebayes)
-library(fastNaiveBayes)
-library(slam)
-library(glmnet)
-library(lexicon)
-library(caret)
+library("tm")
+library("data.table")
+library("ggplot2")
+library("tidytext")
+library("dplyr")
+library("topicmodels")
+library("wordcloud")
+library("SentimentAnalysis")
+library("sentimentr") ## TODO: update code to this.
+library("naivebayes")
+library("fastNaiveBayes")
+library("slam")
+library("glmnet")
+library("lexicon")
+library("caret")
 
 ## Simple helper function to view first copora elements, only for lecture
 chead <- function(c) lapply(c[1:2], as.character)

@@ -3,38 +3,37 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: So Mär  1 15:41:38 2020
-## Last-Updated: Do Aug 26 14:59:31 2021
+## Last-Updated: Mi Sep 15 15:04:04 2021
 ################################################################################
+
 
 #================================== Libraries ==================================
 
-library("twfy")
-library("jsonlite")
-library("topicmodels")
-library("textclean")
-library("wordcloud")
-library("slam")
-library("tm")
+library("caret")
 library("data.table")
-library("tidytext")
-library("stringr")
+library("doc2vec")
 library("dplyr")
+library("factoextra")
+library("fpc")
 library("ggplot2")
 library("ggrepel")
-library("uwot")
-library("udpipe")
-library("lsa")
-library("factoextra")
-library("word2vec")
-library("plotly")
-library("fpc")
-library("doc2vec")
 library("glmnet")
-library("caret")
+library("jsonlite")
+library("lsa")
+library("plotly")
+library("slam")
+library("stringr")
+library("text2vec")
+library("textclean")
+library("tidytext")
+library("tm")
+library("topicmodels")
+library("twfy")
+library("udpipe")
+library("uwot")
+library("word2vec")
+library("wordcloud")
 
-# new
-library("text")
-library("golgotha")
 
 #======================= Get data from TheyWorkForYou API ======================
 
@@ -578,8 +577,6 @@ predict(model, newdata = wv, type = "nearest", top_n = 10)
 
 #==================================== GloVe ====================================
 
-library(text2vec)
-
 ## Create iterator over tokens
 tokens <- space_tokenizer(text)
 str(tokens)
@@ -811,7 +808,7 @@ confusionMatrix(rfpred, ytest)
 #======= Convenient access to BERT and other pre-trained embedding models ======
 
 ## Check these libraries
-library("text")
+## library("text")
 library("golgotha")
 
 # using golgotha

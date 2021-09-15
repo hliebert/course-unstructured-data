@@ -3,15 +3,15 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: Mi. Aug 26 14:44:17 2020
-## Last-Updated: Mo Sep  6 13:00:55 2021
+## Last-Updated: Mi Sep 15 14:56:01 2021
 ################################################################################
 
 
 #========================== reading all the txt files ==========================
 
-library(stringr)
-library(readr)
-## library(data.table)
+library("stringr")
+library("readr")
+## library("data.table")
 
 ## set encoding (may be necessary on Windows)
 ## options(encoding = "UTF-8")

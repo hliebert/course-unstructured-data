@@ -3,13 +3,13 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Di Jan  8 18:23:16 2019
-## Last-Updated: Di Sep 14 17:29:43 2021
+## Last-Updated: Mi Sep 15 15:58:44 2021
 ################################################################################
 
 
 ## install and load required library
 ## install.packages("rvest", dependencies = TRUE)
-library(rvest)
+library("rvest")
 
 
 #============================ SCRAPING A WIKI TABLE ============================
@@ -17,7 +17,7 @@ library(rvest)
 ## 1) fetch and parse the website
 page <- read_html("https://en.wikipedia.org/wiki/Infant_mortality")
 ## 2) extract the html node containing the table
-table <- html_node(page, xpath = "//*[@id='mw-content-text']/div/table[3]")
+table <- html_node(page, xpath = "//*[@id='mw-content-text']/div/table[2]")
 ## 3) extract the table as a data frame
 mrates <- html_table(table)
 mrates
@@ -28,13 +28,13 @@ mrates
 ## list table nodes
 html_nodes(page, "table")
 ## using css selectors or xpath is equivalent
-table <- html_node(page, xpath = "//*[@id='mw-content-text']/div/table[2]")
-table <- html_node(page, css = "table.wikitable:nth-child(129)")
+## table <- html_node(page, xpath = "/html/body/div[3]/div[3]/div[5]/div[1]/table[2]")
+## table <- html_node(page, xpath = "//*[@id='mw-content-text']/div/table[2]")
+table <- html_node(page, css = "table.wikitable:nth-child(126)")
 html_table(table)
 
-
 ## check out links in the next table
-table <- html_node(page, css = "table.wikitable:nth-child(134)")
+table <- html_node(page, css = "table.wikitable:nth-child(132)")
 html_nodes(table, "a") %>% html_attr("href")
 
 ## piping is the same as nested function calls
@@ -58,12 +58,20 @@ html_nodes(page, "link") %>% html_attr("href")
 html_nodes(page, "a") %>% html_attr("href")
 html_attr(html_nodes(page, "a"), "href")
 
-
 ## follwing a link to another page
-session <- html_session("https://en.wikipedia.org/wiki/Infant_mortality")
-session <- follow_link(session, "Somalia")
+session <- session("https://en.wikipedia.org/wiki/Infant_mortality")
+session <- session_follow_link(session, "Somalia")
 page <- read_html(session)
-table <- html_node(page, css = "table.wikitable:nth-child(130)")
+
+## these you get from copying the xpath/css in firefox or chrome
+## table <- html_node(page, css = "table.wikitable:nth-child(140)")
+## table <- html_node(page, xpath = "/html/body/div[3]/div[3]/div[5]/div[1]/table[2]")
+## table <- html_node(page, xpath = "//*[@id='mw-content-text']/div/table[3]")
+
+## ...but you can also write more elaborate xpath expressions
+table <- html_node(page, xpath = "//*[@class='wikitable sortable'][1]")
+table <- html_node(page, xpath = "//table[contains(@class,'wikitable')][1]")
+table
 regions <- html_table(table)
 regions
 
@@ -71,7 +79,7 @@ regions
 #=============================== REGEX FILTERING ===============================
 
 ## filtering links
-session <- html_session("https://en.wikipedia.org/wiki/Infant_mortality")
+session <- session("https://en.wikipedia.org/wiki/Infant_mortality")
 ## page <- read_html("https://en.wikipedia.org/wiki/Infant_mortality")
 page <- read_html(session)
 wikilinks <- html_attr(html_nodes(page, "a"), "href")
@@ -97,12 +105,12 @@ links <- unique(links)
 links
 
 # navigate to linked page
-session <- jump_to(session, links[1])
-## session <- follow_link(session, linktext) ## This function takes the link html_text() as the argument
+session <- session_jump_to(session, links[1])
+## session <- session_follow_link(session, linktext) ## This function takes the link html_text() as the argument
 page <- read_html(session)
 html_nodes(page, "title")
 
 # navigate to linked page
-session <- jump_to(session, links[5])
+session <- session_jump_to(session, links[5])
 page <- read_html(session)
 html_nodes(page, "title")

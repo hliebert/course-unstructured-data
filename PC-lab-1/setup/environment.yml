@@ -54,6 +54,7 @@ dependencies:
   - r-tidytext
   - r-tidyverse
   - r-tm
+  - r-topicmodels
   - r-twfy
   - r-udpipe
   - r-uwot

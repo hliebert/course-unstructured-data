@@ -42,6 +42,7 @@ install.packages(
     "tidytext",
     "tidyverse",
     "tm",
+    "topicmodels",
     "twfy",
     "udpipe",
     "uwot",
