@@ -4,7 +4,7 @@ This repository contains material for the course Methods for Unstructured Data (
 
 The lab material is set up to run on Binder.
 
-Jupyter Notebook [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master)
+Jupyter Notebook [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=tree)
 
 Jupyter Lab [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=lab)
 
