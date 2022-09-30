@@ -3,9 +3,9 @@
 This repository contains material for the course Methods for Unstructured Data
 (57366-01) at the University of Basel. The lab material is set up to run on Binder.
 
-[![Binder](https://mybinder.org/badge_logo.svg) Jupyter Notebook](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=tree) 
+[![Binder](https://mybinder.org/badge_logo.svg) Jupyter Notebook](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=tree)  
 [![Binder](https://mybinder.org/badge_logo.svg) Jupyter Lab](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=lab)  
-[![Binder](https://mybinder.org/badge_logo.svg) Rstudio](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=rstudio)
+[![Binder](https://mybinder.org/badge_logo.svg) Rstudio](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=rstudio)  
 
 
 # Setup instructions
@@ -68,6 +68,6 @@ This repository contains material for the course Methods for Unstructured Data
    different operating systems is difficult. If all else fails, simply run the
    lab material in your browser using the links below.
 
-    [![Binder](https://mybinder.org/badge_logo.svg) Jupyter Notebook](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=tree)
-    [![Binder](https://mybinder.org/badge_logo.svg) Jupyter Lab](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=lab)
+    [![Binder](https://mybinder.org/badge_logo.svg) Jupyter Notebook](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=tree)  
+    [![Binder](https://mybinder.org/badge_logo.svg) Jupyter Lab](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=lab)  
     [![Binder](https://mybinder.org/badge_logo.svg) Rstudio](https://mybinder.org/v2/gh/hliebert/course-unstructured-data/master?urlpath=rstudio)  
