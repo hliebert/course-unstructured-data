@@ -3,7 +3,7 @@
 ## Description: 
 ## Author: Helge Liebert
 ## Created: So Mär  1 15:41:38 2020
-## Last-Updated: Mi Sep 15 15:04:04 2021
+## Last-Updated: Fr Sep 30 21:06:39 2022
 ################################################################################
 
 
@@ -807,7 +807,7 @@ confusionMatrix(rfpred, ytest)
 
 #======= Convenient access to BERT and other pre-trained embedding models ======
 
-## Check these libraries
+## Libraries
 ## library("text")
 library("golgotha")
 

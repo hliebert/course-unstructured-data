@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-set -euo pipefail
-
 
 # ======================== convert and filter pdf files ========================
 
 echo $PWD
 mkdir txts
+
+# change to input directory
+cd input
 
 # convert all pdfs to text
 # for file in pdf/*.pdf; do pdftotext "$file"; done

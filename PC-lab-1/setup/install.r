@@ -12,6 +12,7 @@ install.packages(
     "ggrepel",
     "ghql",
     "glmnet",
+    "gutenbergr"
     "h2o",
     "httr",
     "IRkernel",
@@ -35,6 +36,7 @@ install.packages(
     "sentimentr",
     "slam",
     "spacyr",
+    "stringr",
     "styler",
     "text",
     "text2vec",

@@ -3,7 +3,7 @@
 ## Description:
 ## Author: Helge Liebert
 ## Created: Fr Dez  7 15:01:01 2018
-## Last-Updated: Mi Sep 15 16:00:42 2021
+## Last-Updated: Fr Sep 30 20:47:10 2022
 ######################################################################
 
 ## Libraries
@@ -15,13 +15,13 @@ library("dplyr")
 library("topicmodels")
 library("wordcloud")
 library("SentimentAnalysis")
-library("sentimentr") ## TODO: update code to this.
 library("naivebayes")
 library("fastNaiveBayes")
 library("slam")
 library("glmnet")
 library("lexicon")
 library("caret")
+library("ranger")
 
 ## Simple helper function to view first copora elements, only for lecture
 chead <- function(c) lapply(c[1:2], as.character)
@@ -136,8 +136,8 @@ findFreqTerms(dtm, lowfreq = 1000)
 ## Remove sparse terms
 ## Improves tractability and saves time, my laptop cannot handle large matrices
 ## Tweak the sparse parameter to influence # of words
-inspect(dtms)
-dtms <- removeSparseTerms(dtm, sparse=0.90)
+inspect(dtm)
+dtms <- removeSparseTerms(dtm, sparse = 0.95)
 dim(dtms)
 dtms <- dtms[row_sums(dtms) > 0, ]
 dim(dtms)
@@ -239,12 +239,12 @@ summary(termtfidf)
 
 ## Filter by tf-idf
 ## dim(dtmuse)
-dtmuse <- dtmuse[, (termtfidf >= 1.70)]
-dtmuse <- dtmuse[row_sums(dtmuse) > 0, ]
-## dim(dtmuse)
+dtmuse.tfidf <- dtmuse[, (termtfidf >= 1.70)]
+dtmuse.tfidf <- dtmuse.tfidf[row_sums(dtmuse.tfidf) > 0, ]
+## dim(dtmuse.tfidf)
 
 ## Unsupervised method: Topic model
-lda <- LDA(dtmuse, k = 3, control = list(seed = 100))
+lda <- LDA(dtmuse.tfidf, k = 3, control = list(seed = 100))
 ## str(lda)
 
 ## Most likely topic for each document, could merge this to original data
@@ -283,8 +283,16 @@ topterms %>%
 
 #======================== Supervised methods: Prep data, binary ========================
 
+## Use more columns or all, better performance, but takes longer time
+dtms <- removeSparseTerms(dtm, sparse = 0.98)
+
+## All vars, try this
+## bag.all <- as.data.frame(as.matrix(dtm))
+## dim(bag.all)
+
 ## Convert the sparse term-document matrix to a standard data frame
 bag <- as.data.frame(as.matrix(dtms))
+dim(bag)
 
 ## Convert token counts to simple binary indicators (not much difference)
 bag.bin <- as.data.frame(sapply(bag, function(x) as.numeric(x > 0)))
@@ -294,6 +302,7 @@ bag$doc_id <- rownames(as.matrix(dtms))
 bag.bin$doc_id <- rownames(as.matrix(dtms))
 
 ## Add outcomes from the original data: Predict agricultural sector
+table(loans$sectorname)
 loans$agsector <- as.numeric(loans$sectorname == "Agriculture")
 bag <- merge(bag, loans[, .(agsector, loanamount, doc_id)], by = "doc_id")
 bag.bin <- merge(bag.bin, loans[, .(agsector, loanamount, doc_id)], by = "doc_id")
@@ -301,7 +310,7 @@ table(bag$agsector)
 
 ## Partition data in test and training sample
 set.seed(100)
-testids <- sample(floor(nrow(bag)/3))
+testids <- sample(floor(0.2 * nrow(bag)))
 xtrain <- as.matrix(bag[-testids, !(names(bag) %in% c("agsector", "loanamount", "doc_id"))])
 xtest  <- as.matrix(bag[ testids, !(names(bag) %in% c("agsector", "loanamount", "doc_id"))])
 xtrain.bin <- as.matrix(bag.bin[-testids, !(names(bag) %in% c("agsector", "loanamount", "doc_id"))])
@@ -324,7 +333,7 @@ nbpred <- predict(nbclassifier, xtest.factor, type = "class")
 ## nbprob <- predict(nbclassifier, xtest, type = "prob")
 
 ## Performance statistics: Classification rate
-1-mean(as.numeric(nbpred != ytest))
+1 - mean(as.numeric(nbpred != ytest))
 ## Performance statistics: Confusion matrix
 ## table(nbpred, ytest)
 confusionMatrix(nbpred, ytest)
@@ -350,7 +359,7 @@ nbclassifier <- train(
 nbclassifier
 summary(nbclassifier)
 nbpred <- predict(nbclassifier, xtest.factor)
-1-mean(as.numeric(nbpred != ytest))
+1 - mean(as.numeric(nbpred != ytest))
 confusionMatrix(nbpred, ytest)
 
 
@@ -359,7 +368,7 @@ confusionMatrix(nbpred, ytest)
 ## non-parametric naive bayes
 nbclassifier <- nonparametric_naive_bayes(xtrain, ytrain)
 nbpred <- predict(nbclassifier, xtest)
-1-mean(as.numeric(nbpred != ytest))
+1 - mean(as.numeric(nbpred != ytest))
 confusionMatrix(nbpred, ytest)
 
 ## fastNaiveBays better package
@@ -369,7 +378,7 @@ fnb.detect_distribution(xtrain)
 nbclassifier <- fastNaiveBayes(xtrain, ytrain)
 ## nbclassifier <- multinomial_naive_bayes(xtrain, ytrain)
 nbpred <- predict(nbclassifier, xtest)
-1-mean(as.numeric(nbpred != ytest))
+1 - mean(as.numeric(nbpred != ytest))
 confusionMatrix(nbpred, ytest)
 
 ## not part of caret, need to add it, manual grid search here, pointless, no tuning required
@@ -382,10 +391,19 @@ confusionMatrix(nbpred, ytest)
 #========= Supervised text regression: L1 penalized logistic regression, binary ========
 
 l1classifier <- cv.glmnet(xtrain.bin, ytrain, alpha = 1, family = "binomial")
-l1pred <- as.factor(predict(l1classifier, xtest.bin, s = "lambda.min", type = "class"))
 
+## Insample
+l1pred <- as.factor(predict(l1classifier, xtrain.bin, s = "lambda.min", type = "class"))
 ## Performance statistics: Classification rate
-1-mean(as.numeric(l1pred != ytest))
+1 - mean(as.numeric(l1pred != ytest))
+## Performance statistics: Confusion matrix
+confusionMatrix(l1pred, ytrain)
+
+
+## Holdout sample
+l1pred <- as.factor(predict(l1classifier, xtest.bin, s = "lambda.min", type = "class"))
+## Performance statistics: Classification rate
+1 - mean(as.numeric(l1pred != ytest))
 ## Performance statistics: Confusion matrix
 confusionMatrix(l1pred, ytest)
 
@@ -396,7 +414,7 @@ l1classifier <- cv.glmnet(xtrain, ytrain, alpha = 1, family = "binomial")
 l1pred <- as.factor(predict(l1classifier, xtest, s = "lambda.min", type = "class"))
 
 ## Performance statistics: Classification rate
-1-mean(as.numeric(l1pred != ytest))
+1 - mean(as.numeric(l1pred != ytest))
 ## Performance statistics: Confusion matrix
 confusionMatrix(l1pred, ytest)
 
@@ -408,22 +426,110 @@ l1pred <- as.factor(predict(l1classifier, xtest, s = "lambda.min", type = "class
                             penalty.factor  = sdweights))
 
 ## Performance statistics: Classification rate
-1-mean(as.numeric(l1pred != ytest))
+1 - mean(as.numeric(l1pred != ytest))
 ## Performance statistics: Confusion matrix
 confusionMatrix(l1pred, ytest)
 
 
-#===================== Further example: Predict Loan Amount ====================
-#======================== L1 penalized linear regression =======================
+#================================ Random forest ================================
 
-## Rebuild outcome vectors
-ytrain <- as.matrix(bag[-testids,  "loanamount"])
-ytest  <- as.matrix(bag[ testids,  "loanamount"])
+## I am using library(caret) for training, alternatives are library(mlr) or
+## library(tidymodels) if you enjoy tidyverse
 
-## Estimate and predict
-l1predictor <- cv.glmnet(xtrain, ytrain, alpha = 1, family = "gaussian")
-l1pred <- predict(l1predictor, xtest, s = "lambda.min", type = "response")
+## ## using cv, convenient to just use oob with rf.
+## rfclassifier <- train(
+##   y = ytrain,
+##   x = xtrain,
+##   method = "ranger",
+##   num.trees = 100,
+##   tuneGrid = expand.grid(mtry = seq(5, ncol(xtrain), 10),
+##                          splitrule = "gini",
+##                          min.node.size = 1),
+##   trControl = trainControl(
+##     method = "cv",
+##     number = 5
+##   )
+## )
 
-## RMSE
-sqrt(mean((l1pred - ytest)^2))
-postResample(l1pred, ytest)
+## using oob
+## small scale for cluster, adjust mtry to finer grid and increase num.trees substantially
+rfclassifier <- train(
+  y = ytrain,
+  x = xtrain,
+  method = "ranger",
+  num.trees = 200,
+  tuneGrid = expand.grid(
+    mtry = seq(5, floor(sqrt(ncol(xtrain))), 5),
+    splitrule = "gini",
+    min.node.size = c(1,3)
+  ),
+  trControl = trainControl(
+    method = "oob"
+  )
+)
+
+rfclassifier
+plot(rfclassifier)
+rfclassifier$bestTune
+
+rfpred <- predict(rfclassifier, xtest)
+1 - mean(as.numeric(rfpred != ytest))
+confusionMatrix(rfpred, ytest)
+
+
+#================================ Boosted trees ================================
+
+## Ada boost with decision tree as base learner
+## Simplified to lower runtime!
+## Increase iterations or use grid, expand grid for maxdepth, user finer grid for learning rate.
+gbclassifier <- train(
+  y = ytrain,
+  x = xtrain,
+  method = "ada",
+  tuneGrid = expand.grid(
+    iter = 10,
+    maxdepth = seq(2, 5, 1),
+    nu = seq(0.1, 1, 0.3)
+  ),
+  trControl = trainControl(
+    method = "cv",
+    number = 5
+  )
+)
+
+rfclassifier
+plot(rfclassifier)
+rfclassifier$bestTune
+
+rfpred <- predict(rfclassifier, xtest)
+1 - mean(as.numeric(rfpred != ytest))
+confusionMatrix(rfpred, ytest)
+
+
+## ## stochastic gradient boosting, may perform better
+## ## but requires more elaborate tuning w/ grid over several parameters, can be tweaked
+## ## this will run for a while, skip in notebook
+## gbclassifier <- train(
+##   y = ytrain,
+##   x = xtrain,
+##   method = "xgbTree",
+##   nthread = 1,
+##   trControl = trainControl(
+##     method = "cv",
+##     number = 5
+##   )
+## )
+
+
+#===============================================================================
+#==================================== Tasks ====================================
+#===============================================================================
+
+## Task: The above examples are all classification. Implement a regression
+## example. Predict the loanamount using L1 penalized linear regression (lasso).
+## ...
+
+## Task: How would you go about improving performce for the classifiers?
+## ...
+
+
